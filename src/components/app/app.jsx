@@ -13,18 +13,10 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <Main offersNumber={offersNumber} />
-        </Route>
-        <Route exact path="/favorites">
-          <Favorites />
-        </Route>
-        <Route exact path="/offer/:id">
-          <Offer />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
+        <Route exact path="/" render={() => <Main offersNumber = {offersNumber} />}/>
+        <Route exact path="/favorites" component={Favorites} />
+        <Route exact path="/offer/:id" component={Offer} />
+        <Route exact path="/login" component={Login} />
       </Switch>
     </BrowserRouter>
   );

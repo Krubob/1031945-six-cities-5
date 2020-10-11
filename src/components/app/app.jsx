@@ -8,14 +8,31 @@ import Login from "../login/login";
 
 const App = (props) => {
 
-  const {offersNumber} = props;
+  const {offersNumber, offers, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" render={() => <Main offersNumber = {offersNumber} />}/>
-        <Route exact path="/favorites" component={Favorites} />
-        <Route exact path="/offer/:id" component={Offer} />
+        <Route exact path="/" render={() => (
+          <Main
+            offersNumber = {offersNumber}
+            offers = {offers}
+          />
+        )}
+        />
+        <Route exact path="/favorites" render={() => (
+          <Favorites
+            offers = {offers}
+          />
+        )}
+        />
+        <Route exact path="/offer/:id" render={() => (
+          <Offer
+            offers = {offers}
+            reviews = {reviews}
+          />
+        )}
+        />
         <Route exact path="/login" component={Login} />
       </Switch>
     </BrowserRouter>
@@ -23,7 +40,9 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offersNumber: PropTypes.number.isRequired
+  offersNumber: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default App;

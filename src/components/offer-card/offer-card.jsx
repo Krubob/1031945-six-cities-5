@@ -64,7 +64,7 @@ OfferCard.propTypes = {
       bedrooms: PropTypes.number.isRequired,
       guests: PropTypes.number.isRequired,
     }),
-    mark: PropTypes.string.isRequired,
+    mark: PropTypes.string,
     service: PropTypes.arrayOf(
         PropTypes.string.isRequired
     ).isRequired,

@@ -42,7 +42,16 @@ const App = (props) => {
 App.propTypes = {
   offersNumber: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    author: PropTypes.string.isRequired,
+    avatar: PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      alt: PropTypes.string.isRequired
+    }),
+    text: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+  }))
 };
 
 export default App;

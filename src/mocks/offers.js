@@ -84,7 +84,7 @@ export default [
     type: `Apartment`,
     cost: 800,
     rating: 4.8,
-    image: `img/apartment-02.jpg`,
+    image: `img/apartment-03.jpg`,
     photos: [
       {
         src: `img/room.jpg`,

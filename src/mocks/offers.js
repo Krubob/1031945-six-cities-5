@@ -1,10 +1,11 @@
 export default [
   {
     id: `0`,
+    city: `Amsterdam`,
     title: `Ritz Carlton`,
     type: `Private room`,
     cost: 500,
-    rating: 4.1,
+    rating: 95,
     image: `img/apartment-02.jpg`,
     photos: [
       {
@@ -37,7 +38,8 @@ export default [
       bedrooms: 1,
       guests: 4,
     },
-    mark: `Premium`,
+    isFavorite: true,
+    isPremium: true,
     service: [`Wi-Fi`, `PS5`, `Home cinema`, `Soundbar`, `Popcorn`],
     owner: {
       avatar: `img/avatar-angelina.jpg`,
@@ -47,10 +49,11 @@ export default [
     },
   }, {
     id: `1`,
+    city: `Amsterdam`,
     title: `Village in the forest`,
     type: `Cabin`,
     cost: 100,
-    rating: 3,
+    rating: 40,
     image: `img/apartment-01.jpg`,
     photos: [
       {
@@ -71,6 +74,8 @@ export default [
       bedrooms: 2,
       guests: 5,
     },
+    isFavorite: false,
+    isPremium: false,
     service: [`Wi-Fi`, `Free cow milk`, `Russian bath-house`],
     owner: {
       avatar: `img/avatar-angelina.jpg`,
@@ -80,10 +85,11 @@ export default [
     },
   }, {
     id: `2`,
+    city: `Amsterdam`,
     title: `The Four Seasons`,
     type: `Apartment`,
     cost: 800,
-    rating: 4.8,
+    rating: 90,
     image: `img/apartment-03.jpg`,
     photos: [
       {
@@ -108,6 +114,8 @@ export default [
       bedrooms: 3,
       guests: 10,
     },
+    isFavorite: true,
+    isPremium: true,
     mark: `Premium`,
     service: [`Wi-Fi`, `Swimming pool`, `Heating`, `Fridge`, `Dishwasher`, `TV`, `Coffee machine`],
     owner: {
@@ -118,10 +126,11 @@ export default [
     },
   }, {
     id: `3`,
+    city: `Amsterdam`,
     title: `Capsule hotel`,
     type: `Capsule`,
     cost: 30,
-    rating: 2.8,
+    rating: 60,
     image: `img/room.jpg`,
     photos: [
       {
@@ -150,6 +159,8 @@ export default [
       bedrooms: 1,
       guests: 1,
     },
+    isFavorite: false,
+    isPremium: false,
     service: [`Wi-Fi`, `Lamp`, `bed`, `Washing machine`],
     owner: {
       avatar: `img/avatar-angelina.jpg`,

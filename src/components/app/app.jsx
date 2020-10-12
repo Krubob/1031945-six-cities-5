@@ -5,42 +5,41 @@ import Main from "../main/main";
 import Favorites from "../favorites/favorites";
 import Offer from "../offer/offer";
 import Login from "../login/login";
+import {Path} from "../../const";
 
 const App = (props) => {
 
-  const {offersNumber, offers, reviews} = props;
+  const {offers, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" render={() => (
+        <Route exact path={Path.MAIN} render={() => (
           <Main
-            offersNumber = {offersNumber}
             offers = {offers}
           />
         )}
         />
-        <Route exact path="/favorites" render={() => (
+        <Route exact path={Path.FAVORITES} render={() => (
           <Favorites
             offers = {offers}
           />
         )}
         />
-        <Route exact path="/offer/:id" render={() => (
+        <Route exact path={`${Path.OFFER}/:id`} render={() => (
           <Offer
             offers = {offers}
             reviews = {reviews}
           />
         )}
         />
-        <Route exact path="/login" component={Login} />
+        <Route exact path={Path.LOGIN} component={Login} />
       </Switch>
     </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  offersNumber: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape({
     author: PropTypes.string.isRequired,

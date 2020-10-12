@@ -14,7 +14,7 @@ class OffersList extends PureComponent {
 
   handleOfferHover(title = null) {
     this.setState({
-      activeOfferName: title
+      activeOfferTitle: title
     });
   }
 

@@ -26,9 +26,9 @@ const App = (props) => {
           />
         )}
         />
-        <Route exact path={`${Path.OFFER}/:id`} render={() => (
+        <Route exact path={`${Path.OFFER}/:id`} render={({match: {params}}) => (
           <Offer
-            offers = {offers}
+            offer = {offers.find((item) => item.id === params.id)}
             reviews = {reviews}
           />
         )}

@@ -7,7 +7,7 @@ class OffersList extends PureComponent {
     super(props);
 
     this.state = {
-      activeOfferTitle: null
+      activeOfferTitle: null,
     };
     this.handleOfferHover = this.handleOfferHover.bind(this);
   }
@@ -33,6 +33,7 @@ class OffersList extends PureComponent {
 
 OffersList.propTypes = {
   handleOfferHover: PropTypes.func,
+  onOfferClick: PropTypes.func,
   offers: PropTypes.arrayOf(OfferCard.propTypes.offer),
 };
 

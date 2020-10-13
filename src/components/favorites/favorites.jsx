@@ -6,6 +6,7 @@ import {Path} from "../../const";
 
 const Favorites = (props) => {
   const {offers} = props;
+  const favoriteOffers = offers.filter((it) => it.isFavorite);
 
   return (
     <div className="page">
@@ -46,7 +47,7 @@ const Favorites = (props) => {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {offers.map((offer) => (
+                  {favoriteOffers.map((offer) => (
                     <article key={offer.id} className="favorites__card place-card">
                       <div className="favorites__image-wrapper place-card__image-wrapper">
                         <Link to={`${Path.OFFER}/${offer.id}`}>

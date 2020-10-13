@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import OfferCard from "../offer-card/offer-card";
+import {Path} from "../../const";
 
 const Offer = (props) => {
-  const {offers, reviews} = props;
-  const offer = offers[1];
-  const review = reviews[1];
+  const {offer, reviews} = props;
+  const review = reviews[offer.id];
+  const premiumPropMark = <div className="property__mark"><span>Premium</span></div>;
 
   return (
     <div className="page">
@@ -13,9 +15,9 @@ const Offer = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to={Path.MAIN}>
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -36,31 +38,16 @@ const Offer = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
+              {offer.photos.map((img, index) => (
+                <div className="property__image-wrapper" key={`gallery-item${index}`} >
+                  <img className="property__image" src={img} alt="Photo studio" />
+                </div>
+              ))}
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>{offer.mark}</span>
-              </div>
+              {offer.isPremium ? premiumPropMark : ``}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {offer.title}
@@ -305,7 +292,7 @@ const Offer = (props) => {
 };
 
 Offer.propTypes = {
-  offers: PropTypes.arrayOf(OfferCard.propTypes.offer),
+  offer: OfferCard.propTypes.offer,
   reviews: PropTypes.array.isRequired,
 };
 

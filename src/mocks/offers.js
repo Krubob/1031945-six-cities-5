@@ -7,32 +7,7 @@ export default [
     cost: 500,
     rating: 95,
     image: `img/apartment-02.jpg`,
-    photos: [
-      {
-        src: `img/room.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-01.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-02.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-03.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/studio-01.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-01.jpg`,
-        alt: `Photo studio`
-      }
-    ],
+    photos: [`img/room.jpg`, `img/apartment-01.jpg`, `img/apartment-02.jpg`, `img/apartment-03.jpg`, `img/studio-01.jpg`, `img/apartment-01.jpg`],
     features: {
       type: `Private room`,
       bedrooms: 1,
@@ -55,20 +30,7 @@ export default [
     cost: 100,
     rating: 40,
     image: `img/apartment-01.jpg`,
-    photos: [
-      {
-        src: `img/apartment-03.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/studio-01.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-01.jpg`,
-        alt: `Photo studio`
-      }
-    ],
+    photos: [`img/apartment-03.jpg`, `img/studio-01.jpg`, `img/apartment-01.jpg`],
     features: {
       type: `Wood house`,
       bedrooms: 2,
@@ -91,24 +53,7 @@ export default [
     cost: 800,
     rating: 90,
     image: `img/apartment-03.jpg`,
-    photos: [
-      {
-        src: `img/room.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-01.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-02.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/studio-01.jpg`,
-        alt: `Photo studio`
-      },
-    ],
+    photos: [`img/room.jpg`, `img/apartment-01.jpg`, `img/apartment-02.jpg`, `img/studio-01.jpg`],
     features: {
       type: `Apartment`,
       bedrooms: 3,
@@ -132,28 +77,7 @@ export default [
     cost: 30,
     rating: 60,
     image: `img/room.jpg`,
-    photos: [
-      {
-        src: `img/room.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-01.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-03.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/studio-01.jpg`,
-        alt: `Photo studio`
-      },
-      {
-        src: `img/apartment-01.jpg`,
-        alt: `Photo studio`
-      }
-    ],
+    photos: [`img/room.jpg`, `img/apartment-01.jpg`, `img/apartment-03.jpg`, `img/studio-01.jpg`, `img/apartment-01.jpg`],
     features: {
       type: `Capsule`,
       bedrooms: 1,

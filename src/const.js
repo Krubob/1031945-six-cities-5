@@ -4,3 +4,5 @@ export const Path = {
   FAVORITES: `/favorites`,
   LOGIN: `/login`,
 };
+
+export const RATING_MULTIPLIER = 20;

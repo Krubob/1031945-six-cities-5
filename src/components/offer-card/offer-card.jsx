@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {Path} from "../../const";
+import {RATING_MULTIPLIER} from '../../const';
 
 const OfferCard = (props) => {
   const {onOfferHover, offer} = props;
@@ -32,7 +33,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: offer.rating + `%`}}></span>
+            <span style={{width: `${offer.rating * RATING_MULTIPLIER}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -47,7 +48,6 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   onOfferHover: PropTypes.func,
-  onOfferClick: PropTypes.func,
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

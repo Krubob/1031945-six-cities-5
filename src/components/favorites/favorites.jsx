@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
 import {Path} from "../../const";
+import {RATING_MULTIPLIER} from '../../const';
 
 const Favorites = (props) => {
   const {offers} = props;
@@ -69,7 +70,7 @@ const Favorites = (props) => {
                         </div>
                         <div className="place-card__rating rating">
                           <div className="place-card__stars rating__stars">
-                            <span style={{width: `100%`}}></span>
+                            <span style={{width: `${offer.rating * RATING_MULTIPLIER}%`}}></span>
                             <span className="visually-hidden">Rating</span>
                           </div>
                         </div>

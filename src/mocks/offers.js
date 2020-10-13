@@ -5,7 +5,7 @@ export default [
     title: `Ritz Carlton`,
     type: `Private room`,
     cost: 500,
-    rating: 95,
+    rating: 4.5,
     image: `img/apartment-02.jpg`,
     photos: [`img/room.jpg`, `img/apartment-01.jpg`, `img/apartment-02.jpg`, `img/apartment-03.jpg`, `img/studio-01.jpg`, `img/apartment-01.jpg`],
     features: {
@@ -28,7 +28,7 @@ export default [
     title: `Village in the forest`,
     type: `Cabin`,
     cost: 100,
-    rating: 40,
+    rating: 2,
     image: `img/apartment-01.jpg`,
     photos: [`img/apartment-03.jpg`, `img/studio-01.jpg`, `img/apartment-01.jpg`],
     features: {
@@ -51,7 +51,7 @@ export default [
     title: `The Four Seasons`,
     type: `Apartment`,
     cost: 800,
-    rating: 90,
+    rating: 4.9,
     image: `img/apartment-03.jpg`,
     photos: [`img/room.jpg`, `img/apartment-01.jpg`, `img/apartment-02.jpg`, `img/studio-01.jpg`],
     features: {
@@ -75,7 +75,7 @@ export default [
     title: `Capsule hotel`,
     type: `Capsule`,
     cost: 30,
-    rating: 60,
+    rating: 3,
     image: `img/room.jpg`,
     photos: [`img/room.jpg`, `img/apartment-01.jpg`, `img/apartment-03.jpg`, `img/studio-01.jpg`, `img/apartment-01.jpg`],
     features: {

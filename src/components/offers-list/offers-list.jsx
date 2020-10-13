@@ -33,7 +33,6 @@ class OffersList extends PureComponent {
 
 OffersList.propTypes = {
   handleOfferHover: PropTypes.func,
-  onOfferClick: PropTypes.func,
   offers: PropTypes.arrayOf(OfferCard.propTypes.offer),
 };
 

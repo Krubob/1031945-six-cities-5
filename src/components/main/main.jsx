@@ -110,7 +110,6 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  onOfferClick: PropTypes.func,
   offers: PropTypes.arrayOf(OfferCard.propTypes.offer),
 };
 

@@ -15,18 +15,16 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={Path.MAIN} render={() => (
+        <Route exact path={Path.MAIN}>
           <Main
             offers = {offers}
           />
-        )}
-        />
-        <Route exact path={Path.FAVORITES} render={() => (
+        </Route>
+        <Route exact path={Path.FAVORITES}>
           <Favorites
             offers = {offers}
           />
-        )}
-        />
+        </Route>
         <Route exact path={`${Path.OFFER}/:id`} render={({match: {params}}) => (
           <Offer
             offer = {offers.find((item) => item.id === params.id)}
@@ -34,7 +32,9 @@ const App = (props) => {
           />
         )}
         />
-        <Route exact path={Path.LOGIN} component={Login} />
+        <Route exact path={Path.LOGIN}>
+          <Login />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

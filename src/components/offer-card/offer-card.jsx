@@ -7,13 +7,12 @@ import {OfferPropTуpes} from "../../propTypes";
 
 const OfferCard = (props) => {
   const {onOfferHover, offer} = props;
-  const premiumCardMark = <div className="place-card__mark"><span>Premium</span></div>;
 
   return (
     <article onMouseOver={() => {
       onOfferHover(offer.title);
     }} className="cities__place-card place-card">
-      {offer.isPremium ? premiumCardMark : ``}
+      {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link className="header__logo-link" to={`${Path.OFFER}/${offer.id}`}>
           <img className="place-card__image" src={offer.image} width="260" height="200" alt="Place image" />

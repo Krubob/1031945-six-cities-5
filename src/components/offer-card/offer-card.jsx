@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {Path} from "../../const";
 import {RATING_MULTIPLIER} from '../../const';
+import {OfferPropTуpes} from "../../propTypes";
 
 const OfferCard = (props) => {
   const {onOfferHover, offer} = props;
@@ -47,35 +48,8 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  onOfferHover: PropTypes.func,
-  offer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    cost: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    photos: PropTypes.arrayOf(
-        PropTypes.string.isRequired
-    ).isRequired,
-    features: PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      bedrooms: PropTypes.number.isRequired,
-      guests: PropTypes.number.isRequired,
-    }),
-    isFavorite: PropTypes.bool.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    mark: PropTypes.string,
-    service: PropTypes.arrayOf(
-        PropTypes.string.isRequired
-    ).isRequired,
-    owner: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired
-    }).isRequired
-  })
+  offer: OfferPropTуpes.isRequired,
+  onOfferHover: PropTypes.func.isRequired,
 };
 
 export default OfferCard;

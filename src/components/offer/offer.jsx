@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import OfferCard from "../offer-card/offer-card";
 import Comment from "../comment/comment";
 import {Path} from "../../const";
 import {RATING_MULTIPLIER} from '../../const';
+import {OfferPropTуpes} from "../../propTypes";
 
 const Offer = (props) => {
   const {offer, reviews} = props;
@@ -249,7 +249,7 @@ const Offer = (props) => {
 };
 
 Offer.propTypes = {
-  offer: OfferCard.propTypes.offer,
+  offer: OfferPropTуpes.isRequired,
   reviews: PropTypes.array.isRequired,
 };
 

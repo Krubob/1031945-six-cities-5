@@ -6,6 +6,7 @@ import Favorites from "../favorites/favorites";
 import Offer from "../offer/offer";
 import Login from "../login/login";
 import {Path} from "../../const";
+import {ReviewPropTypes} from "../../propTypes";
 
 const App = (props) => {
 
@@ -41,16 +42,7 @@ const App = (props) => {
 
 App.propTypes = {
   offers: PropTypes.array.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    author: PropTypes.string.isRequired,
-    avatar: PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired
-    }),
-    text: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired,
-  }))
+  reviews: PropTypes.arrayOf(ReviewPropTypes.isRequired)
 };
 
 export default App;

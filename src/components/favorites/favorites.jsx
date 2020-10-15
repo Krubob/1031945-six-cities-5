@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
-import OfferCard from "../offer-card/offer-card";
+import {OfferPropTуpes} from "../../propTypes";
 import {Path} from "../../const";
 import {RATING_MULTIPLIER} from '../../const';
 
@@ -98,7 +98,7 @@ const Favorites = (props) => {
 };
 
 Favorites.propTypes = {
-  offers: PropTypes.arrayOf(OfferCard.propTypes.offer),
+  offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
 };
 
 export default Favorites;

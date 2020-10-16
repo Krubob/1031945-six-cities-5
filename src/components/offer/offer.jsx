@@ -5,6 +5,7 @@ import Comment from "../comment/comment";
 import {Path} from "../../const";
 import {RATING_MULTIPLIER} from '../../const';
 import {OfferPropTуpes} from "../../propTypes";
+import {stars} from "../../const";
 
 const Offer = (props) => {
   const {offer, reviews} = props;
@@ -135,7 +136,7 @@ const Offer = (props) => {
                     </div>
                   </li>
                 </ul>
-                <Comment />
+                <Comment stars={stars} />
               </section>
             </div>
           </div>

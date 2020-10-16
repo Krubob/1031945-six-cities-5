@@ -26,7 +26,7 @@ export const OfferPropTуpes = PropTypes.shape({
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     super: PropTypes.bool.isRequired
-  }).isRequired
+  })
 });
 
 export const ReviewPropTypes = PropTypes.shape({
@@ -38,4 +38,9 @@ export const ReviewPropTypes = PropTypes.shape({
   text: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,
+});
+
+export const StarPropTypes = PropTypes.shape({
+  value: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
 });

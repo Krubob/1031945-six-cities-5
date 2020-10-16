@@ -10,7 +10,7 @@ const OfferCard = (props) => {
 
   return (
     <article onMouseOver={() => {
-      onOfferHover(offer.title);
+      onOfferHover(offer);
     }} className="cities__place-card place-card">
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className="cities__image-wrapper place-card__image-wrapper">

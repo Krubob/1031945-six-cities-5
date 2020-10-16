@@ -8,14 +8,14 @@ class OffersList extends PureComponent {
     super(props);
 
     this.state = {
-      activeOfferTitle: null,
+      activeOffer: null,
     };
     this.handleOfferHover = this.handleOfferHover.bind(this);
   }
 
-  handleOfferHover(title = null) {
+  handleOfferHover(offer = null) {
     this.setState({
-      activeOfferTitle: title
+      activeOffer: offer
     });
   }
 

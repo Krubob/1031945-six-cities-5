@@ -14,6 +14,7 @@ class Comment extends PureComponent {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+    this.handleInputStarClick = this.handleInputStarClick.bind(this);
   }
 
   handleSubmit(evt) {
@@ -25,6 +26,11 @@ class Comment extends PureComponent {
     this.setState({[name]: value});
   }
 
+  handleInputStarClick(evt) {
+    const {name, value} = evt.target;
+    this.setState({[name]: value});
+  }
+
   render() {
     const {stars} = this.props;
     return (
@@ -32,7 +38,7 @@ class Comment extends PureComponent {
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {stars.map((star) => (
-            <RatingStar key={star.title} star={star} onInputChange={this.handleTextAreaChange} />
+            <RatingStar key={star.title} star={star} onInputStarClick={this.handleInputStarClick} />
           ))}
         </div>
         <textarea className="reviews__textarea form__textarea" onChange={this.handleTextAreaChange} id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>

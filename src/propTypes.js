@@ -2,7 +2,11 @@ import PropTypes from "prop-types";
 
 export const OfferPropTуpes = PropTypes.shape({
   id: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  coordinates: PropTypes.arrayOf(
+      PropTypes.number.isRequired
+  ).isRequired,
   type: PropTypes.string.isRequired,
   cost: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,

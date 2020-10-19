@@ -45,6 +45,6 @@ export const ReviewPropTypes = PropTypes.shape({
 });
 
 export const StarPropTypes = PropTypes.shape({
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 });

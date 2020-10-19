@@ -7,23 +7,23 @@ export const Path = {
 
 export const stars = [
   {
-    value: 5,
+    value: `5`,
     title: `perfect`,
   },
   {
-    value: 4,
+    value: `4`,
     title: `good`,
   },
   {
-    value: 3,
+    value: `3`,
     title: `not bad`,
   },
   {
-    value: 2,
+    value: `2`,
     title: `badly`,
   },
   {
-    value: 1,
+    value: `1`,
     title: `terribly`,
   },
 ];

@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React, {PureComponent, Fragment} from "react";
 import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
 import {OfferPropTуpes} from "../../propTypes";
@@ -20,14 +20,14 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, className} = this.props;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <Fragment>
         {offers.map((offer) => (
-          <OfferCard key={offer.title} offer={offer} onOfferHover={this.handleOfferHover} />
+          <OfferCard key={offer.title} offer={offer} onOfferHover={this.handleOfferHover} className={className}/>
         ))}
-      </div>
+      </Fragment>
     );
   }
 }
@@ -35,6 +35,7 @@ class OffersList extends PureComponent {
 OffersList.propTypes = {
   handleOfferHover: PropTypes.func,
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  className: PropTypes.string.isRequired,
 };
 
 export default OffersList;

@@ -8,6 +8,8 @@ export const Path = {
 export const className = {
   PROPERTY: `property`,
   CITIES: `cities`,
+  NEAR: `near`,
+  NEAR_PLACES: `near-places`,
 };
 
 export const stars = [

@@ -29,6 +29,7 @@ const App = (props) => {
           <Offer
             offer = {offers.find((item) => item.id === params.id)}
             reviews = {reviews}
+            nearOffers = {[offers[0], offers[1], offers[2]]}
           />
         )}
         />

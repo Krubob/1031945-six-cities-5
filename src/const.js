@@ -5,6 +5,11 @@ export const Path = {
   LOGIN: `/login`,
 };
 
+export const className = {
+  PROPERTY: `property`,
+  CITIES: `cities`,
+};
+
 export const stars = [
   {
     value: `5`,

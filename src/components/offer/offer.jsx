@@ -3,16 +3,14 @@ import PropTypes from "prop-types";
 import Comment from "../comment/comment";
 import Header from "../header/header";
 import ReviewsList from "../reviews-list/reviews-list";
-import {RATING_MULTIPLIER} from '../../const';
+import Map from "../map/map";
+import {RATING_MULTIPLIER, className} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 import {stars} from "../../const";
 
 const Offer = (props) => {
-  const {offer, reviews} = props;
-  const reviewsById = reviews.find((review) => {
-    return (review.id === offer.id);
-  });
-
+  const {offer, nearOffers, reviews} = props;
+  const reviewsById = reviews.find((review) => review.id === offer.id);
 
   return (
     <div className="page">
@@ -96,7 +94,7 @@ const Offer = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map offers={nearOffers} className={className.PROPERTY} />
         </section>
         <div className="container">
           <section className="near-places places">
@@ -208,6 +206,7 @@ const Offer = (props) => {
 Offer.propTypes = {
   offer: OfferPropTуpes.isRequired,
   reviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
+  nearOffers: PropTypes.array.isRequired,
 };
 
 export default Offer;

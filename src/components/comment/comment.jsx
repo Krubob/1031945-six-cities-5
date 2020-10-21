@@ -8,7 +8,7 @@ class Comment extends PureComponent {
     super(props);
 
     this.state = {
-      rating: ``,
+      rating: `1`,
       review: ``,
     };
 
@@ -22,23 +22,25 @@ class Comment extends PureComponent {
   }
 
   handleTextAreaChange(evt) {
-    const {name, value} = evt.target;
-    this.setState({[name]: value});
+    const {value} = evt.target;
+    this.setState({review: value});
   }
 
   handleInputStarClick(evt) {
-    const {name, value} = evt.target;
-    this.setState({[name]: value});
+    const {value} = evt.target;
+    this.setState({rating: value});
   }
 
   render() {
     const {stars} = this.props;
+    const {rating} = this.state;
+
     return (
       <form className="reviews__form form" onSubmit={this.handleSubmit} action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {stars.map((star) => (
-            <RatingStar key={star.title} star={star} onInputStarClick={this.handleInputStarClick} />
+            <RatingStar key={star.title} star={star} onInputStarClick={this.handleInputStarClick} checked={rating === star.value} />
           ))}
         </div>
         <textarea className="reviews__textarea form__textarea" onChange={this.handleTextAreaChange} id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>

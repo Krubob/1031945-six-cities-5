@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 import Comment from "../comment/comment";
 import Header from "../header/header";
 import {RATING_MULTIPLIER} from '../../const';
-import {OfferPropTуpes} from "../../propTypes";
+import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 import {stars} from "../../const";
 
 const Offer = (props) => {
   const {offer, reviews} = props;
   const review = reviews[offer.id];
-  const premiumPropMark = <div className="property__mark"><span>Premium</span></div>;
 
   return (
     <div className="page">
@@ -27,7 +26,7 @@ const Offer = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer.isPremium ? premiumPropMark : ``}
+              {offer.isPremium && <div className="property__mark"><span>Premium</span></div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {offer.title}
@@ -228,7 +227,7 @@ const Offer = (props) => {
 
 Offer.propTypes = {
   offer: OfferPropTуpes.isRequired,
-  reviews: PropTypes.array.isRequired,
+  reviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
 };
 
 export default Offer;

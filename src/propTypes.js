@@ -34,11 +34,20 @@ export const OfferPropTуpes = PropTypes.shape({
 });
 
 export const ReviewPropTypes = PropTypes.shape({
+  id: PropTypes.string,
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    author: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
+  }).isRequired
+  )
+});
+
+export const ReviewsByIdPropTypes = PropTypes.shape({
   author: PropTypes.string.isRequired,
-  avatar: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-  }),
+  avatar: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   date: PropTypes.string.isRequired,

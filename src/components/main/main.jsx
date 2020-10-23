@@ -4,6 +4,7 @@ import {OfferPropTуpes} from "../../propTypes";
 import OffersList from "../offers-list/offers-list";
 import Map from "../map/map";
 import Header from "../header/header";
+import {className} from "../../const";
 
 const Main = (props) => {
 
@@ -77,12 +78,12 @@ const Main = (props) => {
                 </select> */}
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offers} />
+                <OffersList offers={offers} className={className.CITIES}/>
               </div>
             </section>
             <div className="cities__right-section">
               <section id="map" className="cities__map map">
-                <Map offers={offers} />
+                <Map offers={offers} className={className.CITIES} />
               </section>
             </div>
           </div>

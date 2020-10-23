@@ -7,10 +7,10 @@ import 'leaflet/dist/leaflet.css';
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.offers = props.offers;
   }
 
   componentDidMount() {
+    const {offers} = this.props;
     const amsterdamCoordinates = [52.38333, 4.9];
     const zoom = 12;
     const pinIcon = leaflet.icon({
@@ -32,7 +32,7 @@ class Map extends PureComponent {
     })
     .addTo(map);
 
-    this.offers.forEach((offer) => {
+    offers.forEach((offer) => {
       leaflet
         .marker(offer.coordinates, {icon: pinIcon})
         .addTo(map);
@@ -40,14 +40,17 @@ class Map extends PureComponent {
   }
 
   render() {
+    const {className} = this.props;
+
     return (
-      <div id="map"></div>
+      <section id="map" className={`${className}__map map`}></section>
     );
   }
 }
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  className: PropTypes.string.isRequired,
 };
 
 export default Map;

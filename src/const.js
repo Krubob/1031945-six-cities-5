@@ -5,6 +5,13 @@ export const Path = {
   LOGIN: `/login`,
 };
 
+export const className = {
+  PROPERTY: `property`,
+  CITIES: `cities`,
+  NEAR: `near`,
+  NEAR_PLACES: `near-places`,
+};
+
 export const stars = [
   {
     value: `5`,

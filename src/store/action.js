@@ -8,7 +8,7 @@ export const ActionType = {
 export const ActionCreator = {
   changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
-    payload: city
+    payload: city,
   }),
   getCityOffers: () => ({
     type: ActionType.GET_CITY_OFFERS,

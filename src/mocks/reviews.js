@@ -66,5 +66,60 @@ export default [
         date: `11.10.2019`,
       },
     ]
+  },
+  {
+    id: `4`,
+    reviews: [
+      {author: `Man from mars`,
+        avatar: `img/avatar-max.jpg`,
+        text: `Well, well, well...`,
+        rating: 3.5,
+        date: `13.09.2020`,
+      },
+    ]
+  },
+  {
+    id: `5`,
+    reviews: [
+      {author: `Cowboy Bill`,
+        avatar: `img/avatar-max.jpg`,
+        text: `Beer, a lot of beer!`,
+        rating: 3.5,
+        date: `12.06.2019`,
+      },
+    ]
+  },
+  {
+    id: `6`,
+    reviews: [
+      {author: `Farmer Bob`,
+        avatar: `img/avatar-max.jpg`,
+        text: `Not bad, not good.`,
+        rating: 3,
+        date: `10.10.2020`,
+      },
+    ]
+  },
+  {
+    id: `7`,
+    reviews: [
+      {author: `Russian gangster`,
+        avatar: `img/avatar-max.jpg`,
+        text: `Very quit, thanks.`,
+        rating: 4,
+        date: `03.04.2018`,
+      },
+    ]
+  },
+  {
+    id: `8`,
+    reviews: [
+      {author: `King of men`,
+        avatar: `img/avatar-max.jpg`,
+        text: `Definitely, LIKE.`,
+        rating: 4.9,
+        date: `28.07.2016`,
+      },
+    ]
   }
 ];

@@ -11,7 +11,7 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const {offers} = this.props;
-    const amsterdamCoordinates = [52.38333, 4.9];
+    const city = [52.38, 4.9];
     const zoom = 12;
     const pinIcon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -19,12 +19,12 @@ class Map extends PureComponent {
     });
 
     const map = leaflet.map(`map`, {
-      center: amsterdamCoordinates,
+      center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(amsterdamCoordinates, zoom);
+    map.setView(city, zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {

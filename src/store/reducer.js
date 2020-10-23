@@ -1,11 +1,11 @@
 import {extend} from "../utils";
 import {ActionType} from "./action";
 import offers from "../mocks/offers";
-import {CITIES} from "../const";
+import cities from "../mocks/cities";
 
 const initialState = {
-  city: `Amsterdam`,
-  cities: CITIES,
+  activeCity: `Amsterdam`,
+  cities,
   offers,
 };
 
@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
-        city: action.payload,
+        activeCity: action.payload,
       });
     case ActionType.GET_CITY_OFFERS:
       return extend(state, {

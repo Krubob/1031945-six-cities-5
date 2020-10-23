@@ -39,6 +39,4 @@ export const cities = {
   AMSTERDAM: [52.38333, 4.9],
 };
 
-export const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
-
 export const RATING_MULTIPLIER = 20;

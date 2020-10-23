@@ -2,19 +2,25 @@ export default [
   {
     id: `0`,
     reviews: [
-      {author: `Johny Depp`,
+      {
+        id: `0.1`,
+        author: `Johny Depp`,
         avatar: `img/avatar-max.jpg`,
         text: `I like it!`,
         rating: 4.5,
         date: `31.12.2019`
       },
-      {author: `Brad Pitt`,
+      {
+        id: `0.2`,
+        author: `Brad Pitt`,
         avatar: `img/avatar-max.jpg`,
         text: `Not bad!`,
         rating: 4,
         date: `18.04.2017`
       },
-      {author: `Angelina Jolie`,
+      {
+        id: `0.3`,
+        author: `Angelina Jolie`,
         avatar: `img/avatar-max.jpg`,
         text: `Cool place!`,
         rating: 4.9,
@@ -25,13 +31,17 @@ export default [
   {
     id: `1`,
     reviews: [
-      {author: `Kolya`,
+      {
+        id: `1.1`,
+        author: `Kolya`,
         avatar: `img/avatar-max.jpg`,
         text: `Many mosquitoes, lack of service.`,
         rating: 2.8,
         date: `08.01.2020`,
       },
-      {author: `Bruce Willis`,
+      {
+        id: `1.2`,
+        author: `Bruce Willis`,
         avatar: `img/avatar-max.jpg`,
         text: `Bad.`,
         rating: 1,
@@ -42,13 +52,17 @@ export default [
   {
     id: `2`,
     reviews: [
-      {author: `Leo DiCaprio`,
+      {
+        id: `2.1`,
+        author: `Leo DiCaprio`,
         avatar: `img/avatar-max.jpg`,
         text: `Cool place! Thank you for all!`,
         rating: 4.9,
         date: `11.10.2020`,
       },
-      {author: `Chuck Norris`,
+      {
+        id: `2.2`,
+        author: `Chuck Norris`,
         avatar: `img/avatar-max.jpg`,
         text: `Good, recommend you to visit.`,
         rating: 3,
@@ -59,7 +73,9 @@ export default [
   {
     id: `3`,
     reviews: [
-      {author: `Unknown`,
+      {
+        id: `3.1`,
+        author: `Unknown`,
         avatar: `img/avatar-max.jpg`,
         text: `Cheap & cheerful!`,
         rating: 3.5,
@@ -70,7 +86,9 @@ export default [
   {
     id: `4`,
     reviews: [
-      {author: `Man from mars`,
+      {
+        id: `4.1`,
+        author: `Man from mars`,
         avatar: `img/avatar-max.jpg`,
         text: `Well, well, well...`,
         rating: 3.5,
@@ -81,7 +99,9 @@ export default [
   {
     id: `5`,
     reviews: [
-      {author: `Cowboy Bill`,
+      {
+        id: `5.1`,
+        author: `Cowboy Bill`,
         avatar: `img/avatar-max.jpg`,
         text: `Beer, a lot of beer!`,
         rating: 3.5,
@@ -92,7 +112,9 @@ export default [
   {
     id: `6`,
     reviews: [
-      {author: `Farmer Bob`,
+      {
+        id: `6.1`,
+        author: `Farmer Bob`,
         avatar: `img/avatar-max.jpg`,
         text: `Not bad, not good.`,
         rating: 3,
@@ -103,7 +125,9 @@ export default [
   {
     id: `7`,
     reviews: [
-      {author: `Russian gangster`,
+      {
+        id: `7.1`,
+        author: `Russian gangster`,
         avatar: `img/avatar-max.jpg`,
         text: `Very quit, thanks.`,
         rating: 4,
@@ -114,7 +138,9 @@ export default [
   {
     id: `8`,
     reviews: [
-      {author: `King of men`,
+      {
+        id: `8.1`,
+        author: `King of men`,
         avatar: `img/avatar-max.jpg`,
         text: `Definitely, LIKE.`,
         rating: 4.9,

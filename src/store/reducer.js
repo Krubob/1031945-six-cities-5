@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeCity: action.payload,
       });
-    case ActionType.GET_CITY_OFFERS:
+    case ActionType.GET_OFFERS:
       return extend(state, {
         offers: action.payload});
     default:

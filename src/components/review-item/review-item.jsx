@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {ReviewsByIdPropTypes} from "../../propTypes";
 import {RATING_MULTIPLIER} from '../../const';
 
@@ -6,7 +6,7 @@ const ReviewItem = (props) => {
   const {review} = props;
 
   return (
-    <li className="reviews__item">
+    <Fragment>
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={review.avatar} width="54" height="54" alt="Reviews avatar" />
@@ -27,7 +27,7 @@ const ReviewItem = (props) => {
         </p>
         <time className="reviews__time" dateTime="2019-04-24">{review.date}</time>
       </div>
-    </li>
+    </Fragment>
   );
 };
 

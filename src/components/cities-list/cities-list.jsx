@@ -16,7 +16,7 @@ const CitiesList = (props) => {
                 key={`city-${city.id}`}
                 name={city.name}
                 isActive={city.name === activeCity}
-                handleCityClick={()=>handleCityClick(city.name)}
+                handleCityClick={handleCityClick.bind(null, city.name)}
               />
             ))
           }

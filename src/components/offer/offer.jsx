@@ -101,7 +101,7 @@ const Offer = (props) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OffersList className={className.PROPERTY} offers={nearOffers} />
+              <OffersList offers={nearOffers} className={className.PROPERTY} />
             </div>
           </section>
         </div>

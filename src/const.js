@@ -35,8 +35,4 @@ export const stars = [
   },
 ];
 
-export const cities = {
-  AMSTERDAM: [52.38333, 4.9],
-};
-
 export const RATING_MULTIPLIER = 20;

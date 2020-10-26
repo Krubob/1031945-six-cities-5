@@ -1,42 +1,66 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
-import {OfferPropTуpes} from "../../propTypes";
+import {OfferPropTуpes, cityPropTypes} from "../../propTypes";
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
+    this.coords = [52.38, 4.9];
+    this.zoom = 12;
+    this.iconUrl = `img/pin.svg`;
+    this.iconSize = [30, 30];
+    this.pins = [];
   }
+
+  addPinsToMap(offers) {
+    offers.forEach((offer) => {
+      const pin = leaflet
+        .marker(offer.coordinates, {icon: this.pinIcon})
+        .addTo(this.map);
+      this.pins = [...this.pins, pin];
+    });
+  }
+
+  removePinsMap() {
+    this.pins.forEach((it) => {
+      it.removeFrom(this.map);
+    });
+    this.pins = [];
+  }
+
 
   componentDidMount() {
     const {offers} = this.props;
-    const amsterdamCoordinates = [52.38333, 4.9];
-    const zoom = 12;
-    const pinIcon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
+
+    this.pinIcon = leaflet.icon({
+      iconUrl: this.iconUrl,
+      iconSize: this.iconSize,
     });
 
-    const map = leaflet.map(`map`, {
-      center: amsterdamCoordinates,
-      zoom,
+    this.map = leaflet.map(`map`, {
+      center: this.coords,
+      zoom: this.zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(amsterdamCoordinates, zoom);
+    this.map.setView(this.coords, this.zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
-    .addTo(map);
+    .addTo(this.map);
 
-    offers.forEach((offer) => {
-      leaflet
-        .marker(offer.coordinates, {icon: pinIcon})
-        .addTo(map);
-    });
+    this.addPinsToMap(offers);
+  }
+
+  componentDidUpdate() {
+    const {offers} = this.props;
+
+    this.removePinsMap();
+    this.addPinsToMap(offers);
   }
 
   render() {
@@ -51,6 +75,8 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   className: PropTypes.string.isRequired,
+  cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
+  activeCity: PropTypes.string.isRequired,
 };
 
 export default Map;

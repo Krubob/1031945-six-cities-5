@@ -57,3 +57,11 @@ export const StarPropTypes = PropTypes.shape({
   value: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 });
+
+export const cityPropTypes = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  coord: PropTypes.arrayOf(
+      PropTypes.number.isRequired
+  ).isRequired,
+});

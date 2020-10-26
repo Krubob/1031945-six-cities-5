@@ -9,8 +9,10 @@ const ReviewsList = (props) => {
   return (
     <ul className="reviews__list">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-      {reviews.map((review, i) => (
-        <ReviewItem key={`review-${i}`} review={review}/>
+      {reviews.map((review) => (
+        <li key={`review-${review.id}`} className="reviews__item">
+          <ReviewItem review={review}/>
+        </li>
       ))}
     </ul>
   );

@@ -35,4 +35,6 @@ export const stars = [
   },
 ];
 
+export const sortingTypes = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
+
 export const RATING_MULTIPLIER = 20;

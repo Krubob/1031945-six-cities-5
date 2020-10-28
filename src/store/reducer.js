@@ -5,6 +5,7 @@ import cities from "../mocks/cities";
 
 const initialState = {
   activeCity: `Amsterdam`,
+  activeSorting: `Popular`,
   cities,
   offers,
 };
@@ -17,7 +18,12 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.GET_OFFERS:
       return extend(state, {
-        offers: action.payload});
+        offers: action.payload
+      });
+    case ActionType.CHANGE_SORTING:
+      return extend(state, {
+        activeSorting: action.payload
+      });
     default:
       return state;
   }

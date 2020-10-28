@@ -18,7 +18,7 @@ class SortingList extends PureComponent {
 
   render() {
     const {isOpened} = this.state;
-    const {activeSorting, handleSortingClick} = this.props;
+    const {activeSorting, handleSortingClick, getSortedOffers} = this.props;
 
     return (
       <form className="places__sorting" action="#" method="get">
@@ -35,7 +35,7 @@ class SortingList extends PureComponent {
         </span>
         <ul className={`places__options places__options--custom ${isOpened ? `places__options--opened` : ``}`}>
           {sortingTypes.map((type, i) => (
-            <SortingItem key={`item-${i}`} type={type} activeSorting={activeSorting} handleSortingClick={handleSortingClick} />
+            <SortingItem key={`type-${i}`} type={type} activeSorting={activeSorting} handleSortingClick={handleSortingClick} getSortedOffers={getSortedOffers}/>
           ))
           }
         </ul>
@@ -47,6 +47,7 @@ class SortingList extends PureComponent {
 SortingList.propTypes = {
   activeSorting: PropTypes.string.isRequired,
   handleSortingClick: PropTypes.func.isRequired,
+  getSortedOffers: PropTypes.func.isRequired,
 };
 
 export default SortingList;

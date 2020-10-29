@@ -8,6 +8,7 @@ const initialState = {
   offers,
   activeCity: `Amsterdam`,
   activeSorting: `Popular`,
+  activeOffer: ``,
   cityOffers: undefined,
   sortedOffers: undefined,
 };
@@ -27,11 +28,15 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CHANGE_SORTING:
       return extend(state, {
-        activeSorting: action.payload
+        activeSorting: action.payload,
       });
     case ActionType.GET_SORTED_OFFERS:
       return extend(state, {
         sortedOffers: getOffersBySortType(state.cityOffers, state.activeSorting),
+      });
+    case ActionType.CHANGE_ACTIVE_OFFER:
+      return extend(state, {
+        activeOffer: action.payload,
       });
     default:
       return state;

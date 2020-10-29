@@ -6,12 +6,14 @@ import {RATING_MULTIPLIER} from '../../const';
 import {OfferPropTуpes} from "../../propTypes";
 
 const OfferCard = (props) => {
-  const {onOfferHover, offer, className} = props;
+  const {id, onOfferHover, offer, className} = props;
 
   return (
     <article onMouseOver={() => {
-      onOfferHover(offer);
-    }} className={`${className}__place-card place-card`}>
+      onOfferHover(id);
+    }}
+    className={`${className}__place-card place-card`}
+    >
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link className="header__logo-link" to={`${Path.OFFER}/${offer.id}`}>
@@ -47,6 +49,7 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
+  id: PropTypes.string.isRequired,
   offer: OfferPropTуpes.isRequired,
   onOfferHover: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,

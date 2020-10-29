@@ -34,7 +34,7 @@ export const OfferPropTуpes = PropTypes.shape({
 });
 
 export const ReviewPropTypes = PropTypes.shape({
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape({
     author: PropTypes.string.isRequired,
     avatar: PropTypes.string.isRequired,

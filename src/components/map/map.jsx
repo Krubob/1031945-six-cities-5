@@ -10,6 +10,7 @@ class Map extends PureComponent {
     this.coords = [52.38, 4.9];
     this.zoom = 12;
     this.iconUrl = `img/pin.svg`;
+    this.activeIconUrl = `img/pin-active.svg`;
     this.iconSize = [30, 30];
     this.pins = [];
   }
@@ -30,6 +31,12 @@ class Map extends PureComponent {
     this.pins = [];
   }
 
+  onPinMouseHover() {
+    this.pinIcon = leaflet.icon({
+      iconUrl: this.activeIconUrl,
+      iconSize: this.iconSize,
+    });
+  }
 
   componentDidMount() {
     const {offers} = this.props;
@@ -67,7 +74,7 @@ class Map extends PureComponent {
     const {className} = this.props;
 
     return (
-      <section id="map" className={`${className}__map map`}></section>
+      <section id="map" className={`${className}__map map`} onClick={this.onPinMouseHover()}></section>
     );
   }
 }

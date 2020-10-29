@@ -12,7 +12,7 @@ import {className} from "../../const";
 
 const Main = (props) => {
 
-  const {cities, activeCity, activeSorting, changeCity, changeSorting, getSortedOffers, getCityOffers, sortedOffers, cityOffers} = props;
+  const {cities, activeCity, activeSorting, changeCity, changeSorting, getSortedOffers, getCityOffers, sortedOffers, cityOffers, activeOffer} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -32,7 +32,7 @@ const Main = (props) => {
             </section>
             <div className="cities__right-section">
               <section id="map" className="cities__map map">
-                <Map offers={cityOffers} cities={cities} activeCity={activeCity} className={className.CITIES} />
+                <Map offers={cityOffers} cities={cities} activeCity={activeCity} activeOffer={activeOffer} className={className.CITIES} />
               </section>
             </div>
           </div>
@@ -48,6 +48,7 @@ const mapStateToProps = (state) => ({
   cityOffers: state.cityOffers,
   activeSorting: state.activeSorting,
   sortedOffers: state.sortedOffers,
+  activeOffer: state.activeOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -76,6 +77,7 @@ Main.propTypes = {
   getCityOffers: PropTypes.func.isRequired,
   sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  activeOffer: PropTypes.string.isRequired,
 };
 
 export {Main};

@@ -88,11 +88,24 @@ export default [
     reviews: [
       {
         id: `4.1`,
-        author: `Man from mars`,
+        author: `Man from Mars`,
         avatar: `img/avatar-max.jpg`,
         text: `Well, well, well...`,
         rating: 3.5,
         date: `13.09.2020`,
+      },
+    ]
+  },
+  {
+    id: `4`,
+    reviews: [
+      {
+        id: `4.7`,
+        author: `Man from Jupiter`,
+        avatar: `img/avatar-max.jpg`,
+        text: `Good, good, very good...`,
+        rating: 3.9,
+        date: `17.09.2020`,
       },
     ]
   },
@@ -145,6 +158,32 @@ export default [
         text: `Definitely, LIKE.`,
         rating: 4.9,
         date: `28.07.2016`,
+      },
+    ]
+  },
+  {
+    id: `9`,
+    reviews: [
+      {
+        id: `9.1`,
+        author: `UFO`,
+        avatar: `img/avatar-max.jpg`,
+        text: `LIKE.`,
+        rating: 4.9,
+        date: `28.07.2016`,
+      },
+    ]
+  },
+  {
+    id: `10`,
+    reviews: [
+      {
+        id: `9.1`,
+        author: `UFO`,
+        avatar: `img/avatar-max.jpg`,
+        text: `LIKE.`,
+        rating: 4.9,
+        date: `30.08.2019`,
       },
     ]
   }

@@ -9,15 +9,19 @@ class Map extends PureComponent {
     super(props);
     this.coords = [52.38, 4.9];
     this.zoom = 12;
-    this.iconUrl = `img/pin.svg`;
+    this.pinIcon = undefined;
+    this.activePinIcon = undefined;
     this.iconSize = [30, 30];
     this.pins = [];
   }
 
   addPinsToMap(offers) {
+    const {activeOffer} = this.props;
+
     offers.forEach((offer) => {
+      const activeIcon = activeOffer === offer.id ? this.activePinIcon : this.pinIcon;
       const pin = leaflet
-        .marker(offer.coordinates, {icon: this.pinIcon})
+        .marker(offer.coordinates, {icon: activeIcon})
         .addTo(this.map);
       this.pins = [...this.pins, pin];
     });
@@ -30,12 +34,16 @@ class Map extends PureComponent {
     this.pins = [];
   }
 
-
   componentDidMount() {
     const {offers} = this.props;
 
     this.pinIcon = leaflet.icon({
-      iconUrl: this.iconUrl,
+      iconUrl: `img/pin.svg`,
+      iconSize: this.iconSize,
+    });
+
+    this.activePinIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
       iconSize: this.iconSize,
     });
 
@@ -77,6 +85,7 @@ Map.propTypes = {
   className: PropTypes.string.isRequired,
   cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
   activeCity: PropTypes.string.isRequired,
+  activeOffer: PropTypes.string.isRequired,
 };
 
 export default Map;

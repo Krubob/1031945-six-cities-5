@@ -5,54 +5,34 @@ import {ActionCreator} from "../../store/action";
 import {OfferPropTуpes, cityPropTypes} from "../../propTypes";
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
+import SortingList from "../sorting-list/sorting-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import {className} from "../../const";
-import {getOffersByCity} from "../../utils";
 
 const Main = (props) => {
 
-  const {offers, cities, activeCity, changeCity} = props;
+  const {cities, activeCity, activeSorting, changeCity, changeSorting, getSortedOffers, getCityOffers, sortedOffers, cityOffers, activeOffer} = props;
 
   return (
     <div className="page page--gray page--main">
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesList cities={cities} activeCity={activeCity} handleCityClick={changeCity} />
+        <CitiesList cities={cities} activeCity={activeCity} handleCityClick={changeCity} getCityOffers={getCityOffers} getSortedOffers={getSortedOffers}/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {activeCity}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by </span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select" />
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-                {/* <select className="places__sorting-type" id="places-sorting">
-                  <option className="places__option" value="popular" selected="">Popular</option>
-                  <option className="places__option" value="to-high">Price: low to high</option>
-                  <option className="places__option" value="to-low">Price: high to low</option>
-                  <option className="places__option" value="top-rated">Top rated first</option>
-                </select> */}
-              </form>
+              <b className="places__found">{cityOffers.length} places to stay in {activeCity}</b>
+              <SortingList handleSortingClick={changeSorting} activeSorting={activeSorting} getSortedOffers={getSortedOffers} />
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offers} className={className.CITIES}/>
+                <OffersList offers={sortedOffers} className={className.CITIES}/>
               </div>
             </section>
             <div className="cities__right-section">
               <section id="map" className="cities__map map">
-                <Map offers={offers} cities={cities} activeCity={activeCity} className={className.CITIES} />
+                <Map offers={cityOffers} cities={cities} activeCity={activeCity} activeOffer={activeOffer} className={className.CITIES} />
               </section>
             </div>
           </div>
@@ -63,15 +43,27 @@ const Main = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: getOffersByCity(state.offers, state.activeCity),
   activeCity: state.activeCity,
   cities: state.cities,
+  cityOffers: state.cityOffers,
+  activeSorting: state.activeSorting,
+  sortedOffers: state.sortedOffers,
+  activeOffer: state.activeOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity(city) {
     dispatch(ActionCreator.changeCity(city));
-  }
+  },
+  getCityOffers() {
+    dispatch(ActionCreator.getCityOffers());
+  },
+  changeSorting(type) {
+    dispatch(ActionCreator.changeSorting(type));
+  },
+  getSortedOffers() {
+    dispatch(ActionCreator.getSortedOffers());
+  },
 });
 
 Main.propTypes = {
@@ -79,6 +71,13 @@ Main.propTypes = {
   cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
   activeCity: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
+  activeSorting: PropTypes.string.isRequired,
+  changeSorting: PropTypes.func.isRequired,
+  getSortedOffers: PropTypes.func.isRequired,
+  getCityOffers: PropTypes.func.isRequired,
+  sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  activeOffer: PropTypes.string.isRequired,
 };
 
 export {Main};

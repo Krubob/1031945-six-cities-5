@@ -98,7 +98,7 @@ const Offer = (props) => {
               </section>
             </div>
           </div>
-          <Map offers={nearOffers} className={className.NEAR} />
+          <Map offers={nearOffers} className={className.PROPERTY} />
         </section>
         <div className="container">
           <section className="near-places places">

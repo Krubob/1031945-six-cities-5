@@ -1,13 +1,15 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 import {OfferPropTуpes, cityPropTypes} from "../../propTypes";
+import {getCoordByCity} from "../../utils";
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.coords = [52.38, 4.9];
+    this.defaultCoords = getCoordByCity(this.props.cities, this.props.activeCity);
     this.zoom = 12;
     this.pinIcon = undefined;
     this.activePinIcon = undefined;
@@ -48,12 +50,12 @@ class Map extends PureComponent {
     });
 
     this.map = leaflet.map(`map`, {
-      center: this.coords,
+      center: this.defaultCoords,
       zoom: this.zoom,
       zoomControl: false,
       marker: true
     });
-    this.map.setView(this.coords, this.zoom);
+    this.map.setView(this.defaultCoords, this.zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -64,10 +66,29 @@ class Map extends PureComponent {
     this.addPinsToMap(offers);
   }
 
-  componentDidUpdate() {
-    const {offers} = this.props;
+  componentDidUpdate(prevProps) {
+    const {offers, cities, activeCity} = this.props;
+    const currentCoords = getCoordByCity(cities, activeCity);
 
-    this.removePinsMap();
+    if (activeCity !== prevProps.activeCity) {
+      this.removePinsMap();
+      this.map.remove();
+
+      this.map = leaflet.map(`map`, {
+        center: currentCoords,
+        zoom: this.zoom,
+        zoomControl: false,
+        marker: true
+      });
+      this.map.setView(currentCoords, this.zoom);
+
+      leaflet
+    .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+    })
+    .addTo(this.map);
+    }
+
     this.addPinsToMap(offers);
   }
 
@@ -80,12 +101,21 @@ class Map extends PureComponent {
   }
 }
 
+const mapStateToProps = (state) => ({
+  cities: state.cities,
+  activeOffer: state.activeOffer,
+  activeCity: state.activeCity,
+});
+
+
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   className: PropTypes.string.isRequired,
-  cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
-  activeCity: PropTypes.string.isRequired,
   activeOffer: PropTypes.string.isRequired,
+  cities: PropTypes.arrayOf(cityPropTypes.isRequired),
+  activeCity: PropTypes.string.isRequired,
 };
 
-export default Map;
+export {Map};
+export default connect(mapStateToProps, null)(Map);
+

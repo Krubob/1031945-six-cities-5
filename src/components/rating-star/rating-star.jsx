@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {StarPropTypes} from "../../propTypes";
 
 const RatingStar = (props) => {
-  const {star, onInputStarClick, checked} = props;
+  const {star, handleInputStarClick, checked} = props;
 
   return (
     <Fragment>
@@ -13,7 +13,7 @@ const RatingStar = (props) => {
         value={star.value}
         id={`${star.value}-stars`}
         type="radio"
-        onChange={onInputStarClick}
+        onChange={handleInputStarClick}
         checked = {checked}
       />
       <label htmlFor={`${star.value}-stars`} className="reviews__rating-label form__rating-label" title={star.title}>
@@ -26,7 +26,7 @@ const RatingStar = (props) => {
 };
 
 RatingStar.propTypes = {
-  onInputStarClick: PropTypes.func.isRequired,
+  handleInputStarClick: PropTypes.func.isRequired,
   star: StarPropTypes.isRequired,
   checked: PropTypes.bool.isRequired,
 };

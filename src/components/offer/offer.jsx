@@ -4,10 +4,13 @@ import Comment from "../comment/comment";
 import Header from "../header/header";
 import ReviewsList from "../reviews-list/reviews-list";
 import Map from "../map/map";
+import OffersList from "../offers-list/offers-list";
+import withComment from "../hocs/with-comment/with-comment";
 import {RATING_MULTIPLIER, className} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 import {stars} from "../../const";
-import OffersList from "../offers-list/offers-list";
+
+const CommentWrapped = withComment(Comment);
 
 const Offer = (props) => {
   const {offer, nearOffers, reviews} = props;
@@ -91,7 +94,7 @@ const Offer = (props) => {
               </div>
               <section className="property__reviews reviews">
                 <ReviewsList reviews={reviewsById.reviews} />
-                <Comment stars={stars} />
+                <CommentWrapped stars={stars} />
               </section>
             </div>
           </div>

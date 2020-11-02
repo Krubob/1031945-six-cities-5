@@ -6,13 +6,16 @@ import {OfferPropTуpes, cityPropTypes} from "../../propTypes";
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import SortingList from "../sorting-list/sorting-list";
+import withSortingList from "../hocs/with-sorting-list/with-sorting-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import {className} from "../../const";
 
+const SortingListWrapped = withSortingList(SortingList);
+
 const Main = (props) => {
 
-  const {cities, activeCity, activeSorting, changeCity, changeSorting, getSortedOffers, getCityOffers, sortedOffers, cityOffers, activeOffer} = props;
+  const {cities, activeCity, activeSorting, changeCity, changeSorting, getSortedOffers, getCityOffers, sortedOffers, cityOffers} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -25,15 +28,13 @@ const Main = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{cityOffers.length} places to stay in {activeCity}</b>
-              <SortingList handleSortingClick={changeSorting} activeSorting={activeSorting} getSortedOffers={getSortedOffers} />
+              <SortingListWrapped handleSortingClick={changeSorting} activeSorting={activeSorting} getSortedOffers={getSortedOffers} />
               <div className="cities__places-list places__list tabs__content">
                 <OffersList offers={sortedOffers} className={className.CITIES}/>
               </div>
             </section>
             <div className="cities__right-section">
-              <section id="map" className="cities__map map">
-                <Map offers={cityOffers} cities={cities} activeCity={activeCity} activeOffer={activeOffer} className={className.CITIES} />
-              </section>
+              <Map offers={cityOffers} className={className.CITIES} />
             </div>
           </div>
         </div>
@@ -48,7 +49,6 @@ const mapStateToProps = (state) => ({
   cityOffers: state.cityOffers,
   activeSorting: state.activeSorting,
   sortedOffers: state.sortedOffers,
-  activeOffer: state.activeOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -77,7 +77,6 @@ Main.propTypes = {
   getCityOffers: PropTypes.func.isRequired,
   sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
-  activeOffer: PropTypes.string.isRequired,
 };
 
 export {Main};

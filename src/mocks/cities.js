@@ -7,7 +7,7 @@ export default [
   {
     id: 1,
     name: `Cologne`,
-    coord: [50.93, 6.34],
+    coord: [50.94, 6.96],
   },
   {
     id: 2,
@@ -22,11 +22,11 @@ export default [
   {
     id: 4,
     name: `Hamburg`,
-    coord: [53.57, 10.0],
+    coord: [53.55, 10.01],
   },
   {
     id: 5,
     name: `Dusseldorf`,
-    coord: [51.22, 6.8],
+    coord: [51.22, 6.78],
   }
 ];

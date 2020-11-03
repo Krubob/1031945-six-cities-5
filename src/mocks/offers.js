@@ -174,7 +174,7 @@ export default [
   },
   {
     id: `7`,
-    city: `Dusseldorf`,
+    city: `Brussels`,
     title: `Lighthouse by the sea`,
     coordinates: [51.22, 6.8],
     type: `private room`,

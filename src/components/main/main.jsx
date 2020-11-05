@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
@@ -9,6 +9,7 @@ import SortingList from "../sorting-list/sorting-list";
 import withSortingList from "../hocs/with-sorting-list/with-sorting-list";
 import Map from "../map/map";
 import Header from "../header/header";
+import MainEmpty from "../main-empty/main-empty";
 import {className} from "../../const";
 
 const SortingListWrapped = withSortingList(SortingList);
@@ -16,26 +17,31 @@ const SortingListWrapped = withSortingList(SortingList);
 const Main = (props) => {
 
   const {cities, activeCity, activeSorting, changeCity, changeSorting, getSortedOffers, getCityOffers, sortedOffers, cityOffers} = props;
+  const haveCityOffers = cityOffers.length > 0;
 
   return (
     <div className="page page--gray page--main">
       <Header />
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index ${!haveCityOffers ? `page__main--index-empty` : ``}`}>
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList cities={cities} activeCity={activeCity} handleCityClick={changeCity} getCityOffers={getCityOffers} getSortedOffers={getSortedOffers}/>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityOffers.length} places to stay in {activeCity}</b>
-              <SortingListWrapped handleSortingClick={changeSorting} activeSorting={activeSorting} getSortedOffers={getSortedOffers} />
-              <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={sortedOffers} className={className.CITIES}/>
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <Map offers={cityOffers} className={className.CITIES} />
-            </div>
+          <div className={`cities__places-container ${!haveCityOffers ? `cities__places-container--empty` : ``} container`}>
+            {haveCityOffers ? (
+              <Fragment>
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{cityOffers.length} places to stay in {activeCity}</b>
+                  <SortingListWrapped handleSortingClick={changeSorting} activeSorting={activeSorting} getSortedOffers={getSortedOffers} />
+                  <div className="cities__places-list places__list tabs__content">
+                    <OffersList offers={sortedOffers} className={className.CITIES}/>
+                  </div>
+                </section>
+                <div className="cities__right-section">
+                  <Map offers={cityOffers} className={className.CITIES} />
+                </div>
+              </Fragment>
+            ) : <MainEmpty/>}
           </div>
         </div>
       </main>

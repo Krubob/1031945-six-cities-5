@@ -1,16 +1,17 @@
 import React from "react";
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {connect} from "react-redux";
 import Main from "../main/main";
-// import Favorites from "../favorites/favorites";
-// import Offer from "../offer/offer";
-// import Login from "../login/login";
+import Favorites from "../favorites/favorites";
+import Offer from "../offer/offer";
+import Login from "../login/login";
 import {Path} from "../../const";
-// import {ReviewPropTypes, OfferPropTуpes} from "../../propTypes";
+import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 
-const App = () => {
+const App = (props) => {
 
-  // const {offers, reviews} = props;
+  const {offers, reviews} = props;
 
   return (
     <BrowserRouter>
@@ -18,7 +19,7 @@ const App = () => {
         <Route exact path={Path.MAIN}>
           <Main />
         </Route>
-        {/* <Route exact path={Path.FAVORITES}>
+        <Route exact path={Path.FAVORITES}>
           <Favorites
             offers = {offers}
           />
@@ -33,15 +34,20 @@ const App = () => {
         />
         <Route exact path={Path.LOGIN}>
           <Login />
-        </Route> */}
+        </Route>
       </Switch>
     </BrowserRouter>
   );
 };
 
+const mapStateToProps = (state) => ({
+  offers: state.cityOffers,
+});
+
 App.propTypes = {
-  // offers: PropTypes.arrayOf(OfferPropTуpes.isRequired).isRequired,
-  // reviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
+  offers: PropTypes.arrayOf(OfferPropTуpes.isRequired).isRequired,
+  reviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
 };
 
-export default App;
+export {App};
+export default connect(mapStateToProps, null)(App);

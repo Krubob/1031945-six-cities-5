@@ -14,7 +14,7 @@ const CommentWrapped = withComment(Comment);
 
 const Offer = (props) => {
   const {offer, nearOffers, reviews} = props;
-  const reviewsById = reviews.find((review) => review.id === offer.id);
+  const reviewsById = reviews[0];
 
   return (
     <div className="page">
@@ -53,13 +53,13 @@ const Offer = (props) => {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer.features.type}
+                  {offer.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {offer.features.bedrooms} Bedrooms
+                  {offer.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {offer.features.guests} adults
+                  Max {offer.guests} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -80,15 +80,15 @@ const Offer = (props) => {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={offer.owner.avatar} width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src={offer.avatar} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    {offer.owner.name}
+                    {offer.name}
                   </span>
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    {offer.owner.description}
+                    {offer.description}
                   </p>
                 </div>
               </div>

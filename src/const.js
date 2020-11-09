@@ -45,3 +45,8 @@ export const SortingType = {
 };
 
 export const RATING_MULTIPLIER = 20;
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};

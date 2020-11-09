@@ -12,7 +12,7 @@ const OffersList = (props) => {
     <Fragment>
       {offers.map((offer) => (
         <OfferCard
-          key={offer.title}
+          key={`${offer.title}-${offer.id}`}
           offer={offer}
           id={offer.id}
           onOfferHover={changeActiveOffer}

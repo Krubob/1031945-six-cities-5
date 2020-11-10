@@ -1,6 +1,5 @@
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  GET_CITY_OFFERS: `GET_CITY_OFFERS`,
   CHANGE_SORTING: `CHANGE_SORTING`,
   CHANGE_ACTIVE_OFFER: `CHANGE_ACTIVE_OFFER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
@@ -10,11 +9,6 @@ export const ActionType = {
 export const changeCity = (city) => ({
   type: ActionType.CHANGE_CITY,
   payload: city,
-});
-
-export const getCityOffers = (cityOffers) => ({
-  type: ActionType.GET_CITY_OFFERS,
-  payload: cityOffers,
 });
 
 export const changeSorting = (type) => ({

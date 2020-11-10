@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const CityItem = (props) => {
-  const {name, isActive, handleCityClick, getCityOffers} = props;
+  const {name, isActive, handleCityClick} = props;
 
   return (
     <li className="locations__item">
@@ -10,7 +10,6 @@ const CityItem = (props) => {
         className={`locations__item-link tabs__item ${isActive ? `tabs__item--active` : ``}`} href="#"
         onClick={() => {
           handleCityClick(name);
-          getCityOffers();
         }}
       >
         <span>{name}</span>
@@ -23,7 +22,6 @@ CityItem.propTypes = {
   name: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   handleCityClick: PropTypes.func.isRequired,
-  getCityOffers: PropTypes.func.isRequired,
 };
 
 export default CityItem;

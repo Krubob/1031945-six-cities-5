@@ -8,7 +8,6 @@ const initialState = {
   activeCity: `Amsterdam`,
   activeSorting: `Popular`,
   activeOffer: ``,
-  cityOffers: undefined,
 };
 
 const offerData = (state = initialState, action) => {
@@ -16,10 +15,6 @@ const offerData = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       return extend(state, {
         activeCity: action.payload,
-      });
-    case ActionType.GET_CITY_OFFERS:
-      return extend(state, {
-        cityOffers: action.payload,
       });
     case ActionType.CHANGE_SORTING:
       return extend(state, {

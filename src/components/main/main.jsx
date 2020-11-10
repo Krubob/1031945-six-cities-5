@@ -10,14 +10,14 @@ import Map from "../map/map";
 import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
 import {className} from "../../const";
-import {changeCity, getCityOffers, changeSorting} from "../../store/action";
-import {loadCities, loadActiveCity, loadCityOffers, loadActiveSorting, getSortedCityOffers} from "../../store/selectors";
+import {changeCity, changeSorting} from "../../store/action";
+import {loadCities, loadActiveCity, loadActiveSorting, getSortedCityOffers, getCityOffers} from "../../store/selectors";
 
 const SortingListWrapped = withSortingList(SortingList);
 
 const Main = (props) => {
 
-  const {cities, activeCity, activeSorting, changeCityAction, changeSortingAction, getCityOffersAction, sortedOffers, cityOffers} = props;
+  const {cities, activeCity, activeSorting, changeCityAction, changeSortingAction, sortedOffers, cityOffers} = props;
   const haveCityOffers = cityOffers.length > 0;
 
   return (
@@ -25,7 +25,7 @@ const Main = (props) => {
       <Header />
       <main className={`page__main page__main--index ${!haveCityOffers ? `page__main--index-empty` : ``}`}>
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesList cities={cities} activeCity={activeCity} handleCityClick={changeCityAction} getCityOffers={getCityOffersAction}/>
+        <CitiesList cities={cities} activeCity={activeCity} handleCityClick={changeCityAction}/>
         <div className="cities">
           <div className={`cities__places-container ${!haveCityOffers ? `cities__places-container--empty` : ``} container`}>
             {haveCityOffers ? (
@@ -53,7 +53,7 @@ const Main = (props) => {
 const mapStateToProps = (state) => ({
   activeCity: loadActiveCity(state),
   cities: loadCities(state),
-  cityOffers: loadCityOffers(state),
+  cityOffers: getCityOffers(state),
   activeSorting: loadActiveSorting(state),
   sortedOffers: getSortedCityOffers(state),
 });
@@ -61,9 +61,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeCityAction(city) {
     dispatch(changeCity(city));
-  },
-  getCityOffersAction() {
-    dispatch(getCityOffers());
   },
   changeSortingAction(type) {
     dispatch(changeSorting(type));
@@ -77,7 +74,6 @@ Main.propTypes = {
   changeCityAction: PropTypes.func.isRequired,
   activeSorting: PropTypes.string.isRequired,
   changeSortingAction: PropTypes.func.isRequired,
-  getCityOffersAction: PropTypes.func.isRequired,
   sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
 };

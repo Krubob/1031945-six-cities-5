@@ -4,7 +4,7 @@ import CityItem from "../city-item/city-item";
 import {cityPropTypes} from "../../propTypes";
 
 const CitiesList = (props) => {
-  const {cities, activeCity, handleCityClick, getCityOffers} = props;
+  const {cities, activeCity, handleCityClick} = props;
 
   return (
     <div className="tabs">
@@ -17,7 +17,6 @@ const CitiesList = (props) => {
                 name={city.name}
                 isActive={city.name === activeCity}
                 handleCityClick={handleCityClick}
-                getCityOffers={getCityOffers}
               />
             ))
           }
@@ -31,7 +30,6 @@ CitiesList.propTypes = {
   cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
   activeCity: PropTypes.string.isRequired,
   handleCityClick: PropTypes.func.isRequired,
-  getCityOffers: PropTypes.func.isRequired,
 };
 
 export default CitiesList;

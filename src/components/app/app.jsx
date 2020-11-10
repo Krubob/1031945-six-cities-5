@@ -8,6 +8,7 @@ import Offer from "../offer/offer";
 import Login from "../login/login";
 import {Path} from "../../const";
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
+import {loadOffers} from "../../store/selectors";
 
 const App = (props) => {
 
@@ -28,7 +29,7 @@ const App = (props) => {
           <Offer
             offer = {offers.find((item) => item.id === params.id)}
             reviews = {reviews}
-            nearOffers = {[offers[0], offers[1], offers[2]]}
+            nearOffers = {[offers[3], offers[4], offers[21]]}
           />
         )}
         />
@@ -41,7 +42,7 @@ const App = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.cityOffers,
+  offers: loadOffers(state),
 });
 
 App.propTypes = {

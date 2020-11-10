@@ -1,7 +1,6 @@
 import React, {Fragment} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
 import {OfferPropTуpes, cityPropTypes} from "../../propTypes";
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
@@ -11,12 +10,14 @@ import Map from "../map/map";
 import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
 import {className} from "../../const";
+import {changeCity, getCityOffers, changeSorting, getSortedOffers} from "../../store/action";
+import {loadCities, loadActiveCity, loadCityOffers, loadSortedOffers, loadActiveSorting} from "../../store/selectors";
 
 const SortingListWrapped = withSortingList(SortingList);
 
 const Main = (props) => {
 
-  const {cities, activeCity, activeSorting, changeCity, changeSorting, getSortedOffers, getCityOffers, sortedOffers, cityOffers} = props;
+  const {cities, activeCity, activeSorting, changeCityAction, changeSortingAction, getSortedOffersAction, getCityOffersAction, sortedOffers, cityOffers} = props;
   const haveCityOffers = cityOffers.length > 0;
 
   return (
@@ -24,7 +25,7 @@ const Main = (props) => {
       <Header />
       <main className={`page__main page__main--index ${!haveCityOffers ? `page__main--index-empty` : ``}`}>
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesList cities={cities} activeCity={activeCity} handleCityClick={changeCity} getCityOffers={getCityOffers} getSortedOffers={getSortedOffers}/>
+        <CitiesList cities={cities} activeCity={activeCity} handleCityClick={changeCityAction} getCityOffers={getCityOffersAction} getSortedOffers={getSortedOffersAction}/>
         <div className="cities">
           <div className={`cities__places-container ${!haveCityOffers ? `cities__places-container--empty` : ``} container`}>
             {haveCityOffers ? (
@@ -32,7 +33,7 @@ const Main = (props) => {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{cityOffers.length} places to stay in {activeCity}</b>
-                  <SortingListWrapped handleSortingClick={changeSorting} activeSorting={activeSorting} getSortedOffers={getSortedOffers} />
+                  <SortingListWrapped handleSortingClick={changeSortingAction} activeSorting={activeSorting} getSortedOffers={getSortedOffersAction} />
                   <div className="cities__places-list places__list tabs__content">
                     <OffersList offers={sortedOffers} className={className.CITIES}/>
                   </div>
@@ -50,25 +51,25 @@ const Main = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  cities: state.cities,
-  cityOffers: state.cityOffers,
-  activeSorting: state.activeSorting,
-  sortedOffers: state.sortedOffers,
+  activeCity: loadActiveCity(state),
+  cities: loadCities(state),
+  cityOffers: loadCityOffers(state),
+  activeSorting: loadActiveSorting(state),
+  sortedOffers: loadSortedOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
+  changeCityAction(city) {
+    dispatch(changeCity(city));
   },
-  getCityOffers() {
-    dispatch(ActionCreator.getCityOffers());
+  getCityOffersAction() {
+    dispatch(getCityOffers());
   },
-  changeSorting(type) {
-    dispatch(ActionCreator.changeSorting(type));
+  changeSortingAction(type) {
+    dispatch(changeSorting(type));
   },
-  getSortedOffers() {
-    dispatch(ActionCreator.getSortedOffers());
+  getSortedOffersAction() {
+    dispatch(getSortedOffers());
   },
 });
 
@@ -76,11 +77,11 @@ Main.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
   activeCity: PropTypes.string.isRequired,
-  changeCity: PropTypes.func.isRequired,
+  changeCityAction: PropTypes.func.isRequired,
   activeSorting: PropTypes.string.isRequired,
-  changeSorting: PropTypes.func.isRequired,
-  getSortedOffers: PropTypes.func.isRequired,
-  getCityOffers: PropTypes.func.isRequired,
+  changeSortingAction: PropTypes.func.isRequired,
+  getSortedOffersAction: PropTypes.func.isRequired,
+  getCityOffersAction: PropTypes.func.isRequired,
   sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
 };

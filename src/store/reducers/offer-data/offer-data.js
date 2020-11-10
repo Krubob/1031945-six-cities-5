@@ -1,6 +1,6 @@
-import {extend} from "../utils";
-import {ActionType} from "./action";
-import cities from "../mocks/cities";
+import {extend} from "../../../utils";
+import {ActionType} from "../../action";
+import cities from "../../../mocks/cities";
 
 const initialState = {
   cities,
@@ -12,7 +12,7 @@ const initialState = {
   sortedOffers: undefined,
 };
 
-const reducer = (state = initialState, action) => {
+const offerData = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
@@ -43,4 +43,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export {reducer};
+export {offerData};

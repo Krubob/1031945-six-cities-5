@@ -1,5 +1,5 @@
-import {getCityOffers, getSortedOffers, loadOffers} from "./action";
-import {getOffersByCity, getOffersBySortType, getTemplateOffers} from "../utils";
+import {getCityOffers, loadOffers} from "./action";
+import {getOffersByCity, getTemplateOffers} from "../utils";
 
 
 export const fetchOfferList = () => (dispatch, getState, api) => (
@@ -9,8 +9,6 @@ export const fetchOfferList = () => (dispatch, getState, api) => (
       dispatch(loadOffers(offers));
       let currentState = getState();
       dispatch(getCityOffers(getOffersByCity(currentState.DATA.offers, currentState.DATA.activeCity)));
-      currentState = getState();
-      dispatch(getSortedOffers(getOffersBySortType(currentState.DATA.cityOffers, currentState.DATA.activeSorting)));
     })
     .catch((err) => {
       throw err;

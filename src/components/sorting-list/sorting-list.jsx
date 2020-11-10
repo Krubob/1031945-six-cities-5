@@ -4,7 +4,7 @@ import SortingItem from "../sorting-item/sorting-item";
 import {sortingTypes} from "../../const";
 
 const SortingList = (props) => {
-  const {isOpened, activeSorting, handleSortingToggle, handleSortingClick, getSortedOffers} = props;
+  const {isOpened, activeSorting, handleSortingToggle, handleSortingClick} = props;
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -21,7 +21,7 @@ const SortingList = (props) => {
       </span>
       <ul className={`places__options places__options--custom ${isOpened ? `places__options--opened` : ``}`}>
         {sortingTypes.map((type, i) => (
-          <SortingItem key={`type-${i}`} type={type} activeSorting={activeSorting} handleSortingClick={handleSortingClick} getSortedOffers={getSortedOffers}/>
+          <SortingItem key={`type-${i}`} type={type} activeSorting={activeSorting} handleSortingClick={handleSortingClick}/>
         ))
         }
       </ul>
@@ -34,7 +34,6 @@ SortingList.propTypes = {
   activeSorting: PropTypes.string.isRequired,
   handleSortingClick: PropTypes.func.isRequired,
   handleSortingToggle: PropTypes.func.isRequired,
-  getSortedOffers: PropTypes.func.isRequired,
 };
 
 export default SortingList;

@@ -9,7 +9,6 @@ const initialState = {
   activeSorting: `Popular`,
   activeOffer: ``,
   cityOffers: undefined,
-  sortedOffers: undefined,
 };
 
 const offerData = (state = initialState, action) => {
@@ -25,10 +24,6 @@ const offerData = (state = initialState, action) => {
     case ActionType.CHANGE_SORTING:
       return extend(state, {
         activeSorting: action.payload,
-      });
-    case ActionType.GET_SORTED_OFFERS:
-      return extend(state, {
-        sortedOffers: action.payload,
       });
     case ActionType.CHANGE_ACTIVE_OFFER:
       return extend(state, {

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const CityItem = (props) => {
-  const {name, isActive, handleCityClick, getCityOffers, getSortedOffers} = props;
+  const {name, isActive, handleCityClick, getCityOffers} = props;
 
   return (
     <li className="locations__item">
@@ -11,7 +11,6 @@ const CityItem = (props) => {
         onClick={() => {
           handleCityClick(name);
           getCityOffers();
-          getSortedOffers();
         }}
       >
         <span>{name}</span>
@@ -24,7 +23,6 @@ CityItem.propTypes = {
   name: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   handleCityClick: PropTypes.func.isRequired,
-  getSortedOffers: PropTypes.func.isRequired,
   getCityOffers: PropTypes.func.isRequired,
 };
 

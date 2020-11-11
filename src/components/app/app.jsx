@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {connect} from "react-redux";
 import Main from "../main/main";
 import Favorites from "../favorites/favorites";
 import Offer from "../offer/offer";
 import Login from "../login/login";
 import {Path} from "../../const";
-import {ReviewPropTypes, OfferPropTуpes} from "../../propTypes";
+import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
+import {loadOffers} from "../../store/selectors";
 
 const App = (props) => {
 
@@ -27,7 +29,7 @@ const App = (props) => {
           <Offer
             offer = {offers.find((item) => item.id === params.id)}
             reviews = {reviews}
-            nearOffers = {[offers[0], offers[1], offers[2]]}
+            nearOffers = {[offers[3], offers[4], offers[21]]}
           />
         )}
         />
@@ -39,9 +41,14 @@ const App = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  offers: loadOffers(state),
+});
+
 App.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired).isRequired,
   reviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
 };
 
-export default App;
+export {App};
+export default connect(mapStateToProps, null)(App);

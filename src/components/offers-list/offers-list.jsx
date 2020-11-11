@@ -1,21 +1,22 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
 import OfferCard from "../offer-card/offer-card";
 import {OfferPropTуpes} from "../../propTypes";
+import {loadActiveOffer} from "../../store/selectors";
+import {changeActiveOffer} from "../../store/action";
 
 const OffersList = (props) => {
-  const {offers, className, changeActiveOffer} = props;
+  const {offers, className, changeActiveOfferAction} = props;
 
   return (
     <Fragment>
       {offers.map((offer) => (
         <OfferCard
-          key={offer.title}
+          key={`${offer.title}-${offer.id}`}
           offer={offer}
           id={offer.id}
-          onOfferHover={changeActiveOffer}
+          onOfferHover={changeActiveOfferAction}
           className={className}/>
       ))}
     </Fragment>
@@ -23,18 +24,18 @@ const OffersList = (props) => {
 };
 
 OffersList.propTypes = {
-  changeActiveOffer: PropTypes.func.isRequired,
+  changeActiveOfferAction: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   className: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeOffer: state.activeOffer,
+  activeOffer: loadActiveOffer(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveOffer(id) {
-    dispatch(ActionCreator.changeActiveOffer(id));
+  changeActiveOfferAction(id) {
+    dispatch(changeActiveOffer(id));
   },
 });
 

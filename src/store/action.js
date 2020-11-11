@@ -4,6 +4,8 @@ export const ActionType = {
   CHANGE_ACTIVE_OFFER: `CHANGE_ACTIVE_OFFER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_OFFERS_SUCCESS: `LOAD_OFFERS_SUCCESS`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  LOAD_AUTH_DATA: `LOAD_AUTH_DATA`,
 };
 
 export const changeCity = (city) => ({
@@ -31,3 +33,12 @@ export const requireAuthorization = (status) => ({
   payload: status,
 });
 
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
+
+export const loadAuthData = (authInfo) => ({
+  type: ActionType.LOAD_AUTH_DATA,
+  payload: authInfo,
+});

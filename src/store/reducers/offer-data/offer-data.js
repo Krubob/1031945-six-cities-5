@@ -5,9 +5,10 @@ import cities from "../../../mocks/cities";
 const initialState = {
   cities,
   offers: [],
-  reviews: [],
   activeOffer: ``,
   offer: {},
+  reviews: [],
+  nearOffers: [],
   activeCity: `Amsterdam`,
   activeSorting: `Popular`,
 };
@@ -37,6 +38,10 @@ const offerData = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS_SUCESS:
       return extend(state, {
         reviews: action.payload,
+      });
+    case ActionType.LOAD_NEAR_OFFERS_SUCESS:
+      return extend(state, {
+        nearOffers: action.payload,
       });
     default:
       return state;

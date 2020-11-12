@@ -10,8 +10,8 @@ import withComment from "../hocs/with-comment/with-comment";
 import {RATING_MULTIPLIER, className} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 import {stars} from "../../const";
-import {fetchOffer, fetchReviews} from "../../store/api-actions";
-import {offerSelector, reviewsSelector} from "../../store/selectors";
+import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
+import {offerSelector, reviewsSelector, nearOffersSelector} from "../../store/selectors";
 
 const CommentWrapped = withComment(Comment);
 
@@ -21,23 +21,27 @@ class Offer extends PureComponent {
   }
 
   componentDidMount() {
-    const {offerId, loadOfferAction, loadReviewsAction} = this.props;
+    const {offerId, loadOfferAction, loadReviewsAction, loadNearOffersAction} = this.props;
     loadOfferAction(offerId);
     loadReviewsAction(offerId);
+    loadNearOffersAction(offerId);
   }
 
   componentDidUpdate(prevProps) {
-    const {offerId, loadOfferAction, loadReviewsAction} = this.props;
+    const {offerId, loadOfferAction, loadReviewsAction, loadNearOffersAction} = this.props;
     if (prevProps.offerId !== offerId) {
       loadOfferAction(offerId);
       loadReviewsAction(offerId);
+      loadNearOffersAction(offerId);
     }
   }
 
   render() {
     const {offer, nearOffers, reviews} = this.props;
 
-    return (
+    return !offer.id ? (
+      <div>Идёт загрузка...</div>
+    ) : (
       <div className="page">
         <Header />
         <main className="page__main page__main--property">
@@ -142,11 +146,13 @@ Offer.propTypes = {
   nearOffers: PropTypes.array.isRequired,
   loadOfferAction: PropTypes.func.isRequired,
   loadReviewsAction: PropTypes.func.isRequired,
+  loadNearOffersAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offer: offerSelector(state),
   reviews: reviewsSelector(state),
+  nearOffers: nearOffersSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -156,6 +162,9 @@ const mapDispatchToProps = (dispatch) => ({
   loadReviewsAction(offerId) {
     dispatch(fetchReviews(offerId));
   },
+  loadNearOffersAction(offerId) {
+    dispatch(fetchNearOffers(offerId));
+  }
 });
 
 export {Offer};

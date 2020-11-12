@@ -8,6 +8,7 @@ export const activeCitySelector = (state) => state.DATA.activeCity;
 export const activeSortingSelector = (state) => state.DATA.activeSorting;
 export const activeOfferSelector = (state) => state.DATA.activeOffer;
 export const reviewsSelector = (state) => state.DATA.reviews;
+export const nearOffersSelector = (state) => state.DATA.nearOffers;
 export const authStatusSelector = (state) => state.USER.authStatus;
 export const authDataSelector = (state) => state.USER.authData;
 

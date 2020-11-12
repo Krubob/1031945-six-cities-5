@@ -19,10 +19,11 @@ const App = (props) => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path={Path.MAIN}>
+        <PrivateRoute exact path={Path.MAIN} redirectTo={Path.LOGIN} render={() => (
           <Main />
-        </Route>
-        <PrivateRoute exact path={Path.FAVORITES} render={() => (
+        )}
+        />
+        <PrivateRoute exact path={Path.FAVORITES} redirectTo={Path.LOGIN} render={() => (
           <Favorites
             offers = {offers}
           />

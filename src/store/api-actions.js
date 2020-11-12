@@ -1,33 +1,50 @@
 import {loadOffers, requireAuthorization, redirectToRoute, loadAuthData} from "./action";
 import {getTemplateOffers, getTemplateAuthData} from "../utils";
-import {AuthorizationStatus, Path} from "../const";
+import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType} from "../const";
 
 export const fetchOfferList = () => (dispatch, getState, api) => (
-  api.get(`/hotels`)
+  api.get(APIPath.OFFERS)
     .then(({data}) => {
       const offers = getTemplateOffers(data);
       dispatch(loadOffers(offers));
+      return ResponseType.SUCCESS;
     })
     .catch((err) => {
-      throw err;
+      return err;
     })
 );
 
 export const checkAuth = () => (dispatch, getState, api) => (
-  api.get(`/login`)
-    .then(({data}) => {
-      const authData = getTemplateAuthData(data);
-      dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(loadAuthData(authData));
+  api.get(APIPath.LOGIN)
+    .then((response) => {
+      if (response.status !== HttpCode.UNAUTHORIZED) {
+        const authData = getTemplateAuthData(response.data);
+        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(loadAuthData(authData));
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
     })
-    .catch(() => {
-      dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH));
-      dispatch(loadAuthData({}));
+    .catch((err) => {
+      return err;
     })
 );
 
 export const login = ({email, password}) => (dispatch, getState, api) => (
-  api.post(`/login`, {email, password})
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+  api.post(APIPath.LOGIN, {email, password})
+    .then((response) => {
+      if (response.status !== HttpCode.UNAUTHORIZED) {
+        const authData = getTemplateAuthData(response.data);
+        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(loadAuthData(authData));
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
+    })
     .then(() => dispatch(redirectToRoute(Path.MAIN)))
+    .catch((err) => {
+      return err;
+    })
 );

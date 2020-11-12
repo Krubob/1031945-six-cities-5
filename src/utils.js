@@ -31,7 +31,7 @@ export const getOffersBySortType = (offers, sortingType) => {
   }
 };
 
-const getTemplateOffer = (data) => {
+export const getTemplateOffer = (data) => {
   return {
     id: String(data[`id`]),
     city: data[`city`][`name`],

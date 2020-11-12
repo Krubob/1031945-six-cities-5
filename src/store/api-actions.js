@@ -1,5 +1,5 @@
-import {loadOffers, requireAuthorization, redirectToRoute, loadAuthData} from "./action";
-import {getTemplateOffers, getTemplateAuthData} from "../utils";
+import {loadOffers, loadOffer, requireAuthorization, redirectToRoute, loadAuthData} from "./action";
+import {getTemplateOffer, getTemplateOffers, getTemplateAuthData} from "../utils";
 import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType} from "../const";
 
 export const fetchOfferList = () => (dispatch, getState, api) => (
@@ -7,6 +7,18 @@ export const fetchOfferList = () => (dispatch, getState, api) => (
     .then(({data}) => {
       const offers = getTemplateOffers(data);
       dispatch(loadOffers(offers));
+      return ResponseType.SUCCESS;
+    })
+    .catch((err) => {
+      return err;
+    })
+);
+
+export const fetchOffer = (offerId) => (dispatch, getState, api) => (
+  api.get(`${APIPath.OFFERS}/${offerId}`)
+    .then(({data}) => {
+      const offer = getTemplateOffer(data);
+      dispatch(loadOffer(offer));
       return ResponseType.SUCCESS;
     })
     .catch((err) => {

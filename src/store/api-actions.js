@@ -1,6 +1,6 @@
 import {loadOffers, requireAuthorization, redirectToRoute, loadAuthData} from "./action";
 import {getTemplateOffers, getTemplateAuthData} from "../utils";
-import {AuthorizationStatus} from "../const";
+import {AuthorizationStatus, Path} from "../const";
 
 export const fetchOfferList = () => (dispatch, getState, api) => (
   api.get(`/hotels`)
@@ -29,5 +29,5 @@ export const checkAuth = () => (dispatch, getState, api) => (
 export const login = ({email, password}) => (dispatch, getState, api) => (
   api.post(`/login`, {email, password})
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(redirectToRoute(`/`)))
+    .then(() => dispatch(redirectToRoute(Path.MAIN)))
 );

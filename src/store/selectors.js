@@ -6,7 +6,8 @@ export const loadCities = (state) => state.DATA.cities;
 export const loadActiveCity = (state) => state.DATA.activeCity;
 export const loadActiveSorting = (state) => state.DATA.activeSorting;
 export const loadActiveOffer = (state) => state.DATA.activeOffer;
-export const loadAuthStatus = (state) => state.DATA.authStatus;
+export const loadAuthStatus = (state) => state.USER.authStatus;
+export const loadAuthData = (state) => state.USER.authData;
 
 export const getCityOffers = createSelector(
     loadOffers,

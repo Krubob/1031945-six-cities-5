@@ -10,7 +10,8 @@ import reviews from "./mocks/reviews";
 import rootReducer from "./store/reducers/root-reducer";
 import {requireAuthorization} from "./store/action";
 import {AuthorizationStatus} from "./const";
-import {fetchOfferList} from "./store/api-actions";
+import {fetchOfferList, checkAuth} from "./store/api-actions";
+import {redirect} from "./store/middlewares/redirect";
 
 const api = createAPI(
     () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
@@ -19,12 +20,14 @@ const api = createAPI(
 const store = createStore(
     rootReducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
 
 Promise.all([
-  store.dispatch(fetchOfferList())
+  store.dispatch(fetchOfferList()),
+  store.dispatch(checkAuth())
 ])
   .then(() => {
     ReactDOM.render(

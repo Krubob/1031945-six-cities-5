@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import OfferCard from "../offer-card/offer-card";
 import {OfferPropTуpes} from "../../propTypes";
-import {loadActiveOffer} from "../../store/selectors";
+import {activeOfferSelector} from "../../store/selectors";
 import {changeActiveOffer} from "../../store/action";
 
 const OffersList = (props) => {
@@ -30,7 +30,7 @@ OffersList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeOffer: loadActiveOffer(state),
+  activeOffer: activeOfferSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

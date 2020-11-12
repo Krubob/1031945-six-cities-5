@@ -57,3 +57,13 @@ const getTemplateOffer = (data) => {
 };
 
 export const getTemplateOffers = (dataArr) => dataArr.map((it) => getTemplateOffer(it));
+
+export const getTemplateAuthData = (data) => {
+  return {
+    id: data[`id`],
+    email: data[`email`],
+    avatarUrl: data[`avatar_url`],
+    isPro: data[`is_pro`],
+    name: data[`name`]
+  };
+};

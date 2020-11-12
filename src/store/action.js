@@ -5,6 +5,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_OFFER_SUCCESS: `LOAD_OFFER_SUCCESS`,
   LOAD_OFFERS_SUCCESS: `LOAD_OFFERS_SUCCESS`,
+  LOAD_REVIEWS_SUCESS: `LOAD_REVIEWS_SUCESS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   LOAD_AUTH_DATA: `LOAD_AUTH_DATA`,
 };
@@ -47,4 +48,9 @@ export const redirectToRoute = (url) => ({
 export const loadAuthData = (authInfo) => ({
   type: ActionType.LOAD_AUTH_DATA,
   payload: authInfo,
+});
+
+export const loadReviews = (reviews) => ({
+  type: ActionType.LOAD_REVIEWS_SUCESS,
+  payload: reviews,
 });

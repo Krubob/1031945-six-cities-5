@@ -10,8 +10,8 @@ import withComment from "../hocs/with-comment/with-comment";
 import {RATING_MULTIPLIER, className} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 import {stars} from "../../const";
-import {fetchOffer} from "../../store/api-actions";
-import {offerSelector} from "../../store/selectors";
+import {fetchOffer, fetchReviews} from "../../store/api-actions";
+import {offerSelector, reviewsSelector} from "../../store/selectors";
 
 const CommentWrapped = withComment(Comment);
 
@@ -21,20 +21,21 @@ class Offer extends PureComponent {
   }
 
   componentDidMount() {
-    const {offerId, loadOfferAction} = this.props;
+    const {offerId, loadOfferAction, loadReviewsAction} = this.props;
     loadOfferAction(offerId);
+    loadReviewsAction(offerId);
   }
 
   componentDidUpdate(prevProps) {
-    const {offerId, loadOfferAction} = this.props;
+    const {offerId, loadOfferAction, loadReviewsAction} = this.props;
     if (prevProps.offerId !== offerId) {
       loadOfferAction(offerId);
+      loadReviewsAction(offerId);
     }
   }
 
   render() {
     const {offer, nearOffers, reviews} = this.props;
-    const reviewsById = reviews[0];
 
     return (
       <div className="page">
@@ -113,7 +114,7 @@ class Offer extends PureComponent {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <ReviewsList reviews={reviewsById.reviews} />
+                  <ReviewsList reviews={reviews} />
                   <CommentWrapped stars={stars} />
                 </section>
               </div>
@@ -140,15 +141,20 @@ Offer.propTypes = {
   reviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
   nearOffers: PropTypes.array.isRequired,
   loadOfferAction: PropTypes.func.isRequired,
+  loadReviewsAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offer: offerSelector(state),
+  reviews: reviewsSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadOfferAction(offerId) {
     dispatch(fetchOffer(offerId));
+  },
+  loadReviewsAction(offerId) {
+    dispatch(fetchReviews(offerId));
   },
 });
 

@@ -9,6 +9,8 @@ export const APIPath = {
   LOGIN: `/login`,
   OFFERS: `/hotels`,
   FAVORITE: `/favorite`,
+  REVIEWS: `/comments`,
+  NEARBY: `/nearby`,
 };
 
 export const className = {

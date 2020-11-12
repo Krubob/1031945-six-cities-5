@@ -5,6 +5,7 @@ import cities from "../../../mocks/cities";
 const initialState = {
   cities,
   offers: [],
+  reviews: [],
   activeOffer: ``,
   offer: {},
   activeCity: `Amsterdam`,
@@ -32,6 +33,10 @@ const offerData = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS_SUCCESS:
       return extend(state, {
         offers: action.payload,
+      });
+    case ActionType.LOAD_REVIEWS_SUCESS:
+      return extend(state, {
+        reviews: action.payload,
       });
     default:
       return state;

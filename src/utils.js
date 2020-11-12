@@ -67,3 +67,18 @@ export const getTemplateAuthData = (data) => {
     name: data[`name`]
   };
 };
+
+export const getTemplateReview = (data) => {
+  return {
+    id: String(data[`id`]),
+    date: data[`date`],
+    rating: data[`rating`],
+    text: data[`comment`],
+    author: data[`user`][`name`],
+    avatar: data[`user`][`avatar_url`],
+    isPro: data[`user`][`is_pro`],
+    userId: data[`user`][`id`],
+  };
+};
+
+export const getTemplateReviews = (dataArr) => dataArr.map((it) => getTemplateReview(it));

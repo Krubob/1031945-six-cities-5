@@ -1,17 +1,17 @@
 import {createSelector} from "reselect";
 import {getOffersBySortType, getOffersByCity} from "../utils";
 
-export const loadOffers = (state) => state.DATA.offers;
-export const loadCities = (state) => state.DATA.cities;
-export const loadActiveCity = (state) => state.DATA.activeCity;
-export const loadActiveSorting = (state) => state.DATA.activeSorting;
-export const loadActiveOffer = (state) => state.DATA.activeOffer;
-export const loadAuthStatus = (state) => state.USER.authStatus;
-export const loadAuthData = (state) => state.USER.authData;
+export const offersSelector = (state) => state.DATA.offers;
+export const citiesSelector = (state) => state.DATA.cities;
+export const activeCitySelector = (state) => state.DATA.activeCity;
+export const activeSortingSelector = (state) => state.DATA.activeSorting;
+export const activeOfferSelector = (state) => state.DATA.activeOffer;
+export const authStatusSelector = (state) => state.USER.authStatus;
+export const authDataSelector = (state) => state.USER.authData;
 
 export const getCityOffers = createSelector(
-    loadOffers,
-    loadActiveCity,
+    offersSelector,
+    activeCitySelector,
     (offers, activeCity) => {
       return getOffersByCity(offers, activeCity);
     }
@@ -19,7 +19,7 @@ export const getCityOffers = createSelector(
 
 export const getSortedCityOffers = createSelector(
     getCityOffers,
-    loadActiveSorting,
+    activeSortingSelector,
     (cityOffers, activeSorting) => {
       return getOffersBySortType(cityOffers, activeSorting);
     }

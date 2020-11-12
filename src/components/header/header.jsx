@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {Path} from "../../const";
-import {loadAuthStatus, loadAuthData} from "../../store/selectors";
+import {authStatusSelector, authDataSelector} from "../../store/selectors";
 import {AuthorizationStatus} from "../../const";
 
 const Header = (props) => {
@@ -44,8 +44,8 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authStatus: loadAuthStatus(state),
-  authData: loadAuthData(state),
+  authStatus: authStatusSelector(state),
+  authData: authDataSelector(state),
 });
 
 export {Header};

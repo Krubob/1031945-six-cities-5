@@ -8,7 +8,7 @@ import Offer from "../offer/offer";
 import Login from "../login/login";
 import {Path} from "../../const";
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
-import {loadOffers} from "../../store/selectors";
+import {offersSelector} from "../../store/selectors";
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
 
@@ -46,7 +46,7 @@ const App = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: loadOffers(state),
+  offers: offersSelector(state),
 });
 
 App.propTypes = {

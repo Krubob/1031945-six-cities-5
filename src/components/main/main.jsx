@@ -11,7 +11,7 @@ import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
 import {className} from "../../const";
 import {changeCity, changeSorting} from "../../store/action";
-import {loadCities, loadActiveCity, loadActiveSorting, getSortedCityOffers, getCityOffers} from "../../store/selectors";
+import {citiesSelector, activeCitySelector, activeSortingSelector, getSortedCityOffers, getCityOffers} from "../../store/selectors";
 
 const SortingListWrapped = withSortingList(SortingList);
 
@@ -51,10 +51,10 @@ const Main = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: loadActiveCity(state),
-  cities: loadCities(state),
+  activeCity: activeCitySelector(state),
+  cities: citiesSelector(state),
+  activeSorting: activeSortingSelector(state),
   cityOffers: getCityOffers(state),
-  activeSorting: loadActiveSorting(state),
   sortedOffers: getSortedCityOffers(state),
 });
 

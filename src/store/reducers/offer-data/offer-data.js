@@ -11,6 +11,7 @@ const initialState = {
   nearOffers: [],
   activeCity: `Amsterdam`,
   activeSorting: `Popular`,
+  loadStatus: `NONE`,
 };
 
 const offerData = (state = initialState, action) => {
@@ -42,6 +43,10 @@ const offerData = (state = initialState, action) => {
     case ActionType.LOAD_NEAR_OFFERS_SUCESS:
       return extend(state, {
         nearOffers: action.payload,
+      });
+    case ActionType.CHANGE_LOAD_STATUS:
+      return extend(state, {
+        loadStatus: action.payload,
       });
     default:
       return state;

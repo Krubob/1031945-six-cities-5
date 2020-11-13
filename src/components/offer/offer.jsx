@@ -9,9 +9,9 @@ import OffersList from "../offers-list/offers-list";
 import withComment from "../hocs/with-comment/with-comment";
 import {RATING_MULTIPLIER, className} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
-import {stars} from "../../const";
+import {stars, LoadStatusType} from "../../const";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
-import {offerSelector, reviewsSelector, nearOffersSelector} from "../../store/selectors";
+import {offerSelector, reviewsSelector, nearOffersSelector, loadStatusSelector} from "../../store/selectors";
 
 const CommentWrapped = withComment(Comment);
 
@@ -37,10 +37,10 @@ class Offer extends PureComponent {
   }
 
   render() {
-    const {offer, nearOffers, reviews} = this.props;
+    const {offer, nearOffers, reviews, loadStatus} = this.props;
 
-    return !offer.id ? (
-      <div>Идёт загрузка...</div>
+    return loadStatus !== LoadStatusType.LOADED ? (
+      <div>LOADING...</div>
     ) : (
       <div className="page">
         <Header />
@@ -147,12 +147,14 @@ Offer.propTypes = {
   loadOfferAction: PropTypes.func.isRequired,
   loadReviewsAction: PropTypes.func.isRequired,
   loadNearOffersAction: PropTypes.func.isRequired,
+  loadStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offer: offerSelector(state),
   reviews: reviewsSelector(state),
   nearOffers: nearOffersSelector(state),
+  loadStatus: loadStatusSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -164,7 +166,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadNearOffersAction(offerId) {
     dispatch(fetchNearOffers(offerId));
-  }
+  },
 });
 
 export {Offer};

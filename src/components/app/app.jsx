@@ -32,7 +32,6 @@ const App = (props) => {
         <Route exact path={`${Path.OFFER}/:id`} render={({match}) => (
           <Offer
             offerId = {match.params.id}
-            nearOffers = {[offers[3], offers[4], offers[21]]}
           />
         )}
         />
@@ -44,13 +43,14 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  offers: offersSelector(state),
-});
-
 App.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired).isRequired,
 };
+
+
+const mapStateToProps = (state) => ({
+  offers: offersSelector(state),
+});
 
 export {App};
 export default connect(mapStateToProps, null)(App);

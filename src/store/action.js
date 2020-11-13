@@ -9,7 +9,13 @@ export const ActionType = {
   LOAD_NEAR_OFFERS_SUCESS: `LOAD_NEAR_OFFERS_SUCESS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   LOAD_AUTH_DATA: `LOAD_AUTH_DATA`,
+  CHANGE_LOAD_STATUS: `CHANGE_LOAD_STATUS`,
 };
+
+export const changeLoadStatus = (status) => ({
+  type: ActionType.CHANGE_LOAD_STATUS,
+  payload: status,
+});
 
 export const changeCity = (city) => ({
   type: ActionType.CHANGE_CITY,

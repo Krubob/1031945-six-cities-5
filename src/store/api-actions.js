@@ -1,6 +1,6 @@
-import {loadOffers, loadOffer, loadNearOffers, loadReviews, requireAuthorization, redirectToRoute, loadAuthData} from "./action";
+import {loadOffers, loadOffer, loadNearOffers, loadReviews, requireAuthorization, redirectToRoute, loadAuthData, changeLoadStatus} from "./action";
 import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews} from "../utils";
-import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType} from "../const";
+import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType, LoadStatusType} from "../const";
 
 export const fetchOfferList = () => (dispatch, getState, api) => (
   api.get(APIPath.OFFERS)
@@ -18,10 +18,15 @@ export const fetchOffer = (offerId) => (dispatch, getState, api) => (
   api.get(`${APIPath.OFFERS}/${offerId}`)
     .then(({data}) => {
       const offer = getTemplateOffer(data);
+      dispatch(changeLoadStatus(LoadStatusType.LOADING));
       dispatch(loadOffer(offer));
       return ResponseType.SUCCESS;
     })
+    .then(() => {
+      dispatch(changeLoadStatus(LoadStatusType.LOADED));
+    })
     .catch((err) => {
+      dispatch(changeLoadStatus(LoadStatusType.ERROR));
       return err;
     })
 );

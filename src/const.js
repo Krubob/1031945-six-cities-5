@@ -62,7 +62,15 @@ export const AuthorizationStatus = {
 export const HttpCode = {
   UNAUTHORIZED: 401
 };
+
 export const ResponseType = {
   SUCCESS: `SUCCESS`,
   ERROR: `ERROR`,
+};
+
+export const LoadStatusType = {
+  LOADING: `LOADING`,
+  LOADED: `LOADED`,
+  ERROR: `ERROR`,
+  NONE: `NONE`
 };

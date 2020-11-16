@@ -33,26 +33,26 @@ export const getOffersBySortType = (offers, sortingType) => {
 
 const getTemplateOffer = (data) => {
   return {
-    id: String(data[`id`]),
-    city: data[`city`][`name`],
-    title: data[`title`],
-    coordinates: [data[`location`][`latitude`], data[`location`][`longitude`]],
-    type: data[`type`],
-    cost: data[`price`],
-    rating: data[`rating`],
-    photos: data[`images`],
-    image: data[`preview_image`],
-    isPremium: data[`is_premium`],
-    bedrooms: data[`bedrooms`],
-    guests: data[`max_adults`],
-    service: data[`goods`],
-    isFavorite: data[`is_favorite`],
-    cityCoordinates: [data[`city`][`location`][`latitude`], data[`city`][`location`][`longitude`]],
-    cityZoom: data[`city`][`location`][`zoom`],
-    avatar: data[`host`][`avatar_url`],
-    name: data[`host`][`name`],
-    description: [data[`description`]],
-    super: data[`host`][`is_pro`],
+    id: String(data.id),
+    city: data.city.name,
+    title: data.title,
+    coordinates: [data.location.latitude, data.location.longitude],
+    type: data.type,
+    cost: data.price,
+    rating: data.rating,
+    photos: data.images,
+    image: data.preview_image,
+    isPremium: data.is_premium,
+    bedrooms: data.bedrooms,
+    guests: data.max_adults,
+    service: data.goods,
+    isFavorite: data.is_favorite,
+    cityCoordinates: [data.city.location.latitude, data.city.location.longitude],
+    cityZoom: data.city.location.zoom,
+    avatar: data.host.avatar_url,
+    name: data.host.name,
+    description: data.description,
+    super: data.host.is_pro,
   };
 };
 
@@ -60,10 +60,10 @@ export const getTemplateOffers = (dataArr) => dataArr.map((it) => getTemplateOff
 
 export const getTemplateAuthData = (data) => {
   return {
-    id: data[`id`],
-    email: data[`email`],
-    avatarUrl: data[`avatar_url`],
-    isPro: data[`is_pro`],
-    name: data[`name`]
+    id: data.id,
+    email: data.email,
+    avatarUrl: data.avatar_url,
+    isPro: data.is_pro,
+    name: data.name,
   };
 };

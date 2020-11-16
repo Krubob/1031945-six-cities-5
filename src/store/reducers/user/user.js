@@ -9,13 +9,10 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return extend(state, {
-        authStatus: action.payload,
-      });
     case ActionType.LOAD_AUTH_DATA:
       return extend(state, {
         authData: action.payload,
+        authStatus: action.authStatus,
       });
     default:
       return state;

@@ -1,4 +1,4 @@
-import {loadOffers, requireAuthorization, redirectToRoute, loadAuthData} from "./action";
+import {loadOffers, redirectToRoute, loadAuthData} from "./action";
 import {getTemplateOffers, getTemplateAuthData} from "../utils";
 import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType} from "../const";
 
@@ -19,8 +19,7 @@ export const checkAuth = () => (dispatch, getState, api) => (
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const authData = getTemplateAuthData(response.data);
-        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(loadAuthData(authData));
+        dispatch(loadAuthData(authData, AuthorizationStatus.AUTH));
         return ResponseType.SUCCESS;
       } else {
         return response;
@@ -32,12 +31,11 @@ export const checkAuth = () => (dispatch, getState, api) => (
 );
 
 export const login = ({email, password}) => (dispatch, getState, api) => (
-  api.post(APIPath.LOGIN, {email, password})
+  api.post(APIPath.LOGI, {email, password})
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const authData = getTemplateAuthData(response.data);
-        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(loadAuthData(authData));
+        dispatch(loadAuthData(authData, AuthorizationStatus.AUTH));
         return ResponseType.SUCCESS;
       } else {
         return response;

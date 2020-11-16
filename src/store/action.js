@@ -2,8 +2,9 @@ export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_SORTING: `CHANGE_SORTING`,
   CHANGE_ACTIVE_OFFER: `CHANGE_ACTIVE_OFFER`,
-  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_OFFERS_SUCCESS: `LOAD_OFFERS_SUCCESS`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  LOAD_AUTH_DATA: `LOAD_AUTH_DATA`,
 };
 
 export const changeCity = (city) => ({
@@ -26,8 +27,13 @@ export const loadOffers = (offers) => ({
   payload: offers,
 });
 
-export const requireAuthorization = (status) => ({
-  type: ActionType.REQUIRED_AUTHORIZATION,
-  payload: status,
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
 });
 
+export const loadAuthData = (authData, authStatus) => ({
+  type: ActionType.LOAD_AUTH_DATA,
+  payload: authData,
+  authStatus,
+});

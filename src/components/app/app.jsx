@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Router as BrowserRouter, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import Main from "../main/main";
 import Favorites from "../favorites/favorites";
@@ -8,23 +8,27 @@ import Offer from "../offer/offer";
 import Login from "../login/login";
 import {Path} from "../../const";
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
-import {loadOffers} from "../../store/selectors";
+import {offersSelector} from "../../store/selectors";
+import PrivateRoute from "../private-route/private-route";
+import browserHistory from "../../browser-history";
 
 const App = (props) => {
 
   const {offers, reviews} = props;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path={Path.MAIN}>
+        <PrivateRoute exact path={Path.MAIN} redirectTo={Path.LOGIN} render={() => (
           <Main />
-        </Route>
-        <Route exact path={Path.FAVORITES}>
+        )}
+        />
+        <PrivateRoute exact path={Path.FAVORITES} redirectTo={Path.LOGIN} render={() => (
           <Favorites
             offers = {offers}
           />
-        </Route>
+        )}
+        />
         <Route exact path={`${Path.OFFER}/:id`} render={({match: {params}}) => (
           <Offer
             offer = {offers.find((item) => item.id === params.id)}
@@ -34,7 +38,7 @@ const App = (props) => {
         )}
         />
         <Route exact path={Path.LOGIN}>
-          <Login />
+          <Login/>
         </Route>
       </Switch>
     </BrowserRouter>
@@ -42,7 +46,7 @@ const App = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: loadOffers(state),
+  offers: offersSelector(state),
 });
 
 App.propTypes = {

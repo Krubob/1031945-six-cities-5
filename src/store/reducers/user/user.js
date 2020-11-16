@@ -4,13 +4,15 @@ import {AuthorizationStatus} from "../../../const";
 
 const initialState = {
   authStatus: AuthorizationStatus.NO_AUTH,
+  authData: {},
 };
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return extend({}, state, {
-        authorizationStatus: action.payload,
+    case ActionType.LOAD_AUTH_DATA:
+      return extend(state, {
+        authData: action.payload,
+        authStatus: action.authStatus,
       });
     default:
       return state;

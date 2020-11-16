@@ -5,6 +5,12 @@ export const Path = {
   LOGIN: `/login`,
 };
 
+export const APIPath = {
+  LOGIN: `/login`,
+  OFFERS: `/hotels`,
+  FAVORITE: `/favorite`,
+};
+
 export const className = {
   PROPERTY: `property`,
   CITIES: `cities`,
@@ -49,4 +55,12 @@ export const RATING_MULTIPLIER = 20;
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+};
+
+export const HttpCode = {
+  UNAUTHORIZED: 401
+};
+export const ResponseType = {
+  SUCCESS: `SUCCESS`,
+  ERROR: `ERROR`,
 };

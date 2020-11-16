@@ -5,7 +5,7 @@ import {OfferPropTуpes, cityPropTypes} from "../../propTypes";
 import {getCoordByCity} from "../../utils";
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {loadCities, loadActiveCity, loadActiveOffer} from "../../store/selectors";
+import {citiesSelector, activeCitySelector, activeOfferSelector} from "../../store/selectors";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -103,9 +103,9 @@ class Map extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  cities: loadCities(state),
-  activeOffer: loadActiveOffer(state),
-  activeCity: loadActiveCity(state),
+  cities: citiesSelector(state),
+  activeOffer: activeOfferSelector(state),
+  activeCity: activeCitySelector(state),
 });
 
 

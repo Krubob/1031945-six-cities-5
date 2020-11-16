@@ -31,7 +31,7 @@ export const checkAuth = () => (dispatch, getState, api) => (
 );
 
 export const login = ({email, password}) => (dispatch, getState, api) => (
-  api.post(APIPath.LOGI, {email, password})
+  api.post(APIPath.LOGIN, {email, password})
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const authData = getTemplateAuthData(response.data);

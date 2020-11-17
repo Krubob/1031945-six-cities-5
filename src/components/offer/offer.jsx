@@ -37,7 +37,7 @@ class Offer extends PureComponent {
   }
 
   render() {
-    const {offer, nearOffers, reviews, loadStatus} = this.props;
+    const {offer, offerId, nearOffers, reviews, loadStatus} = this.props;
 
     return loadStatus !== LoadStatusType.LOADED ? (
       <div>LOADING...</div>
@@ -119,7 +119,7 @@ class Offer extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={reviews} />
-                  <CommentWrapped stars={stars} />
+                  <CommentWrapped stars={stars} offerId={offerId} />
                 </section>
               </div>
             </div>

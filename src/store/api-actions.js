@@ -1,5 +1,5 @@
 import {loadOffers, loadOffer, loadNearOffers, loadReviews, requireAuthorization, redirectToRoute, loadAuthData, changeLoadStatus} from "./action";
-import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews} from "../utils";
+import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews, getTemplateReview} from "../utils";
 import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType, LoadStatusType} from "../const";
 
 export const fetchOfferList = () => (dispatch, getState, api) => (
@@ -88,4 +88,20 @@ export const login = ({email, password}) => (dispatch, getState, api) => (
     .catch((err) => {
       return err;
     })
+);
+
+export const sendReview = ({rating, review: comment, offerId}) => (dispatch, getState, api) => (
+  api.post(`${APIPath.REVIEWS}/${offerId}`, {rating, comment})
+  .then((response) => {
+    if (response.status !== HttpCode.UNAUTHORIZED) {
+      const reviews = getTemplateReview(response.data);
+      dispatch(loadReviews(reviews));
+      return ResponseType.SUCCESS;
+    } else {
+      return response;
+    }
+  })
+  .catch((err) => {
+    return err;
+  })
 );

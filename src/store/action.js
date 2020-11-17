@@ -5,8 +5,8 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_OFFER_SUCCESS: `LOAD_OFFER_SUCCESS`,
   LOAD_OFFERS_SUCCESS: `LOAD_OFFERS_SUCCESS`,
-  LOAD_REVIEWS_SUCESS: `LOAD_REVIEWS_SUCESS`,
-  LOAD_NEAR_OFFERS_SUCESS: `LOAD_NEAR_OFFERS_SUCESS`,
+  LOAD_REVIEWS_SUCESS: `LOAD_REVIEWS_SUCCESS`,
+  LOAD_NEAR_OFFERS_SUCESS: `LOAD_NEAR_OFFERS_SUCCESS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   LOAD_AUTH_DATA: `LOAD_AUTH_DATA`,
   CHANGE_LOAD_STATUS: `CHANGE_LOAD_STATUS`,
@@ -58,11 +58,11 @@ export const loadAuthData = (authInfo) => ({
 });
 
 export const loadReviews = (reviews) => ({
-  type: ActionType.LOAD_REVIEWS_SUCESS,
+  type: ActionType.LOAD_REVIEWS_SUCCESS,
   payload: reviews,
 });
 
 export const loadNearOffers = (nearOffers) => ({
-  type: ActionType.LOAD_NEAR_OFFERS_SUCESS,
+  type: ActionType.LOAD_NEAR_OFFERS_SUCCESS,
   payload: nearOffers,
 });

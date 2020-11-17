@@ -10,13 +10,8 @@ const withComment = (Component) => {
         review: ``,
       };
 
-      this.handleSubmit = this.handleSubmit.bind(this);
       this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
       this.handleInputStarClick = this.handleInputStarClick.bind(this);
-    }
-
-    handleSubmit(evt) {
-      evt.preventDefault();
     }
 
     handleTextAreaChange(evt) {
@@ -30,15 +25,15 @@ const withComment = (Component) => {
     }
 
     render() {
-      const {rating} = this.state;
+      const {rating, review} = this.state;
 
       return (
         <Component
           {...this.props}
           rating={rating}
+          review={review}
           handleInputStarClick={this.handleInputStarClick}
           handleTextAreaChange={this.handleTextAreaChange}
-          handleSubmit={this.handleSubmit}
         />
       );
     }

@@ -9,23 +9,24 @@ const withComment = (Component) => {
       this.state = {
         rating: ``,
         review: ``,
+        isValid: false,
       };
 
       this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
       this.handleInputStarClick = this.handleInputStarClick.bind(this);
     }
 
+    checkValidity(rating, review) {
+      if (rating && review.length >= REVIEW_TEXT.MIN_VALUE && review.length <= REVIEW_TEXT.MAX_VALUE) {
+        this.setState({isValid: true});
+      } else {
+        this.setState({isValid: false});
+      }
+    }
+
     handleTextAreaChange(evt) {
       const {value} = evt.target;
       this.setState({review: value});
-
-      if (value.length >= REVIEW_TEXT.MAX_VALUE) {
-        evt.target.setCustomValidity(`Слишком длинное сообщение!`);
-      } else if (value.length <= REVIEW_TEXT.MIN_VALUE) {
-        evt.target.setCustomValidity(`Слишком короткое сообщение!`);
-      } else {
-        evt.target.setCustomValidity(``);
-      }
     }
 
     handleInputStarClick(evt) {
@@ -33,14 +34,20 @@ const withComment = (Component) => {
       this.setState({rating: value});
     }
 
-    render() {
+    componentDidUpdate() {
       const {rating, review} = this.state;
+      this.checkValidity(rating, review);
+    }
+
+    render() {
+      const {rating, review, isValid} = this.state;
 
       return (
         <Component
           {...this.props}
           rating={rating}
           review={review}
+          isValid={isValid}
           handleInputStarClick={this.handleInputStarClick}
           handleTextAreaChange={this.handleTextAreaChange}
         />

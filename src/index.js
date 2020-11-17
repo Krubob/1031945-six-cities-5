@@ -8,13 +8,13 @@ import {createAPI} from "./services/api";
 import App from "./components/app/app";
 import reviews from "./mocks/reviews";
 import rootReducer from "./store/reducers/root-reducer";
-import {requireAuthorization} from "./store/action";
+import {loadAuthData} from "./store/action";
 import {AuthorizationStatus} from "./const";
 import {fetchOfferList, checkAuth} from "./store/api-actions";
 import {redirect} from "./store/middlewares/redirect";
 
 const api = createAPI(
-    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
+    () => store.dispatch(loadAuthData({}, AuthorizationStatus.NO_AUTH))
 );
 
 const store = createStore(

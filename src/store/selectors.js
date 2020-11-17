@@ -1,5 +1,6 @@
 import {createSelector} from "reselect";
 import {getOffersBySortType, getOffersByCity} from "../utils";
+import {AuthorizationStatus} from "../const";
 
 export const loadStatusSelector = (state) => state.DATA.loadStatus;
 export const offerSelector = (state) => state.DATA.offer;
@@ -12,6 +13,7 @@ export const reviewsSelector = (state) => state.DATA.reviews;
 export const nearOffersSelector = (state) => state.DATA.nearOffers;
 export const authStatusSelector = (state) => state.USER.authStatus;
 export const authDataSelector = (state) => state.USER.authData;
+export const userEmailSelector = (state) => state.USER.authData.email;
 
 export const getCityOffers = createSelector(
     offersSelector,
@@ -26,5 +28,23 @@ export const getSortedCityOffers = createSelector(
     activeSortingSelector,
     (cityOffers, activeSorting) => {
       return getOffersBySortType(cityOffers, activeSorting);
+    }
+);
+
+export const isUserAuthorizedSelector = createSelector(
+    authStatusSelector,
+    (authStatus) => {
+      return authStatus === AuthorizationStatus.AUTH;
+    }
+);
+
+export const getUserEmail = createSelector(
+    userEmailSelector,
+    (email) => {
+      if (email) {
+        return email;
+      } else {
+        return null;
+      }
     }
 );

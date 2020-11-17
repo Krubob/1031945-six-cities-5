@@ -1,4 +1,4 @@
-import {loadOffers, loadOffer, loadNearOffers, loadReviews, requireAuthorization, redirectToRoute, loadAuthData, changeLoadStatus} from "./action";
+import {loadOffers, loadOffer, loadNearOffers, loadReviews, redirectToRoute, loadAuthData, changeLoadStatus} from "./action";
 import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews, getTemplateReview} from "../utils";
 import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType, LoadStatusType} from "../const";
 
@@ -60,8 +60,7 @@ export const checkAuth = () => (dispatch, getState, api) => (
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const authData = getTemplateAuthData(response.data);
-        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(loadAuthData(authData));
+        dispatch(loadAuthData(authData, AuthorizationStatus.AUTH));
         return ResponseType.SUCCESS;
       } else {
         return response;
@@ -77,8 +76,7 @@ export const login = ({email, password}) => (dispatch, getState, api) => (
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const authData = getTemplateAuthData(response.data);
-        dispatch(requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(loadAuthData(authData));
+        dispatch(loadAuthData(authData, AuthorizationStatus.AUTH));
         return ResponseType.SUCCESS;
       } else {
         return response;

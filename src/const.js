@@ -74,3 +74,8 @@ export const LoadStatusType = {
   ERROR: `ERROR`,
   NONE: `NONE`
 };
+
+export const REVIEW_TEXT = {
+  MIN_VALUE: 50,
+  MAX_VALUE: 300,
+};

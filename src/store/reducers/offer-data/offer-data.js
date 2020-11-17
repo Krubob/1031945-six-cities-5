@@ -36,11 +36,11 @@ const offerData = (state = initialState, action) => {
       return extend(state, {
         offers: action.payload,
       });
-    case ActionType.LOAD_REVIEWS_SUCESS:
+    case ActionType.LOAD_REVIEWS_SUCCESS:
       return extend(state, {
         reviews: action.payload,
       });
-    case ActionType.LOAD_NEAR_OFFERS_SUCESS:
+    case ActionType.LOAD_NEAR_OFFERS_SUCCESS:
       return extend(state, {
         nearOffers: action.payload,
       });

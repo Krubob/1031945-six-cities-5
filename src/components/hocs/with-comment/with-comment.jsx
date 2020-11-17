@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import {REVIEW_TEXT} from "../../../const";
 
 const withComment = (Component) => {
   class WithComment extends PureComponent {
@@ -6,7 +7,7 @@ const withComment = (Component) => {
       super(props);
 
       this.state = {
-        rating: `1`,
+        rating: ``,
         review: ``,
       };
 
@@ -17,6 +18,14 @@ const withComment = (Component) => {
     handleTextAreaChange(evt) {
       const {value} = evt.target;
       this.setState({review: value});
+
+      if (value.length >= REVIEW_TEXT.MAX_VALUE) {
+        evt.target.setCustomValidity(`Слишком длинное сообщение!`);
+      } else if (value.length <= REVIEW_TEXT.MIN_VALUE) {
+        evt.target.setCustomValidity(`Слишком короткое сообщение!`);
+      } else {
+        evt.target.setCustomValidity(``);
+      }
     }
 
     handleInputStarClick(evt) {

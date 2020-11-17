@@ -11,7 +11,7 @@ import {RATING_MULTIPLIER, className} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 import {stars, LoadStatusType} from "../../const";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
-import {offerSelector, reviewsSelector, nearOffersSelector, loadStatusSelector} from "../../store/selectors";
+import {offerSelector, reviewsSelector, nearOffersSelector, loadStatusSelector, isUserAuthorizedSelector} from "../../store/selectors";
 
 const CommentWrapped = withComment(Comment);
 
@@ -37,7 +37,7 @@ class Offer extends PureComponent {
   }
 
   render() {
-    const {offer, offerId, nearOffers, reviews, loadStatus} = this.props;
+    const {offer, offerId, nearOffers, reviews, loadStatus, isUserAuthorized} = this.props;
 
     return loadStatus !== LoadStatusType.LOADED ? (
       <div>LOADING...</div>
@@ -119,7 +119,7 @@ class Offer extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={reviews} />
-                  <CommentWrapped stars={stars} offerId={offerId} />
+                  {isUserAuthorized ? <CommentWrapped stars={stars} offerId={offerId} /> : false}
                 </section>
               </div>
             </div>
@@ -148,6 +148,7 @@ Offer.propTypes = {
   loadReviewsAction: PropTypes.func.isRequired,
   loadNearOffersAction: PropTypes.func.isRequired,
   loadStatus: PropTypes.string.isRequired,
+  isUserAuthorized: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -155,6 +156,7 @@ const mapStateToProps = (state) => ({
   reviews: reviewsSelector(state),
   nearOffers: nearOffersSelector(state),
   loadStatus: loadStatusSelector(state),
+  isUserAuthorized: isUserAuthorizedSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

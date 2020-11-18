@@ -10,10 +10,12 @@ const withComment = (Component) => {
         rating: ``,
         review: ``,
         isValid: false,
+        isResponseWaiting: false,
       };
 
       this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
       this.handleInputStarClick = this.handleInputStarClick.bind(this);
+      this.handleResponseWaitingChange = this.handleResponseWaitingChange.bind(this);
     }
 
     checkValidity(rating, review) {
@@ -22,6 +24,12 @@ const withComment = (Component) => {
       } else {
         this.setState({isValid: false});
       }
+    }
+
+    handleResponseWaitingChange(isWaiting) {
+      this.setState(() => ({
+        isResponseWaiting: isWaiting,
+      }));
     }
 
     handleFormDataClear() {
@@ -47,7 +55,8 @@ const withComment = (Component) => {
     }
 
     render() {
-      const {rating, review, isValid} = this.state;
+      const {rating, review, isValid, isResponseWaiting} = this.state;
+      const isDisabledSubmitBtn = isValid && !isResponseWaiting;
 
       return (
         <Component
@@ -55,6 +64,8 @@ const withComment = (Component) => {
           rating={rating}
           review={review}
           isValid={isValid}
+          isDisabledSubmitBtn={isDisabledSubmitBtn}
+          handleResponseWaitingChange={this.handleResponseWaitingChange}
           handleFormDataClear={this.handleFormDataClear}
           handleInputStarClick={this.handleInputStarClick}
           handleTextAreaChange={this.handleTextAreaChange}

@@ -13,20 +13,23 @@ class Comment extends PureComponent {
   }
 
   handleSubmit(evt) {
-    const {rating, review, offerId, sendReviewAction, handleFormDataClear} = this.props;
+    const {rating, review, offerId, sendReviewAction, handleFormDataClear, handleResponseWaitingChange} = this.props;
     evt.preventDefault();
+
+    handleResponseWaitingChange(true);
 
     sendReviewAction({
       rating,
       review,
       offerId,
     },
-    handleFormDataClear
+    handleFormDataClear,
+    handleResponseWaitingChange,
     );
   }
 
   render() {
-    const {stars, rating, handleTextAreaChange, handleInputStarClick, isValid} = this.props;
+    const {stars, rating, handleTextAreaChange, handleInputStarClick, isDisabledSubmitBtn} = this.props;
 
     return (
       <form className="reviews__form form" onSubmit={this.handleSubmit} action="#" method="post">
@@ -47,7 +50,7 @@ class Comment extends PureComponent {
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
-          <button className="reviews__submit form__submit button" type="submit" disabled={isValid ? `` : `disabled`}>Submit</button>
+          <button className="reviews__submit form__submit button" type="submit" disabled={isDisabledSubmitBtn ? `` : `disabled`}>Submit</button>
         </div>
       </form>
     );
@@ -60,10 +63,11 @@ Comment.propTypes = {
   handleTextAreaChange: PropTypes.func.isRequired,
   handleInputStarClick: PropTypes.func.isRequired,
   handleFormDataClear: PropTypes.func.isRequired,
+  handleResponseWaitingChange: PropTypes.func.isRequired,
   review: PropTypes.string.isRequired,
   offerId: PropTypes.string.isRequired,
   sendReviewAction: PropTypes.func.isRequired,
-  isValid: PropTypes.bool.isRequired,
+  isDisabledSubmitBtn: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

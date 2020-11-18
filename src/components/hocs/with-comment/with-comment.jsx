@@ -14,6 +14,7 @@ const withComment = (Component) => {
       };
 
       this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+      this.handleFormDataClear = this.handleFormDataClear.bind(this);
       this.handleInputStarClick = this.handleInputStarClick.bind(this);
       this.handleResponseWaitingChange = this.handleResponseWaitingChange.bind(this);
     }

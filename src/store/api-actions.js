@@ -88,14 +88,13 @@ export const login = ({email, password}) => (dispatch, getState, api) => (
     })
 );
 
-export const sendReview = ({rating, review: comment, offerId}, handleFormDataClear, handleResponseWaitingChange) => (dispatch, getState, api) => (
+export const sendReview = ({rating, review: comment, offerId}, handleResponseWaitingChange) => (dispatch, getState, api) => (
   api.post(`${APIPath.REVIEWS}/${offerId}`, {rating, comment})
   .then((response) => {
     if (response.status !== HttpCode.UNAUTHORIZED) {
       const reviews = getTemplateReview(response.data);
       dispatch(loadReviews(reviews));
       handleResponseWaitingChange(false);
-      handleFormDataClear();
       return ResponseType.SUCCESS;
     } else {
       return response;

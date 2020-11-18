@@ -1,9 +1,12 @@
 import React, {Fragment} from "react";
 import {ReviewsByIdPropTypes} from "../../propTypes";
 import {RATING_MULTIPLIER} from '../../const';
+import {dateConverter} from "../../utils";
 
 const ReviewItem = (props) => {
   const {review} = props;
+
+  const dateData = dateConverter.format(new Date(review.date));
 
   return (
     <Fragment>
@@ -25,7 +28,7 @@ const ReviewItem = (props) => {
         <p className="reviews__text">
           {review.text}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{review.date}</time>
+        <time className="reviews__time" dateTime={review.date}>{dateData}</time>
       </div>
     </Fragment>
   );

@@ -82,3 +82,12 @@ export const getTemplateReview = (data) => {
 };
 
 export const getTemplateReviews = (dataArr) => dataArr.map((it) => getTemplateReview(it));
+
+export const dateConverter = new Intl.DateTimeFormat(`en-us`, {
+  year: `numeric`,
+  day: `numeric`,
+  month: `long`,
+  hour: `numeric`,
+  minute: `numeric`,
+  hour12: false
+});

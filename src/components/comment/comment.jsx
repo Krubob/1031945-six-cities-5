@@ -13,14 +13,16 @@ class Comment extends PureComponent {
   }
 
   handleSubmit(evt) {
-    const {rating, review, offerId, sendReviewAction} = this.props;
+    const {rating, review, offerId, sendReviewAction, handleFormDataClear} = this.props;
     evt.preventDefault();
 
     sendReviewAction({
       rating,
       review,
       offerId,
-    });
+    },
+    handleFormDataClear
+    );
   }
 
   render() {
@@ -57,6 +59,7 @@ Comment.propTypes = {
   rating: PropTypes.string.isRequired,
   handleTextAreaChange: PropTypes.func.isRequired,
   handleInputStarClick: PropTypes.func.isRequired,
+  handleFormDataClear: PropTypes.func.isRequired,
   review: PropTypes.string.isRequired,
   offerId: PropTypes.string.isRequired,
   sendReviewAction: PropTypes.func.isRequired,

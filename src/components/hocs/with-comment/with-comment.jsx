@@ -24,6 +24,13 @@ const withComment = (Component) => {
       }
     }
 
+    handleFormDataClear() {
+      this.setState({
+        rating: ``,
+        review: ``,
+      });
+    }
+
     handleTextAreaChange(evt) {
       const {value} = evt.target;
       this.setState({review: value});
@@ -48,6 +55,7 @@ const withComment = (Component) => {
           rating={rating}
           review={review}
           isValid={isValid}
+          handleFormDataClear={this.handleFormDataClear}
           handleInputStarClick={this.handleInputStarClick}
           handleTextAreaChange={this.handleTextAreaChange}
         />

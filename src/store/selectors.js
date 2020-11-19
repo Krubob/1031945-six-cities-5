@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import {getOffersBySortType, getOffersByCity} from "../utils";
+import {getOffersBySortType, getOffersByCity, sortReviewsByDate} from "../utils";
 import {AuthorizationStatus} from "../const";
 
 export const loadStatusSelector = (state) => state.DATA.loadStatus;
@@ -28,6 +28,13 @@ export const getSortedCityOffers = createSelector(
     activeSortingSelector,
     (cityOffers, activeSorting) => {
       return getOffersBySortType(cityOffers, activeSorting);
+    }
+);
+
+export const getSortedReviewsSelector = createSelector(
+    reviewsSelector,
+    (reviews) => {
+      return sortReviewsByDate(reviews);
     }
 );
 

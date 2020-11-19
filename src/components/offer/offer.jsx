@@ -11,7 +11,7 @@ import {RATING_MULTIPLIER, className} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 import {stars, LoadStatusType} from "../../const";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
-import {offerSelector, reviewsSelector, nearOffersSelector, loadStatusSelector, isUserAuthorizedSelector} from "../../store/selectors";
+import {offerSelector, nearOffersSelector, loadStatusSelector, isUserAuthorizedSelector, getSortedReviewsSelector} from "../../store/selectors";
 
 const CommentWrapped = withComment(Comment);
 
@@ -37,7 +37,7 @@ class Offer extends PureComponent {
   }
 
   render() {
-    const {offer, offerId, nearOffers, reviews, loadStatus, isUserAuthorized} = this.props;
+    const {offer, offerId, nearOffers, loadStatus, isUserAuthorized, availableReviews} = this.props;
 
     return loadStatus !== LoadStatusType.LOADED ? (
       <div>LOADING...</div>
@@ -118,7 +118,7 @@ class Offer extends PureComponent {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <ReviewsList reviews={reviews} />
+                  <ReviewsList reviews={availableReviews} />
                   {isUserAuthorized ? <CommentWrapped stars={stars} offerId={offerId} /> : false}
                 </section>
               </div>
@@ -142,7 +142,7 @@ class Offer extends PureComponent {
 Offer.propTypes = {
   offer: OfferPropTуpes.isRequired,
   offerId: PropTypes.string.isRequired,
-  reviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
+  availableReviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
   nearOffers: PropTypes.array.isRequired,
   loadOfferAction: PropTypes.func.isRequired,
   loadReviewsAction: PropTypes.func.isRequired,
@@ -153,7 +153,7 @@ Offer.propTypes = {
 
 const mapStateToProps = (state) => ({
   offer: offerSelector(state),
-  reviews: reviewsSelector(state),
+  availableReviews: getSortedReviewsSelector(state),
   nearOffers: nearOffersSelector(state),
   loadStatus: loadStatusSelector(state),
   isUserAuthorized: isUserAuthorizedSelector(state),

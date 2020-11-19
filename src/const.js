@@ -79,3 +79,5 @@ export const REVIEW_TEXT = {
   MIN_VALUE: 50,
   MAX_VALUE: 300,
 };
+
+export const MAX_REVIEWS_ON_PAGE = 10;

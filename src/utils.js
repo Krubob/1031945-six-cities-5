@@ -1,4 +1,4 @@
-import {SortingType} from "./const";
+import {SortingType, MAX_REVIEWS_ON_PAGE} from "./const";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -89,9 +89,11 @@ export const dateConverter = new Intl.DateTimeFormat(`en-us`, {
 });
 
 export const sortReviewsByDate = (reviews) => {
-  return reviews.sort((a, b) => {
+  const copiedReviews = reviews.slice();
+  copiedReviews.sort((a, b) => {
     let c = new Date(a.date);
     let d = new Date(b.date);
     return d - c;
   });
+  return copiedReviews.slice(0, MAX_REVIEWS_ON_PAGE);
 };

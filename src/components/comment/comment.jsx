@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {StarPropTypes} from "../../propTypes";
 import RatingStar from "../rating-star/rating-star";
 import {sendReview} from "../../store/api-actions";
-import {reviewsSelector} from "../../store/selectors";
 import {connect} from "react-redux";
 
 class Comment extends PureComponent {
@@ -72,9 +71,6 @@ Comment.propTypes = {
   isDisabledSubmitBtn: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  reviews: reviewsSelector(state),
-});
 
 const mapDispatchToProps = (dispatch) => ({
   sendReviewAction(reviewData) {
@@ -83,4 +79,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {Comment};
-export default connect(mapStateToProps, mapDispatchToProps)(Comment);
+export default connect(null, mapDispatchToProps)(Comment);

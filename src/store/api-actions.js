@@ -1,5 +1,5 @@
 import {loadOffers, loadOffer, loadNearOffers, loadReviews, redirectToRoute, loadAuthData, changeLoadStatus} from "./action";
-import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews, getTemplateReview} from "../utils";
+import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews, getTemplateReview, sortReviewsByDate} from "../utils";
 import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType, LoadStatusType} from "../const";
 
 export const fetchOfferList = () => (dispatch, getState, api) => (
@@ -34,7 +34,7 @@ export const fetchOffer = (offerId) => (dispatch, getState, api) => (
 export const fetchReviews = (offerId) => (dispatch, getState, api) => (
   api.get(`${APIPath.REVIEWS}/${offerId}`)
     .then(({data}) => {
-      const reviews = getTemplateReviews(data);
+      const reviews = sortReviewsByDate(getTemplateReviews(data));
       dispatch(loadReviews(reviews));
       return ResponseType.SUCCESS;
     })

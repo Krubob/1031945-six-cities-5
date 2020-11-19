@@ -85,9 +85,13 @@ export const getTemplateReviews = (dataArr) => dataArr.map((it) => getTemplateRe
 
 export const dateConverter = new Intl.DateTimeFormat(`en-us`, {
   year: `numeric`,
-  day: `numeric`,
   month: `long`,
-  hour: `numeric`,
-  minute: `numeric`,
-  hour12: false
 });
+
+export const sortReviewsByDate = (reviews) => {
+  return reviews.sort((a, b) => {
+    let c = new Date(a.date);
+    let d = new Date(b.date);
+    return d - c;
+  });
+};

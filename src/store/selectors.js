@@ -11,6 +11,7 @@ export const activeSortingSelector = (state) => state.DATA.activeSorting;
 export const activeOfferSelector = (state) => state.DATA.activeOffer;
 export const reviewsSelector = (state) => state.DATA.reviews;
 export const nearOffersSelector = (state) => state.DATA.nearOffers;
+export const favoriteOffersSelector = (state) => state.DATA.favoriteOffers;
 export const authStatusSelector = (state) => state.USER.authStatus;
 export const authDataSelector = (state) => state.USER.authData;
 export const userEmailSelector = (state) => state.USER.authData.email;

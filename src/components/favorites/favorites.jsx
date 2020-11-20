@@ -1,13 +1,15 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import Header from "../header/header";
 import {OfferPropTуpes} from "../../propTypes";
 import {Path} from "../../const";
-import {RATING_MULTIPLIER} from '../../const';
+import {RATING_MULTIPLIER} from "../../const";
+import {activeCitySelector} from "../../store/selectors";
 
 const Favorites = (props) => {
-  const {offers} = props;
+  const {offers, activeCity} = props;
   const favoriteOffers = offers.filter((it) => it.isFavorite);
 
   return (
@@ -22,7 +24,7 @@ const Favorites = (props) => {
                 <div className="favorites__locations locations locations--current">
                   <div className="locations__item">
                     <a className="locations__item-link" href="#">
-                      <span>Amsterdam</span>
+                      <span>{activeCity}</span>
                     </a>
                   </div>
                 </div>
@@ -78,6 +80,13 @@ const Favorites = (props) => {
 
 Favorites.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  activeCity: PropTypes.string.isRequired,
 };
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+  activeCity: activeCitySelector(state),
+});
+
+export {Favorites};
+export default connect(mapStateToProps, null)(Favorites);
+

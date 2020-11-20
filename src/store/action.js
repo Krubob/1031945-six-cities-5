@@ -9,11 +9,18 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   LOAD_AUTH_DATA: `LOAD_AUTH_DATA`,
   CHANGE_LOAD_STATUS: `CHANGE_LOAD_STATUS`,
+  CHANGE_FAVORITE_STATUS_OFFER: `CHANGE_FAVORITE_STATUS_OFFER`,
+  LOAD_FAVORITE_OFFERS_SUCCESS: `LOAD_FAVORITE_OFFERS_SUCCESS`,
 };
 
 export const changeLoadStatus = (status) => ({
   type: ActionType.CHANGE_LOAD_STATUS,
   payload: status,
+});
+
+export const changeFavoriteOfferStatus = (favoriteOffer) => ({
+  type: ActionType.CHANGE_FAVORITE_STATUS_OFFER,
+  payload: favoriteOffer,
 });
 
 export const changeCity = (city) => ({
@@ -60,4 +67,9 @@ export const loadReviews = (reviews) => ({
 export const loadNearOffers = (nearOffers) => ({
   type: ActionType.LOAD_NEAR_OFFERS_SUCCESS,
   payload: nearOffers,
+});
+
+export const loadFavoriteOffers = (favoriteOffers) => ({
+  type: ActionType.LOAD_FAVORITE_OFFERS_SUCCESS,
+  payload: favoriteOffers,
 });

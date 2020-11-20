@@ -1,4 +1,4 @@
-import {extend} from "../../../utils";
+import {extend, getOffersWithNewFavoriteStatus} from "../../../utils";
 import {ActionType} from "../../action";
 import cities from "../../../mocks/cities";
 
@@ -9,6 +9,8 @@ const initialState = {
   offer: {},
   reviews: [],
   nearOffers: [],
+  favoriteOffers: [],
+  changedFavoriteOffer: {},
   activeCity: `Amsterdam`,
   activeSorting: `Popular`,
   loadStatus: `NONE`,
@@ -47,6 +49,15 @@ const offerData = (state = initialState, action) => {
     case ActionType.CHANGE_LOAD_STATUS:
       return extend(state, {
         loadStatus: action.payload,
+      });
+    case ActionType.CHANGE_FAVORITE_STATUS_OFFER:
+      return extend(state, {
+        offers: getOffersWithNewFavoriteStatus(state.offers, action.payload),
+        changedFavoriteOffer: action.payload,
+      });
+    case ActionType.LOAD_FAVORITE_OFFERS_SUCCESS:
+      return extend(state, {
+        favoriteOffers: action.payload,
       });
     default:
       return state;

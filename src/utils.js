@@ -97,3 +97,10 @@ export const sortReviewsByDate = (reviews) => {
   });
   return copiedReviews.slice(0, MAX_REVIEWS_ON_PAGE);
 };
+
+export const getOffersWithNewFavoriteStatus = (offers, offer) => {
+  const copiedOffers = offers.slice();
+  const index = copiedOffers.findIndex((it) => it.id === offer.id);
+  copiedOffers[index] = offer;
+  return copiedOffers;
+};

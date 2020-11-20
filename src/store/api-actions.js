@@ -1,4 +1,4 @@
-import {loadOffers, loadOffer, loadNearOffers, loadReviews, redirectToRoute, loadAuthData, changeLoadStatus} from "./action";
+import {loadOffers, loadOffer, loadNearOffers, loadReviews, redirectToRoute, loadAuthData, changeLoadStatus, changeFavoriteOfferStatus, loadFavoriteOffers} from "./action";
 import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews, getTemplateReview} from "../utils";
 import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType, LoadStatusType} from "../const";
 
@@ -48,6 +48,34 @@ export const fetchNearOffers = (offerId) => (dispatch, getState, api) => (
     .then(({data}) => {
       const nearOffers = getTemplateOffers(data);
       dispatch(loadNearOffers(nearOffers));
+      return ResponseType.SUCCESS;
+    })
+    .catch((err) => {
+      return err;
+    })
+);
+
+export const fetchFavoriteOffers = () => (dispatch, getState, api) => (
+  api.get(APIPath.FAVORITE)
+    .then((response) => {
+      if (response.status !== HttpCode.UNAUTHORIZED) {
+        const favoriteOffers = getTemplateOffers(response.data);
+        dispatch(loadFavoriteOffers(favoriteOffers));
+        return ResponseType.SUCCESS;
+      } else {
+        return response;
+      }
+    })
+    .catch((err) => {
+      return err;
+    })
+);
+
+export const updateOfferFavoriteStatus = (offerId, favoriteStatus) => (dispatch, getState, api) => (
+  api.post(`${APIPath.FAVORITE}/${offerId}/${favoriteStatus ? 1 : 0}`)
+    .then(({data}) => {
+      const favoriteOffer = getTemplateOffer(data);
+      dispatch(changeFavoriteOfferStatus(favoriteOffer));
       return ResponseType.SUCCESS;
     })
     .catch((err) => {

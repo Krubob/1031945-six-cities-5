@@ -9,7 +9,6 @@ const withComment = (Component) => {
       this.state = {
         rating: ``,
         review: ``,
-        isValid: false,
         isResponseWaiting: false,
       };
 
@@ -17,14 +16,6 @@ const withComment = (Component) => {
       this.handleFormDataClear = this.handleFormDataClear.bind(this);
       this.handleInputStarClick = this.handleInputStarClick.bind(this);
       this.handleResponseWaitingChange = this.handleResponseWaitingChange.bind(this);
-    }
-
-    checkValidity(rating, review) {
-      if (rating && review.length >= REVIEW_TEXT.MIN_VALUE && review.length <= REVIEW_TEXT.MAX_VALUE) {
-        this.setState({isValid: true});
-      } else {
-        this.setState({isValid: false});
-      }
     }
 
     handleResponseWaitingChange(isWaiting) {
@@ -50,14 +41,10 @@ const withComment = (Component) => {
       this.setState({rating: value});
     }
 
-    componentDidUpdate() {
-      const {rating, review} = this.state;
-      this.checkValidity(rating, review);
-    }
-
     render() {
-      const {rating, review, isValid, isResponseWaiting} = this.state;
-      const isDisabledSubmitBtn = isValid && !isResponseWaiting;
+      const {rating, review, isResponseWaiting} = this.state;
+      const isValid = rating && review.length >= REVIEW_TEXT.MIN_VALUE && review.length <= REVIEW_TEXT.MAX_VALUE;
+      const isDisabledSubmitBtn = !isValid && !isResponseWaiting;
 
       return (
         <Component

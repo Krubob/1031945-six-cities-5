@@ -16,10 +16,6 @@ import {offerSelector, nearOffersSelector, loadStatusSelector, isUserAuthorizedS
 const CommentWrapped = withComment(Comment);
 
 class Offer extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const {offerId, loadOfferAction, loadReviewsAction, loadNearOffersAction} = this.props;
     loadOfferAction(offerId);
@@ -119,7 +115,7 @@ class Offer extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={availableReviews} />
-                  {isUserAuthorized ? <CommentWrapped stars={stars} offerId={offerId} /> : false}
+                  {isUserAuthorized && <CommentWrapped stars={stars} offerId={offerId} />}
                 </section>
               </div>
             </div>

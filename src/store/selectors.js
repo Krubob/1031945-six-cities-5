@@ -19,40 +19,26 @@ export const userEmailSelector = (state) => state.USER.authData.email;
 export const getCityOffers = createSelector(
     offersSelector,
     activeCitySelector,
-    (offers, activeCity) => {
-      return getOffersByCity(offers, activeCity);
-    }
+    (offers, activeCity) => getOffersByCity(offers, activeCity)
 );
 
 export const getSortedCityOffers = createSelector(
     getCityOffers,
     activeSortingSelector,
-    (cityOffers, activeSorting) => {
-      return getOffersBySortType(cityOffers, activeSorting);
-    }
+    (cityOffers, activeSorting) => getOffersBySortType(cityOffers, activeSorting)
 );
 
 export const getSortedReviewsSelector = createSelector(
     reviewsSelector,
-    (reviews) => {
-      return sortReviewsByDate(reviews);
-    }
+    (reviews) => sortReviewsByDate(reviews)
 );
 
 export const isUserAuthorizedSelector = createSelector(
     authStatusSelector,
-    (authStatus) => {
-      return authStatus === AuthorizationStatus.AUTH;
-    }
+    (authStatus) => authStatus === AuthorizationStatus.AUTH
 );
 
 export const getUserEmail = createSelector(
     userEmailSelector,
-    (email) => {
-      if (email) {
-        return email;
-      } else {
-        return null;
-      }
-    }
+    (email) => email || null
 );

@@ -22,7 +22,7 @@ const OfferCard = (props) => {
       className={`${className} place-card`}
     >
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className={`${isFavoriteCardType ? `favorites` : `cities`}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${isFavoriteCardType ? ClassNameType.FAVORITES : ClassNameType.CITIES}__image-wrapper place-card__image-wrapper`}>
         <Link className="header__logo-link" to={`${Path.OFFER}/${offer.id}`}>
           <img className="place-card__image" src={offer.image} width={isFavoriteCardType ? `150` : `260`} height={isFavoriteCardType ? `110` : `200`} alt="Place image" />
         </Link>

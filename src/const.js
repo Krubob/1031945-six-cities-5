@@ -13,11 +13,20 @@ export const APIPath = {
   NEARBY: `/nearby`,
 };
 
-export const className = {
+export const ClassNameType = {
   PROPERTY: `property`,
   CITIES: `cities`,
   NEAR: `near`,
+  CITIES_PLACE_CARD: `cities__place-card`,
   NEAR_PLACES: `near-places`,
+  FAVORITES: `favorites`,
+  FAVORITES_CARD: `favorites__card`,
+  FAVORITES_CARD_INFO: `favorites__card-info`,
+};
+
+export const OfferCardType = {
+  FAVORITE_CARD: `FAVORITE_CARD`,
+  OFFER_CARD: `OFFER_CARD`
 };
 
 export const stars = [

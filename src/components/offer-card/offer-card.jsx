@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {Path} from "../../const";
-import {RATING_MULTIPLIER} from '../../const';
+import {RATING_MULTIPLIER, ClassNameType, OfferCardType} from '../../const';
 import {OfferPropTуpes} from "../../propTypes";
 import {changeActiveOffer} from "../../store/action";
 import Bookmark from "../bookmark/bookmark";
 
 const OfferCard = (props) => {
-  const {changeActiveOfferAction, offer, className} = props;
+  const {changeActiveOfferAction, offer, className, offerCardType} = props;
+
+  const isFavoriteCardType = offerCardType === OfferCardType.FAVORITE_CARD;
 
   const onOfferHover = () => {
     changeActiveOfferAction(offer.id);
@@ -17,15 +19,15 @@ const OfferCard = (props) => {
 
   return (
     <article onMouseOver={onOfferHover}
-      className={`${className}__place-card place-card`}
+      className={`${className} place-card`}
     >
       {offer.isPremium && <div className="place-card__mark"><span>Premium</span></div>}
-      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${isFavoriteCardType ? `favorites` : `cities`}__image-wrapper place-card__image-wrapper`}>
         <Link className="header__logo-link" to={`${Path.OFFER}/${offer.id}`}>
-          <img className="place-card__image" src={offer.image} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={offer.image} width={isFavoriteCardType ? `150` : `260`} height={isFavoriteCardType ? `110` : `200`} alt="Place image" />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${isFavoriteCardType ? ClassNameType.FAVORITES__CARD_INFO : ``} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.cost}</b>
@@ -50,8 +52,9 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offer: OfferPropTуpes.isRequired,
-  changeActiveOfferAction: PropTypes.func.isRequired,
+  changeActiveOfferAction: PropTypes.func,
   className: PropTypes.string.isRequired,
+  offerCardType: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

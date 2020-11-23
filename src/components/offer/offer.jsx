@@ -7,7 +7,7 @@ import ReviewsList from "../reviews-list/reviews-list";
 import Map from "../map/map";
 import OffersList from "../offers-list/offers-list";
 import withComment from "../hocs/with-comment/with-comment";
-import {RATING_MULTIPLIER, className} from '../../const';
+import {RATING_MULTIPLIER, ClassNameType} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 import {stars, LoadStatusType} from "../../const";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
@@ -123,13 +123,13 @@ class Offer extends PureComponent {
                 </section>
               </div>
             </div>
-            <Map offers={nearOffers} className={className.PROPERTY} />
+            <Map offers={nearOffers} className={ClassNameType.PROPERTY} />
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <OffersList offers={nearOffers} className={className.PROPERTY} />
+                <OffersList offers={nearOffers} />
               </div>
             </section>
           </div>

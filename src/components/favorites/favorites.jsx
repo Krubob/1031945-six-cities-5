@@ -23,7 +23,9 @@ const Favorites = (props) => {
           <div className="page__favorites-container container">
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
-              <FavoriteList activeCity={activeCity} favoriteOffers={favoriteOffers} />
+              <ul className="favorites__list">
+                <FavoriteList activeCity={activeCity} favoriteOffers={favoriteOffers} />
+              </ul>
             </section>
           </div>
         </main>}

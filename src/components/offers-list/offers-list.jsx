@@ -2,9 +2,10 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
 import {OfferPropTуpes} from "../../propTypes";
+import {ClassNameType, OfferCardType} from "../../const";
 
 const OffersList = (props) => {
-  const {offers, className} = props;
+  const {offers} = props;
 
   return (
     <Fragment>
@@ -12,8 +13,9 @@ const OffersList = (props) => {
         <OfferCard
           key={`${offer.title}-${offer.id}`}
           offer={offer}
-          className={className}
+          className={ClassNameType.CITIES_PLACE_CARD}
           isFavorite={offer.isFavorite}
+          offerCardType={OfferCardType.OFFER_CARD}
         />
       ))}
     </Fragment>
@@ -22,7 +24,6 @@ const OffersList = (props) => {
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
-  className: PropTypes.string.isRequired,
 };
 
 export default OffersList;

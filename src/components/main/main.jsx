@@ -9,7 +9,7 @@ import withSortingList from "../hocs/with-sorting-list/with-sorting-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
-import {className} from "../../const";
+import {ClassNameType} from "../../const";
 import {changeCity, changeSorting} from "../../store/action";
 import {citiesSelector, activeCitySelector, activeSortingSelector, getSortedCityOffers, getCityOffers} from "../../store/selectors";
 
@@ -35,11 +35,11 @@ const Main = (props) => {
                   <b className="places__found">{cityOffers.length} places to stay in {activeCity}</b>
                   <SortingListWrapped handleSortingClick={changeSortingAction} activeSorting={activeSorting} />
                   <div className="cities__places-list places__list tabs__content">
-                    <OffersList offers={sortedOffers} className={className.CITIES}/>
+                    <OffersList offers={sortedOffers} />
                   </div>
                 </section>
                 <div className="cities__right-section">
-                  <Map offers={cityOffers} className={className.CITIES} />
+                  <Map offers={cityOffers} className={ClassNameType.CITIES} />
                 </div>
               </Fragment>
             ) : <MainEmpty/>}

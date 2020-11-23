@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import PropTypes from 'prop-types';
 import FavoriteItem from "../favorite-item/favorite-item";
 
@@ -10,11 +10,11 @@ const FavoriteList = (props) => {
   });
 
   return (
-    <ul className="favorites__list">
+    <Fragment>
       {(Object.keys(favoriteOffersByCity)).map((city) => (
         <FavoriteItem key={`favorite-${city}`} city={city} offers={favoriteOffersByCity[city]} />
       ))}
-    </ul>
+    </Fragment>
   );
 };
 

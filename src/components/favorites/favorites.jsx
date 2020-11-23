@@ -6,22 +6,27 @@ import Header from "../header/header";
 import {OfferPropTуpes} from "../../propTypes";
 import {Path} from "../../const";
 import {activeCitySelector, favoriteOffersSelector} from "../../store/selectors";
+import {fetchFavoriteOffers} from "../../store/api-actions";
 import FavoriteList from "../favorite-list/favorite-list";
+import FavoriteEmpty from "../favorite-empty/favorite-empty";
 
 const Favorites = (props) => {
-  const {activeCity, favoriteOffers} = props;
+  const {activeCity, favoriteOffers, loadFavoriteOffersAction} = props;
+  const isFavoriteOffers = favoriteOffers.length > 0;
+  loadFavoriteOffersAction();
 
   return (
-    <div className="page">
+    <div className={`page ${isFavoriteOffers ? `` : `page--favorites-empty`}`}>
       <Header />
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoriteList activeCity={activeCity} favoriteOffers={favoriteOffers} />
-          </section>
-        </div>
-      </main>
+      {!isFavoriteOffers ? <FavoriteEmpty /> :
+        <main className="page__main page__main--favorites">
+          <div className="page__favorites-container container">
+            <section className="favorites">
+              <h1 className="favorites__title">Saved listing</h1>
+              <FavoriteList activeCity={activeCity} favoriteOffers={favoriteOffers} />
+            </section>
+          </div>
+        </main>}
       <footer className="footer container">
         <Link className="footer__logo-link" to={Path.MAIN} >
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
@@ -33,15 +38,21 @@ const Favorites = (props) => {
 
 Favorites.propTypes = {
   favoriteOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  loadFavoriteOffersAction: PropTypes.func.isRequired,
   activeCity: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activeCity: activeCitySelector(state),
   favoriteOffers: favoriteOffersSelector(state),
+});
 
+const mapDispatchToProps = (dispatch) => ({
+  loadFavoriteOffersAction() {
+    dispatch(fetchFavoriteOffers());
+  },
 });
 
 export {Favorites};
-export default connect(mapStateToProps, null)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
 

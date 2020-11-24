@@ -8,13 +8,13 @@ import Offer from "../offer/offer";
 import Login from "../login/login";
 import {Path} from "../../const";
 import {OfferPropTуpes} from "../../propTypes";
-import {offersSelector} from "../../store/selectors";
+import {offersSelector, isUserAuthorizedSelector} from "../../store/selectors";
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
 
 const App = (props) => {
 
-  const {offers} = props;
+  const {offers, isUserAuthorized} = props;
 
   return (
     <BrowserRouter history={browserHistory}>
@@ -35,9 +35,12 @@ const App = (props) => {
           />
         )}
         />
-        <Route exact path={Path.LOGIN}>
-          <Login/>
-        </Route>
+        <Route exact path={Path.LOGIN} render={() => {
+          return (
+            isUserAuthorized ? <Main /> : <Login/>
+          );
+        }}
+        />
       </Switch>
     </BrowserRouter>
   );
@@ -45,11 +48,12 @@ const App = (props) => {
 
 App.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired).isRequired,
+  isUserAuthorized: PropTypes.bool.isRequired,
 };
-
 
 const mapStateToProps = (state) => ({
   offers: offersSelector(state),
+  isUserAuthorized: isUserAuthorizedSelector(state),
 });
 
 export {App};

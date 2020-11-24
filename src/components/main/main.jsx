@@ -11,7 +11,7 @@ import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
 import {ClassNameType} from "../../const";
 import {changeCity, changeSorting} from "../../store/action";
-import {citiesSelector, activeCitySelector, activeSortingSelector, getSortedCityOffers, getCityOffers} from "../../store/selectors";
+import {citiesSelector, activeCitySelector, activeSortingSelector, getSortedCityOffersSelector, getCityOffersSelector} from "../../store/selectors";
 
 const SortingListWrapped = withSortingList(SortingList);
 
@@ -42,7 +42,7 @@ const Main = (props) => {
                   <Map offers={cityOffers} className={ClassNameType.CITIES} />
                 </div>
               </Fragment>
-            ) : <MainEmpty/>}
+            ) : <MainEmpty activeCity={activeCity} />}
           </div>
         </div>
       </main>
@@ -54,8 +54,8 @@ const mapStateToProps = (state) => ({
   activeCity: activeCitySelector(state),
   cities: citiesSelector(state),
   activeSorting: activeSortingSelector(state),
-  cityOffers: getCityOffers(state),
-  sortedOffers: getSortedCityOffers(state),
+  cityOffers: getCityOffersSelector(state),
+  sortedOffers: getSortedCityOffersSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

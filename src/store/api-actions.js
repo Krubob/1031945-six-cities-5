@@ -1,75 +1,85 @@
-import {loadOffers, loadOffer, loadNearOffers, loadReviews, redirectToRoute, loadAuthData, changeLoadStatus, changeFavoriteOfferStatus, loadFavoriteOffers} from "./action";
+import {loadOffersRequest, loadOffersFailure, loadOffersSuccess, loadOfferRequest, loadOfferFailure, loadOfferSuccess, loadNearOffersSuccess, loadNearOffersRequest, loadNearOffersFailure, loadReviewsSuccess, loadReviewsRequest, loadReviewsFailure, redirectToRoute, loadAuthDataSuccess, loadAuthDataRequest, loadAuthDataFailure, changeFavoriteOfferStatus, loadFavoriteOffersSuccess, loadFavoriteOffersRequest, loadFavoriteOffersFailure} from "./action";
 import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews, getTemplateReview} from "../utils";
-import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType, LoadStatusType} from "../const";
+import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType} from "../const";
 
-export const fetchOfferList = () => (dispatch, getState, api) => (
+export const fetchOfferList = () => (dispatch, getState, api) => {
+  dispatch(loadOffersRequest());
+
   api.get(APIPath.OFFERS)
     .then(({data}) => {
       const offers = getTemplateOffers(data);
-      dispatch(loadOffers(offers));
+      dispatch(loadOffersSuccess(offers));
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
+      dispatch(loadOffersFailure(err));
       return err;
-    })
-);
+    });
+};
 
-export const fetchOffer = (offerId) => (dispatch, getState, api) => (
+export const fetchOffer = (offerId) => (dispatch, getState, api) => {
+  dispatch(loadOfferRequest());
+
   api.get(`${APIPath.OFFERS}/${offerId}`)
     .then(({data}) => {
       const offer = getTemplateOffer(data);
-      dispatch(changeLoadStatus(LoadStatusType.LOADING));
-      dispatch(loadOffer(offer));
+      dispatch(loadOfferSuccess(offer));
       return ResponseType.SUCCESS;
     })
-    .then(() => {
-      dispatch(changeLoadStatus(LoadStatusType.LOADED));
-    })
     .catch((err) => {
-      dispatch(changeLoadStatus(LoadStatusType.ERROR));
+      dispatch(loadOfferFailure(err));
       return err;
-    })
-);
+    });
+};
 
-export const fetchReviews = (offerId) => (dispatch, getState, api) => (
+export const fetchReviews = (offerId) => (dispatch, getState, api) => {
+  dispatch(loadReviewsRequest());
+
   api.get(`${APIPath.REVIEWS}/${offerId}`)
     .then(({data}) => {
       const reviews = getTemplateReviews(data);
-      dispatch(loadReviews(reviews));
+      dispatch(loadReviewsSuccess(reviews));
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
+      dispatch(loadReviewsFailure(err));
       return err;
-    })
-);
+    });
+};
 
-export const fetchNearOffers = (offerId) => (dispatch, getState, api) => (
+export const fetchNearOffers = (offerId) => (dispatch, getState, api) => {
+  dispatch(loadNearOffersRequest());
+
   api.get(`${APIPath.OFFERS}/${offerId}${APIPath.NEARBY}`)
     .then(({data}) => {
       const nearOffers = getTemplateOffers(data);
-      dispatch(loadNearOffers(nearOffers));
+      dispatch(loadNearOffersSuccess(nearOffers));
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
+      dispatch(loadNearOffersFailure(err));
       return err;
-    })
-);
+    });
+};
 
-export const fetchFavoriteOffers = () => (dispatch, getState, api) => (
+export const fetchFavoriteOffers = () => (dispatch, getState, api) => {
+  dispatch(loadFavoriteOffersRequest());
+
   api.get(APIPath.FAVORITE)
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const favoriteOffers = getTemplateOffers(response.data);
-        dispatch(loadFavoriteOffers(favoriteOffers));
+        dispatch(loadFavoriteOffersSuccess(favoriteOffers));
         return ResponseType.SUCCESS;
       } else {
         return response;
       }
     })
     .catch((err) => {
+      dispatch(loadFavoriteOffersFailure(err));
       return err;
-    })
-);
+    });
+};
 
 export const updateOfferFavoriteStatus = (offerId, favoriteStatus) => (dispatch, getState, api) => (
   api.post(`${APIPath.FAVORITE}/${offerId}/${favoriteStatus ? 1 : 0}`)
@@ -83,28 +93,31 @@ export const updateOfferFavoriteStatus = (offerId, favoriteStatus) => (dispatch,
     })
 );
 
-export const checkAuth = () => (dispatch, getState, api) => (
+export const checkAuth = () => (dispatch, getState, api) => {
+  dispatch(loadAuthDataRequest());
+
   api.get(APIPath.LOGIN)
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const authData = getTemplateAuthData(response.data);
-        dispatch(loadAuthData(authData, AuthorizationStatus.AUTH));
+        dispatch(loadAuthDataSuccess(authData, AuthorizationStatus.AUTH));
         return ResponseType.SUCCESS;
       } else {
         return response;
       }
     })
     .catch((err) => {
+      loadAuthDataFailure(err);
       return err;
-    })
-);
+    });
+};
 
 export const login = ({email, password}) => (dispatch, getState, api) => (
   api.post(APIPath.LOGIN, {email, password})
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const authData = getTemplateAuthData(response.data);
-        dispatch(loadAuthData(authData, AuthorizationStatus.AUTH));
+        dispatch(loadAuthDataSuccess(authData, AuthorizationStatus.AUTH));
         return ResponseType.SUCCESS;
       } else {
         return response;
@@ -121,7 +134,7 @@ export const sendReview = ({rating, review: comment, offerId}, handleResponseWai
   .then((response) => {
     if (response.status !== HttpCode.UNAUTHORIZED) {
       const reviews = getTemplateReview(response.data);
-      dispatch(loadReviews(reviews));
+      dispatch(loadReviewsSuccess(reviews));
       handleResponseWaitingChange(false);
       return ResponseType.SUCCESS;
     } else {

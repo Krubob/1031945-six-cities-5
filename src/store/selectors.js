@@ -2,7 +2,7 @@ import {createSelector} from "reselect";
 import {getOffersBySortType, getOffersByCity, sortReviewsByDate} from "../utils";
 import {AuthorizationStatus} from "../const";
 
-export const loadStatusSelector = (state) => state.DATA.loadStatus;
+export const isLoadingSelector = (state) => state.DATA.isLoading;
 export const offerSelector = (state) => state.DATA.offer;
 export const offersSelector = (state) => state.DATA.offers;
 export const citiesSelector = (state) => state.DATA.cities;
@@ -16,14 +16,14 @@ export const authStatusSelector = (state) => state.USER.authStatus;
 export const authDataSelector = (state) => state.USER.authData;
 export const userEmailSelector = (state) => state.USER.authData.email;
 
-export const getCityOffers = createSelector(
+export const getCityOffersSelector = createSelector(
     offersSelector,
     activeCitySelector,
     (offers, activeCity) => getOffersByCity(offers, activeCity)
 );
 
-export const getSortedCityOffers = createSelector(
-    getCityOffers,
+export const getSortedCityOffersSelector = createSelector(
+    getCityOffersSelector,
     activeSortingSelector,
     (cityOffers, activeSorting) => getOffersBySortType(cityOffers, activeSorting)
 );
@@ -36,6 +36,18 @@ export const getSortedReviewsSelector = createSelector(
 export const isUserAuthorizedSelector = createSelector(
     authStatusSelector,
     (authStatus) => authStatus === AuthorizationStatus.AUTH
+);
+
+export const isOfferLoadedSelector = createSelector(
+    offerSelector,
+    isLoadingSelector,
+    (offer, isLoading) => isLoading === false && Object.keys(offer).length !== 0
+);
+
+export const isFavoriteOffersLoadedSelector = createSelector(
+    favoriteOffersSelector,
+    isLoadingSelector,
+    (favoriteOffers, isLoading) => isLoading === false && favoriteOffers.length !== 0
 );
 
 export const getUserEmail = createSelector(

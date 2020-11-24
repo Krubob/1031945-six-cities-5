@@ -13,7 +13,8 @@ const initialState = {
   changedFavoriteOffer: {},
   activeCity: `Amsterdam`,
   activeSorting: `Popular`,
-  loadStatus: `NONE`,
+  isLoading: false,
+  error: null,
 };
 
 const offerData = (state = initialState, action) => {
@@ -32,23 +33,59 @@ const offerData = (state = initialState, action) => {
       });
     case ActionType.LOAD_OFFER_SUCCESS:
       return extend(state, {
+        isLoading: false,
         offer: action.payload,
+      });
+    case ActionType.LOAD_OFFER_REQUEST:
+      return extend(state, {
+        isLoading: true,
+      });
+    case ActionType.LOAD_OFFER_FAILURE:
+      return extend(state, {
+        isLoading: null,
+        error: action.error
       });
     case ActionType.LOAD_OFFERS_SUCCESS:
       return extend(state, {
+        isLoading: false,
         offers: action.payload,
+      });
+    case ActionType.LOAD_OFFERS_REQUEST:
+      return extend(state, {
+        isLoading: true,
+      });
+    case ActionType.LOAD_OFFERS_FAILURE:
+      return extend(state, {
+        isLoading: null,
+        error: action.error
       });
     case ActionType.LOAD_REVIEWS_SUCCESS:
       return extend(state, {
+        isLoading: false,
         reviews: action.payload,
+      });
+    case ActionType.LOAD_REVIEWS_REQUEST:
+      return extend(state, {
+        isLoading: true,
+      });
+    case ActionType.LOAD_REVIEWS_FAILURE:
+      return extend(state, {
+        isLoading: null,
+        error: action.error
       });
     case ActionType.LOAD_NEAR_OFFERS_SUCCESS:
       return extend(state, {
+        isLoading: false,
         nearOffers: action.payload,
       });
-    case ActionType.CHANGE_LOAD_STATUS:
+    case ActionType.LOAD_NEAR_OFFERS_REQUEST:
       return extend(state, {
-        loadStatus: action.payload,
+        isLoading: true,
+      });
+    case ActionType.LOAD_NEAR_OFFERS_FAILURE:
+      return extend(state, {
+        isLoading: null,
+        error: action.error
       });
     case ActionType.CHANGE_FAVORITE_STATUS_OFFER:
       return extend(state, {
@@ -57,7 +94,17 @@ const offerData = (state = initialState, action) => {
       });
     case ActionType.LOAD_FAVORITE_OFFERS_SUCCESS:
       return extend(state, {
+        isLoading: false,
         favoriteOffers: action.payload,
+      });
+    case ActionType.LOAD_FAVORITE_OFFERS_REQUEST:
+      return extend(state, {
+        isLoading: true,
+      });
+    case ActionType.LOAD_FAVORITE_OFFERS_FAILURE:
+      return extend(state, {
+        isLoading: null,
+        error: action.error
       });
     default:
       return state;

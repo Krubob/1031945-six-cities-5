@@ -9,9 +9,9 @@ import OffersList from "../offers-list/offers-list";
 import withComment from "../hocs/with-comment/with-comment";
 import {RATING_MULTIPLIER, ClassNameType} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
-import {stars, LoadStatusType} from "../../const";
+import {stars} from "../../const";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
-import {offerSelector, nearOffersSelector, loadStatusSelector, isUserAuthorizedSelector, getSortedReviewsSelector} from "../../store/selectors";
+import {offerSelector, nearOffersSelector, isOfferLoadedSelector, isUserAuthorizedSelector, getSortedReviewsSelector} from "../../store/selectors";
 
 const CommentWrapped = withComment(Comment);
 
@@ -33,9 +33,9 @@ class Offer extends PureComponent {
   }
 
   render() {
-    const {offer, offerId, nearOffers, loadStatus, isUserAuthorized, availableReviews} = this.props;
+    const {offer, offerId, nearOffers, isOfferLoaded, isUserAuthorized, availableReviews} = this.props;
 
-    return loadStatus !== LoadStatusType.LOADED ? (
+    return !isOfferLoaded ? (
       <div>LOADING...</div>
     ) : (
       <div className="page">
@@ -143,7 +143,7 @@ Offer.propTypes = {
   loadOfferAction: PropTypes.func.isRequired,
   loadReviewsAction: PropTypes.func.isRequired,
   loadNearOffersAction: PropTypes.func.isRequired,
-  loadStatus: PropTypes.string.isRequired,
+  isOfferLoaded: PropTypes.bool.isRequired,
   isUserAuthorized: PropTypes.bool.isRequired,
 };
 
@@ -151,7 +151,7 @@ const mapStateToProps = (state) => ({
   offer: offerSelector(state),
   availableReviews: getSortedReviewsSelector(state),
   nearOffers: nearOffersSelector(state),
-  loadStatus: loadStatusSelector(state),
+  isOfferLoaded: isOfferLoadedSelector(state),
   isUserAuthorized: isUserAuthorizedSelector(state),
 });
 

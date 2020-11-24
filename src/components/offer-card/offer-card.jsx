@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {Path} from "../../const";
+import {Path, BookmarkType} from "../../const";
 import {RATING_MULTIPLIER, ClassNameType, OfferCardType} from '../../const';
 import {OfferPropTуpes} from "../../propTypes";
 import {changeActiveOffer} from "../../store/action";
@@ -33,7 +33,7 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{offer.cost}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <Bookmark offerId={offer.id} isFavorite={offer.isFavorite} />
+          <Bookmark className={ClassNameType.PLACE_CARD} bookmarkType={BookmarkType.PLACE_CARD_BOOKMARK} offerId={offer.id} isFavorite={offer.isFavorite} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -44,10 +44,14 @@ export const isOfferLoadedSelector = createSelector(
     (offer, isLoading) => isLoading === false && Object.keys(offer).length !== 0
 );
 
-export const isFavoriteOffersLoadedSelector = createSelector(
-    favoriteOffersSelector,
+export const isOffersLoadedSelector = createSelector(
     isLoadingSelector,
-    (favoriteOffers, isLoading) => isLoading === false && favoriteOffers.length !== 0
+    (isLoading) => isLoading === false
+);
+
+export const isFavoriteOffersLoadedSelector = createSelector(
+    isLoadingSelector,
+    (isLoading) => isLoading === false
 );
 
 export const getUserEmail = createSelector(

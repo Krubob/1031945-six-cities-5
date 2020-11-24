@@ -11,16 +11,18 @@ import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
 import {ClassNameType} from "../../const";
 import {changeCity, changeSorting} from "../../store/action";
-import {citiesSelector, activeCitySelector, activeSortingSelector, getSortedCityOffersSelector, getCityOffersSelector} from "../../store/selectors";
+import {citiesSelector, activeCitySelector, activeSortingSelector, getSortedCityOffersSelector, getCityOffersSelector, isOffersLoadedSelector} from "../../store/selectors";
 
 const SortingListWrapped = withSortingList(SortingList);
 
 const Main = (props) => {
 
-  const {cities, activeCity, activeSorting, changeCityAction, changeSortingAction, sortedOffers, cityOffers} = props;
+  const {cities, activeCity, activeSorting, changeCityAction, changeSortingAction, sortedOffers, cityOffers, isOffersLoaded} = props;
   const haveCityOffers = cityOffers.length > 0;
 
-  return (
+  return !isOffersLoaded ? (
+    <div>LOADING...</div>
+  ) : (
     <div className="page page--gray page--main">
       <Header />
       <main className={`page__main page__main--index ${!haveCityOffers ? `page__main--index-empty` : ``}`}>
@@ -56,6 +58,7 @@ const mapStateToProps = (state) => ({
   activeSorting: activeSortingSelector(state),
   cityOffers: getCityOffersSelector(state),
   sortedOffers: getSortedCityOffersSelector(state),
+  isOffersLoaded: isOffersLoadedSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -76,6 +79,7 @@ Main.propTypes = {
   changeSortingAction: PropTypes.func.isRequired,
   sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  isOffersLoaded: PropTypes.bool.isRequired,
 };
 
 export {Main};

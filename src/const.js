@@ -15,6 +15,7 @@ export const APIPath = {
 
 export const ClassNameType = {
   PROPERTY: `property`,
+  PLACE_CARD: `place-card`,
   CITIES: `cities`,
   NEAR: `near`,
   CITIES_PLACE_CARD: `cities__place-card`,
@@ -27,6 +28,11 @@ export const ClassNameType = {
 export const OfferCardType = {
   FAVORITE_CARD: `FAVORITE_CARD`,
   OFFER_CARD: `OFFER_CARD`
+};
+
+export const BookmarkType = {
+  PROPERTY_BOOKMARK: `PROPERTY_BOOKMARK`,
+  PLACE_CARD_BOOKMARK: `PLACE_CARD_BOOKMARK`
 };
 
 export const stars = [

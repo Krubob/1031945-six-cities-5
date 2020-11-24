@@ -7,15 +7,20 @@ import ReviewsList from "../reviews-list/reviews-list";
 import Map from "../map/map";
 import OffersList from "../offers-list/offers-list";
 import withComment from "../hocs/with-comment/with-comment";
-import {RATING_MULTIPLIER, ClassNameType} from '../../const';
+import {RATING_MULTIPLIER, ClassNameType, BookmarkType} from '../../const';
 import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
 import {stars} from "../../const";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
 import {offerSelector, nearOffersSelector, isOfferLoadedSelector, isUserAuthorizedSelector, getSortedReviewsSelector} from "../../store/selectors";
+import Bookmark from "../bookmark/bookmark";
 
 const CommentWrapped = withComment(Comment);
 
 class Offer extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     const {offerId, loadOfferAction, loadReviewsAction, loadNearOffersAction} = this.props;
     loadOfferAction(offerId);
@@ -45,7 +50,7 @@ class Offer extends PureComponent {
             <div className="property__gallery-container container">
               <div className="property__gallery">
                 {offer.photos.map((img, index) => (
-                  <div className="property__image-wrapper" key={`gallery-item${index}`} >
+                  <div className="property__image-wrapper" key={`gallery-item-${index}`} >
                     <img className="property__image" src={img} alt="Photo studio" />
                   </div>
                 ))}
@@ -58,12 +63,7 @@ class Offer extends PureComponent {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <Bookmark className={ClassNameType.PROPERTY} bookmarkType={BookmarkType.PROPERTY_BOOKMARK} offerId={offer.id} isFavorite={offer.isFavorite} />
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">

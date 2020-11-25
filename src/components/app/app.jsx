@@ -7,19 +7,19 @@ import Favorites from "../favorites/favorites";
 import Offer from "../offer/offer";
 import Login from "../login/login";
 import {Path} from "../../const";
-import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
-import {offersSelector} from "../../store/selectors";
+import {OfferPropTуpes} from "../../propTypes";
+import {offersSelector, isUserAuthorizedSelector} from "../../store/selectors";
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
 
 const App = (props) => {
 
-  const {offers, reviews} = props;
+  const {offers, isUserAuthorized} = props;
 
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
-        <PrivateRoute exact path={Path.MAIN} redirectTo={Path.LOGIN} render={() => (
+        <Route exact path={Path.MAIN} render={() => (
           <Main />
         )}
         />
@@ -29,30 +29,32 @@ const App = (props) => {
           />
         )}
         />
-        <Route exact path={`${Path.OFFER}/:id`} render={({match: {params}}) => (
+        <Route exact path={`${Path.OFFER}/:id`} render={({match}) => (
           <Offer
-            offer = {offers.find((item) => item.id === params.id)}
-            reviews = {reviews}
-            nearOffers = {[offers[3], offers[4], offers[21]]}
+            offerId = {match.params.id}
           />
         )}
         />
-        <Route exact path={Path.LOGIN}>
-          <Login/>
-        </Route>
+        <Route exact path={Path.LOGIN} render={() => {
+          return (
+            isUserAuthorized ? <Main /> : <Login/>
+          );
+        }}
+        />
       </Switch>
     </BrowserRouter>
   );
 };
 
-const mapStateToProps = (state) => ({
-  offers: offersSelector(state),
-});
-
 App.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired).isRequired,
-  reviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
+  isUserAuthorized: PropTypes.bool.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  offers: offersSelector(state),
+  isUserAuthorized: isUserAuthorizedSelector(state),
+});
 
 export {App};
 export default connect(mapStateToProps, null)(App);

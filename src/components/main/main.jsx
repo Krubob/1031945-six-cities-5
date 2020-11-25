@@ -9,18 +9,20 @@ import withSortingList from "../hocs/with-sorting-list/with-sorting-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
-import {className} from "../../const";
+import {ClassNameType} from "../../const";
 import {changeCity, changeSorting} from "../../store/action";
-import {citiesSelector, activeCitySelector, activeSortingSelector, getSortedCityOffers, getCityOffers} from "../../store/selectors";
+import {citiesSelector, activeCitySelector, activeSortingSelector, getSortedCityOffersSelector, getCityOffersSelector, isOffersLoadedSelector} from "../../store/selectors";
 
 const SortingListWrapped = withSortingList(SortingList);
 
 const Main = (props) => {
 
-  const {cities, activeCity, activeSorting, changeCityAction, changeSortingAction, sortedOffers, cityOffers} = props;
+  const {cities, activeCity, activeSorting, changeCityAction, changeSortingAction, sortedOffers, cityOffers, isOffersLoaded} = props;
   const haveCityOffers = cityOffers.length > 0;
 
-  return (
+  return !isOffersLoaded ? (
+    <div>LOADING...</div>
+  ) : (
     <div className="page page--gray page--main">
       <Header />
       <main className={`page__main page__main--index ${!haveCityOffers ? `page__main--index-empty` : ``}`}>
@@ -35,14 +37,14 @@ const Main = (props) => {
                   <b className="places__found">{cityOffers.length} places to stay in {activeCity}</b>
                   <SortingListWrapped handleSortingClick={changeSortingAction} activeSorting={activeSorting} />
                   <div className="cities__places-list places__list tabs__content">
-                    <OffersList offers={sortedOffers} className={className.CITIES}/>
+                    <OffersList offers={sortedOffers} />
                   </div>
                 </section>
                 <div className="cities__right-section">
-                  <Map offers={cityOffers} className={className.CITIES} />
+                  <Map offers={cityOffers} className={ClassNameType.CITIES} />
                 </div>
               </Fragment>
-            ) : <MainEmpty/>}
+            ) : <MainEmpty activeCity={activeCity} />}
           </div>
         </div>
       </main>
@@ -54,8 +56,9 @@ const mapStateToProps = (state) => ({
   activeCity: activeCitySelector(state),
   cities: citiesSelector(state),
   activeSorting: activeSortingSelector(state),
-  cityOffers: getCityOffers(state),
-  sortedOffers: getSortedCityOffers(state),
+  cityOffers: getCityOffersSelector(state),
+  sortedOffers: getSortedCityOffersSelector(state),
+  isOffersLoaded: isOffersLoadedSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -76,6 +79,7 @@ Main.propTypes = {
   changeSortingAction: PropTypes.func.isRequired,
   sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  isOffersLoaded: PropTypes.bool.isRequired,
 };
 
 export {Main};

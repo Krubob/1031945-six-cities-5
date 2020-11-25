@@ -9,13 +9,30 @@ export const APIPath = {
   LOGIN: `/login`,
   OFFERS: `/hotels`,
   FAVORITE: `/favorite`,
+  REVIEWS: `/comments`,
+  NEARBY: `/nearby`,
 };
 
-export const className = {
+export const ClassNameType = {
   PROPERTY: `property`,
+  PLACE_CARD: `place-card`,
   CITIES: `cities`,
   NEAR: `near`,
+  CITIES_PLACE_CARD: `cities__place-card`,
   NEAR_PLACES: `near-places`,
+  FAVORITES: `favorites`,
+  FAVORITES_CARD: `favorites__card`,
+  FAVORITES_CARD_INFO: `favorites__card-info`,
+};
+
+export const OfferCardType = {
+  FAVORITE_CARD: `FAVORITE_CARD`,
+  OFFER_CARD: `OFFER_CARD`
+};
+
+export const BookmarkType = {
+  PROPERTY_BOOKMARK: `PROPERTY_BOOKMARK`,
+  PLACE_CARD_BOOKMARK: `PLACE_CARD_BOOKMARK`
 };
 
 export const stars = [
@@ -60,7 +77,22 @@ export const AuthorizationStatus = {
 export const HttpCode = {
   UNAUTHORIZED: 401
 };
+
 export const ResponseType = {
   SUCCESS: `SUCCESS`,
   ERROR: `ERROR`,
 };
+
+export const LoadStatusType = {
+  LOADING: `LOADING`,
+  LOADED: `LOADED`,
+  ERROR: `ERROR`,
+  NONE: `NONE`
+};
+
+export const REVIEW_TEXT = {
+  MIN_VALUE: 50,
+  MAX_VALUE: 300,
+};
+
+export const MAX_REVIEWS_ON_PAGE = 10;

@@ -1,4 +1,4 @@
-import {SortingType} from "./const";
+import {SortingType, MAX_REVIEWS_ON_PAGE} from "./const";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -31,7 +31,7 @@ export const getOffersBySortType = (offers, sortingType) => {
   }
 };
 
-const getTemplateOffer = (data) => {
+export const getTemplateOffer = (data) => {
   return {
     id: String(data.id),
     city: data.city.name,
@@ -66,4 +66,41 @@ export const getTemplateAuthData = (data) => {
     isPro: data.is_pro,
     name: data.name,
   };
+};
+
+export const getTemplateReview = (data) => {
+  return {
+    id: String(data[`id`]),
+    date: data[`date`],
+    rating: data[`rating`],
+    text: data[`comment`],
+    author: data[`user`][`name`],
+    avatar: data[`user`][`avatar_url`],
+    isPro: data[`user`][`is_pro`],
+    userId: data[`user`][`id`],
+  };
+};
+
+export const getTemplateReviews = (dataArr) => dataArr.map((it) => getTemplateReview(it));
+
+export const dateConverter = new Intl.DateTimeFormat(`en-us`, {
+  year: `numeric`,
+  month: `long`,
+});
+
+export const sortReviewsByDate = (reviews) => {
+  const copiedReviews = reviews.slice();
+  copiedReviews.sort((a, b) => {
+    let c = new Date(a.date);
+    let d = new Date(b.date);
+    return d - c;
+  });
+  return copiedReviews.slice(0, MAX_REVIEWS_ON_PAGE);
+};
+
+export const getOffersWithNewFavoriteStatus = (offers, offer) => {
+  const copiedOffers = offers.slice();
+  const index = copiedOffers.findIndex((it) => it.id === offer.id);
+  copiedOffers[index] = offer;
+  return copiedOffers;
 };

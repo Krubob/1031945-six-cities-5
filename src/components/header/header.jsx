@@ -8,6 +8,23 @@ import {isUserAuthorizedSelector, authDataSelector, getUserEmail} from "../../st
 const Header = (props) => {
   const {isUserAuthorized, authData, userEmail} = props;
 
+  const authorizedUserLink = (
+    <Link className="header__nav-link header__nav-link--profile" to={Path.FAVORITES}>
+      <div className="header__avatar-wrapper user__avatar-wrapper">
+        <img src={authData.avatarUrl}/>
+      </div>
+      <span className="header__user-name user__name">{userEmail}</span>
+    </Link>
+  );
+
+  const unauthorizedUserLink = (
+    <Link className="header__nav-link header__nav-link--profile" to={Path.LOGIN}>
+      <div className="header__avatar-wrapper user__avatar-wrapper">
+      </div>
+      <span className="header__login">Sign in</span>
+    </Link>
+  );
+
   return (
     <header className="header">
       <div className="container">
@@ -20,12 +37,7 @@ const Header = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <Link className="header__nav-link header__nav-link--profile" to={isUserAuthorized ? Path.FAVORITES : Path.LOGIN}>
-                  <div className="header__avatar-wrapper user__avatar-wrapper">
-                    {isUserAuthorized ? <img src={authData.avatarUrl}/> : ``}
-                  </div>
-                  {isUserAuthorized ? <span className="header__user-name user__name">{userEmail}</span> : <span className="header__login">Sign in</span>}
-                </Link>
+                {isUserAuthorized ? authorizedUserLink : unauthorizedUserLink}
               </li>
             </ul>
           </nav>

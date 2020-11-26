@@ -119,7 +119,7 @@ class Offer extends PureComponent {
                 </section>
               </div>
             </div>
-            <Map offers={nearOffers} className={ClassNameType.PROPERTY} />
+            <Map offers={[offer, ...nearOffers]} className={ClassNameType.PROPERTY} />
           </section>
           <div className="container">
             <section className="near-places places">

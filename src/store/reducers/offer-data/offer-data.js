@@ -11,7 +11,7 @@ const initialState = {
   nearOffers: [],
   favoriteOffers: [],
   changedFavoriteOffer: {},
-  activeCity: `Amsterdam`,
+  activeCity: `Paris`,
   activeSorting: `Popular`,
   isLoading: false,
   error: null,

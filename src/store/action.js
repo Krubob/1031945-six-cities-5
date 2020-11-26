@@ -2,7 +2,8 @@ export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_SORTING: `CHANGE_SORTING`,
   CHANGE_ACTIVE_OFFER: `CHANGE_ACTIVE_OFFER`,
-  CHANGE_FAVORITE_STATUS_OFFER: `CHANGE_FAVORITE_STATUS_OFFER`,
+  CHANGE_FAVORITE_OFFER_STATUS: `CHANGE_FAVORITE_OFFER_STATUS`,
+  CHANGE_FAVORITE_NEAR_OFFER_STATUS: `CHANGE_FAVORITE_NEAR_OFFER_STATUS`,
   LOAD_OFFER_SUCCESS: `LOAD_OFFER_SUCCESS`,
   LOAD_OFFER_REQUEST: `LOAD_OFFER_REQUEST`,
   LOAD_OFFER_FAILURE: `LOAD_OFFER_FAILURE`,
@@ -25,7 +26,12 @@ export const ActionType = {
 };
 
 export const changeFavoriteOfferStatus = (favoriteOffer) => ({
-  type: ActionType.CHANGE_FAVORITE_STATUS_OFFER,
+  type: ActionType.CHANGE_FAVORITE_OFFER_STATUS,
+  payload: favoriteOffer,
+});
+
+export const changeFavoriteNearOfferStatus = (favoriteOffer) => ({
+  type: ActionType.CHANGE_FAVORITE_NEAR_OFFER_STATUS,
   payload: favoriteOffer,
 });
 

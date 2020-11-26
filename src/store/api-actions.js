@@ -1,4 +1,4 @@
-import {loadOffersRequest, loadOffersFailure, loadOffersSuccess, loadOfferRequest, loadOfferFailure, loadOfferSuccess, loadNearOffersSuccess, loadNearOffersRequest, loadNearOffersFailure, loadReviewsSuccess, loadReviewsRequest, loadReviewsFailure, redirectToRoute, loadAuthDataSuccess, loadAuthDataRequest, loadAuthDataFailure, changeFavoriteOfferStatus, loadFavoriteOffersSuccess, loadFavoriteOffersRequest, loadFavoriteOffersFailure} from "./action";
+import {loadOffersRequest, loadOffersFailure, loadOffersSuccess, loadOfferRequest, loadOfferFailure, loadOfferSuccess, loadNearOffersSuccess, loadNearOffersRequest, loadNearOffersFailure, loadReviewsSuccess, loadReviewsRequest, loadReviewsFailure, redirectToRoute, loadAuthDataSuccess, loadAuthDataRequest, loadAuthDataFailure, changeFavoriteOfferStatus, loadFavoriteOffersSuccess, loadFavoriteOffersRequest, loadFavoriteOffersFailure, changeFavoriteNearOfferStatus} from "./action";
 import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews, getTemplateReview} from "../utils";
 import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType} from "../const";
 
@@ -86,6 +86,7 @@ export const updateOfferFavoriteStatus = (offerId, favoriteStatus) => (dispatch,
     .then(({data}) => {
       const favoriteOffer = getTemplateOffer(data);
       dispatch(changeFavoriteOfferStatus(favoriteOffer));
+      dispatch(changeFavoriteNearOfferStatus(favoriteOffer));
       return ResponseType.SUCCESS;
     })
     .catch((err) => {

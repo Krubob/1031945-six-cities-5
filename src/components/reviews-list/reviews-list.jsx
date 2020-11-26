@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {ReviewsByIdPropTypes} from "../../propTypes";
+import {ReviewByIdPropTypes} from "../../propTypes";
 import ReviewItem from "../review-item/review-item";
 
 const ReviewsList = (props) => {
@@ -9,8 +9,8 @@ const ReviewsList = (props) => {
   return (
     <ul className="reviews__list">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-      {reviews.map((review) => (
-        <li key={`review-${review.id}`} className="reviews__item">
+      {reviews.map((review, i) => (
+        <li key={`review-${i}`} className="reviews__item">
           <ReviewItem review={review}/>
         </li>
       ))}
@@ -19,7 +19,7 @@ const ReviewsList = (props) => {
 };
 
 ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(ReviewsByIdPropTypes.isRequired).isRequired,
+  reviews: PropTypes.arrayOf(ReviewByIdPropTypes.isRequired).isRequired,
 };
 
 export default ReviewsList;

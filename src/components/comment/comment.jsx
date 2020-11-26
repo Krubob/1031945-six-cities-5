@@ -13,18 +13,12 @@ class Comment extends PureComponent {
   }
 
   handleSubmit(evt) {
-    const {rating, review, offerId, sendReviewAction, handleFormDataClear, handleResponseWaitingChange} = this.props;
+    const {rating, review, offerId, sendReviewAction, handleResponseWaitingChange, handleFormDataClear} = this.props;
     evt.preventDefault();
 
     handleResponseWaitingChange(true);
 
-    sendReviewAction({
-      rating,
-      review,
-      offerId,
-    },
-    handleResponseWaitingChange,
-    );
+    sendReviewAction({rating, review, offerId, handleResponseWaitingChange});
 
     handleFormDataClear();
   }

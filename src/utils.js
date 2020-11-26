@@ -52,7 +52,7 @@ export const getTemplateOffer = (data) => {
     avatar: data.host.avatar_url,
     name: data.host.name,
     description: data.description,
-    super: data.host.is_pro,
+    isHostPro: data.host.is_pro,
   };
 };
 
@@ -70,14 +70,16 @@ export const getTemplateAuthData = (data) => {
 
 export const getTemplateReview = (data) => {
   return {
-    id: String(data[`id`]),
+    id: data[`id`],
     date: data[`date`],
+    comment: data[`comment`],
     rating: data[`rating`],
-    text: data[`comment`],
-    author: data[`user`][`name`],
-    avatar: data[`user`][`avatar_url`],
-    isPro: data[`user`][`is_pro`],
-    userId: data[`user`][`id`],
+    user: {
+      userId: data[`user`][`id`],
+      avatar: data[`user`][`avatar_url`],
+      isPro: data[`user`][`is_pro`],
+      name: data[`user`][`name`],
+    },
   };
 };
 

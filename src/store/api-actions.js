@@ -1,6 +1,7 @@
 import {loadOffersRequest, loadOffersFailure, loadOffersSuccess, loadOfferRequest, loadOfferFailure, loadOfferSuccess, loadNearOffersSuccess, loadNearOffersRequest, loadNearOffersFailure, loadReviewsSuccess, loadReviewsRequest, loadReviewsFailure, redirectToRoute, loadAuthDataSuccess, loadAuthDataRequest, loadAuthDataFailure, changeFavoriteOfferStatus, loadFavoriteOffersSuccess, loadFavoriteOffersRequest, loadFavoriteOffersFailure, changeFavoriteNearOfferStatus} from "./action";
-import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews, getTemplateReview} from "../utils";
+import {getTemplateOffer, getTemplateOffers, getTemplateAuthData, getTemplateReviews} from "../utils";
 import {AuthorizationStatus, Path, APIPath, HttpCode, ResponseType} from "../const";
+import swal from "sweetalert";
 
 export const fetchOfferList = () => (dispatch, getState, api) => {
   dispatch(loadOffersRequest());
@@ -13,6 +14,7 @@ export const fetchOfferList = () => (dispatch, getState, api) => {
     })
     .catch((err) => {
       dispatch(loadOffersFailure(err));
+      swal(`Ошибка загрузки данных`, String(err), `error`);
       return err;
     });
 };
@@ -28,6 +30,7 @@ export const fetchOffer = (offerId) => (dispatch, getState, api) => {
     })
     .catch((err) => {
       dispatch(loadOfferFailure(err));
+      swal(`Ошибка загрузки данных`, String(err), `error`);
       return err;
     });
 };
@@ -43,6 +46,7 @@ export const fetchReviews = (offerId) => (dispatch, getState, api) => {
     })
     .catch((err) => {
       dispatch(loadReviewsFailure(err));
+      swal(`Ошибка загрузки данных`, String(err), `error`);
       return err;
     });
 };
@@ -58,6 +62,7 @@ export const fetchNearOffers = (offerId) => (dispatch, getState, api) => {
     })
     .catch((err) => {
       dispatch(loadNearOffersFailure(err));
+      swal(`Ошибка загрузки данных`, String(err), `error`);
       return err;
     });
 };
@@ -77,6 +82,7 @@ export const fetchFavoriteOffers = () => (dispatch, getState, api) => {
     })
     .catch((err) => {
       dispatch(loadFavoriteOffersFailure(err));
+      swal(`Ошибка загрузки данных`, String(err), `error`);
       return err;
     });
 };
@@ -90,6 +96,7 @@ export const updateOfferFavoriteStatus = (offerId, favoriteStatus) => (dispatch,
       return ResponseType.SUCCESS;
     })
     .catch((err) => {
+      swal(`Ошибка обновления данных`, String(err), `error`);
       return err;
     })
 );
@@ -109,6 +116,7 @@ export const checkAuth = () => (dispatch, getState, api) => {
     })
     .catch((err) => {
       loadAuthDataFailure(err);
+      swal(`Ошибка аутентификации`, String(err), `error`);
       return err;
     });
 };
@@ -126,23 +134,21 @@ export const login = ({email, password}) => (dispatch, getState, api) => (
     })
     .then(() => dispatch(redirectToRoute(Path.MAIN)))
     .catch((err) => {
+      swal(`Ошибка отправки данных`, String(err), `error`);
       return err;
     })
 );
 
-export const sendReview = ({rating, review: comment, offerId}, handleResponseWaitingChange) => (dispatch, getState, api) => (
-  api.post(`${APIPath.REVIEWS}/${offerId}`, {rating, comment})
-  .then((response) => {
-    if (response.status !== HttpCode.UNAUTHORIZED) {
-      const reviews = getTemplateReview(response.data);
-      dispatch(loadReviewsSuccess(reviews));
-      handleResponseWaitingChange(false);
-      return ResponseType.SUCCESS;
-    } else {
-      return response;
-    }
+export const sendReview = ({rating, review: comment, offerId, handleResponseWaitingChange}) => (dispatch, getState, api) => (
+  api.post(`${APIPath.REVIEWS}/${offerId}`, {comment, rating})
+  .then(({data}) => {
+    const reviews = getTemplateReviews(data);
+    dispatch(loadReviewsSuccess(reviews));
+    handleResponseWaitingChange(false);
+    return ResponseType.SUCCESS;
   })
   .catch((err) => {
+    swal(`Ошибка отправки данных`, String(err), `error`);
     return err;
   })
 );

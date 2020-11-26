@@ -8,7 +8,7 @@ import Map from "../map/map";
 import OffersList from "../offers-list/offers-list";
 import withComment from "../hocs/with-comment/with-comment";
 import {RATING_MULTIPLIER, ClassNameType, BookmarkType} from '../../const';
-import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
+import {ReviewPropTypes} from "../../propTypes";
 import {stars} from "../../const";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
 import {offerSelector, nearOffersSelector, isOfferLoadedSelector, isUserAuthorizedSelector, getSortedReviewsSelector, changedFavoriteOfferSelector, offerFavoriteStatusSelector} from "../../store/selectors";
@@ -38,7 +38,7 @@ class Offer extends PureComponent {
   }
 
   render() {
-    const {offer, offerId, nearOffers, isOfferLoaded, isUserAuthorized, availableReviews, offerFavoriteStatus, changedFavoriteOffer} = this.props;
+    const {offer, nearOffers, isOfferLoaded, isUserAuthorized, availableReviews, offerFavoriteStatus, changedFavoriteOffer} = this.props;
 
     return !isOfferLoaded ? (
       <div>LOADING...</div>
@@ -100,7 +100,7 @@ class Offer extends PureComponent {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                    <div className={`property__avatar-wrapper ${offer.isHostPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
                       <img className="property__avatar user__avatar" src={offer.avatar} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
@@ -115,7 +115,7 @@ class Offer extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={availableReviews} />
-                  {isUserAuthorized && <CommentWrapped stars={stars} offerId={offerId} />}
+                  {isUserAuthorized && <CommentWrapped stars={stars} offerId={offer.id} />}
                 </section>
               </div>
             </div>
@@ -136,7 +136,7 @@ class Offer extends PureComponent {
 }
 
 Offer.propTypes = {
-  offer: OfferPropTуpes.isRequired,
+  offer: PropTypes.any.isRequired,
   offerId: PropTypes.string.isRequired,
   availableReviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
   nearOffers: PropTypes.array.isRequired,
@@ -145,7 +145,7 @@ Offer.propTypes = {
   loadNearOffersAction: PropTypes.func.isRequired,
   isOfferLoaded: PropTypes.bool.isRequired,
   isUserAuthorized: PropTypes.bool.isRequired,
-  offerFavoriteStatus: PropTypes.bool.isRequired,
+  offerFavoriteStatus: PropTypes.bool,
   changedFavoriteOffer: PropTypes.any.isRequired,
 };
 

@@ -27,7 +27,7 @@ const Main = (props) => {
       <Header />
       <main className={`page__main page__main--index ${!haveCityOffers ? `page__main--index-empty` : ``}`}>
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesList cities={cities} activeCity={activeCity} handleCityClick={changeCityAction}/>
+        <CitiesList cities={cities} activeCity={activeCity} onCityClick={changeCityAction}/>
         <div className="cities">
           <div className={`cities__places-container ${!haveCityOffers ? `cities__places-container--empty` : ``} container`}>
             {haveCityOffers ? (
@@ -35,7 +35,7 @@ const Main = (props) => {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{cityOffers.length} places to stay in {activeCity}</b>
-                  <SortingListWrapped handleSortingClick={changeSortingAction} activeSorting={activeSorting} />
+                  <SortingListWrapped onSortingClick={changeSortingAction} activeSorting={activeSorting} />
                   <div className="cities__places-list places__list tabs__content">
                     <OffersList offers={sortedOffers} />
                   </div>
@@ -50,6 +50,18 @@ const Main = (props) => {
       </main>
     </div>
   );
+};
+
+Main.propTypes = {
+  offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
+  activeCity: PropTypes.string.isRequired,
+  changeCityAction: PropTypes.func.isRequired,
+  activeSorting: PropTypes.string.isRequired,
+  changeSortingAction: PropTypes.func.isRequired,
+  sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  isOffersLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -69,18 +81,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeSorting(type));
   },
 });
-
-Main.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
-  cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
-  activeCity: PropTypes.string.isRequired,
-  changeCityAction: PropTypes.func.isRequired,
-  activeSorting: PropTypes.string.isRequired,
-  changeSortingAction: PropTypes.func.isRequired,
-  sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
-  cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
-  isOffersLoaded: PropTypes.bool.isRequired,
-};
 
 export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

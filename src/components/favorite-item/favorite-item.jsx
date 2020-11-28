@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {ClassNameType, OfferCardType} from "../../const";
 import {OfferCard} from "../offer-card/offer-card";
 
-
 const FavoriteItem = (props) => {
   const {city, offers} = props;
 

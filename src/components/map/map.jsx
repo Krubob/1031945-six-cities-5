@@ -18,25 +18,6 @@ class Map extends PureComponent {
     this.pins = [];
   }
 
-  addPinsToMap(offers) {
-    const {activeOffer} = this.props;
-
-    offers.forEach((offer) => {
-      const activeIcon = activeOffer === offer.id ? this.activePinIcon : this.pinIcon;
-      const pin = leaflet
-        .marker(offer.coordinates, {icon: activeIcon})
-        .addTo(this.map);
-      this.pins = [...this.pins, pin];
-    });
-  }
-
-  removePinsMap() {
-    this.pins.forEach((it) => {
-      it.removeFrom(this.map);
-    });
-    this.pins = [];
-  }
-
   componentDidMount() {
     const {offers} = this.props;
 
@@ -64,7 +45,7 @@ class Map extends PureComponent {
     })
     .addTo(this.map);
 
-    this.addPinsToMap(offers);
+    this._addPinsToMap(offers);
   }
 
   componentDidUpdate(prevProps) {
@@ -72,7 +53,7 @@ class Map extends PureComponent {
     const currentCoords = getCoordByCity(cities, activeCity);
 
     if (activeCity !== prevProps.activeCity) {
-      this.removePinsMap();
+      this._removePinsMap();
       this.map.remove();
 
       this.map = leaflet.map(`map`, {
@@ -90,7 +71,26 @@ class Map extends PureComponent {
     .addTo(this.map);
     }
 
-    this.addPinsToMap(offers);
+    this._addPinsToMap(offers);
+  }
+
+  _addPinsToMap(offers) {
+    const {activeOffer} = this.props;
+
+    offers.forEach((offer) => {
+      const activeIcon = activeOffer === offer.id ? this.activePinIcon : this.pinIcon;
+      const pin = leaflet
+        .marker(offer.coordinates, {icon: activeIcon})
+        .addTo(this.map);
+      this.pins = [...this.pins, pin];
+    });
+  }
+
+  _removePinsMap() {
+    this.pins.forEach((it) => {
+      it.removeFrom(this.map);
+    });
+    this.pins = [];
   }
 
   render() {
@@ -102,13 +102,6 @@ class Map extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
-  cities: citiesSelector(state),
-  activeOffer: activeOfferSelector(state),
-  activeCity: activeCitySelector(state),
-});
-
-
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   className: PropTypes.string.isRequired,
@@ -116,6 +109,12 @@ Map.propTypes = {
   cities: PropTypes.arrayOf(cityPropTypes.isRequired),
   activeCity: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  cities: citiesSelector(state),
+  activeOffer: activeOfferSelector(state),
+  activeCity: activeCitySelector(state),
+});
 
 export {Map};
 export default connect(mapStateToProps, null)(Map);

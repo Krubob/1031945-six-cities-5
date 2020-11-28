@@ -139,12 +139,12 @@ export const login = ({email, password}) => (dispatch, getState, api) => (
     })
 );
 
-export const sendReview = ({rating, review: comment, offerId, handleResponseWaitingChange}) => (dispatch, getState, api) => (
+export const sendReview = ({rating, review: comment, offerId, onResponseWaitingChange}) => (dispatch, getState, api) => (
   api.post(`${APIPath.REVIEWS}/${offerId}`, {comment, rating})
   .then(({data}) => {
     const reviews = getTemplateReviews(data);
     dispatch(loadReviewsSuccess(reviews));
-    handleResponseWaitingChange(false);
+    onResponseWaitingChange(false);
     return ResponseType.SUCCESS;
   })
   .catch((err) => {

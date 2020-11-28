@@ -17,7 +17,7 @@ class Favorites extends PureComponent {
   }
 
   render() {
-    const {activeCity, favoriteOffers, isFavoriteOffersLoaded, favoriteOffersByCity} = this.props;
+    const {favoriteOffers, isFavoriteOffersLoaded, favoriteOffersByCity} = this.props;
     const isFavoriteOffers = favoriteOffers.length > 0;
 
     return !isFavoriteOffersLoaded ? (
@@ -31,7 +31,7 @@ class Favorites extends PureComponent {
               <section className="favorites">
                 <h1 className="favorites__title">Saved listing</h1>
                 <ul className="favorites__list">
-                  <FavoriteList activeCity={activeCity} favoriteOffersByCity={favoriteOffersByCity} />
+                  <FavoriteList favoriteOffersByCity={favoriteOffersByCity} />
                 </ul>
               </section>
             </div>

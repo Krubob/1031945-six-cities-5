@@ -23,7 +23,7 @@ const withSortingList = (Component) => {
         <Component
           {...this.props}
           isOpened={isOpened}
-          handleSortingToggle={this.handleSortingToggle}
+          onSortingToggle={this.handleSortingToggle}
         />
       );
     }

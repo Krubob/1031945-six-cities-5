@@ -4,14 +4,14 @@ import SortingItem from "../sorting-item/sorting-item";
 import {sortingTypes} from "../../const";
 
 const SortingList = (props) => {
-  const {isOpened, activeSorting, handleSortingToggle, handleSortingClick} = props;
+  const {isOpened, activeSorting, onSortingToggle, onSortingClick} = props;
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex="0"
         onClick={()=>{
-          handleSortingToggle(isOpened);
+          onSortingToggle(isOpened);
         }}
       >
                   Popular
@@ -21,7 +21,7 @@ const SortingList = (props) => {
       </span>
       <ul className={`places__options places__options--custom ${isOpened ? `places__options--opened` : ``}`}>
         {sortingTypes.map((type, i) => (
-          <SortingItem key={`type-${i}`} type={type} activeSorting={activeSorting} handleSortingClick={handleSortingClick}/>
+          <SortingItem key={`type-${i}`} type={type} activeSorting={activeSorting} onSortingClick={onSortingClick}/>
         ))
         }
       </ul>
@@ -32,8 +32,8 @@ const SortingList = (props) => {
 SortingList.propTypes = {
   isOpened: PropTypes.bool.isRequired,
   activeSorting: PropTypes.string.isRequired,
-  handleSortingClick: PropTypes.func.isRequired,
-  handleSortingToggle: PropTypes.func.isRequired,
+  onSortingClick: PropTypes.func.isRequired,
+  onSortingToggle: PropTypes.func.isRequired,
 };
 
 export default SortingList;

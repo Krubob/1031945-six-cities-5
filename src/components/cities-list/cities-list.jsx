@@ -4,7 +4,7 @@ import CityItem from "../city-item/city-item";
 import {cityPropTypes} from "../../propTypes";
 
 const CitiesList = (props) => {
-  const {cities, activeCity, handleCityClick} = props;
+  const {cities, activeCity, onCityClick} = props;
 
   return (
     <div className="tabs">
@@ -16,7 +16,7 @@ const CitiesList = (props) => {
                 key={`city-${city.id}`}
                 name={city.name}
                 isActive={city.name === activeCity}
-                handleCityClick={handleCityClick}
+                onCityClick={onCityClick}
               />
             ))
           }
@@ -29,7 +29,7 @@ const CitiesList = (props) => {
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
   activeCity: PropTypes.string.isRequired,
-  handleCityClick: PropTypes.func.isRequired,
+  onCityClick: PropTypes.func.isRequired,
 };
 
 export default CitiesList;

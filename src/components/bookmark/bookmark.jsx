@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import {updateOfferFavoriteStatus, fetchFavoriteOffers} from "../../store/api-actions";
 import {isUserAuthorizedSelector} from "../../store/selectors";
-import {BookmarkType, Path} from "../../const";
+import {BookmarkType, BookmarkImageSize, Path} from "../../const";
+import browserHistory from "../../browser-history";
 
 const Bookmark = (props) => {
   const {offerId, isFavorite, changeFavoriteOfferStatusAction, className, bookmarkType, isUserAuthorized} = props;
@@ -13,32 +13,25 @@ const Bookmark = (props) => {
 
   const handleFavoriteBtnClick = (evt) => {
     evt.preventDefault();
-    changeFavoriteOfferStatusAction(offerId, !isFavorite);
+
+    if (isUserAuthorized) {
+      changeFavoriteOfferStatusAction(offerId, !isFavorite);
+    } else {
+      browserHistory.push(Path.LOGIN);
+    }
   };
 
-  return isUserAuthorized ? (
+  return (
     <button
       className={`${className}__bookmark-button ${isFavorite ? `${className}__bookmark-button--active` : ``} button`}
       type="button"
       onClick={handleFavoriteBtnClick}
     >
-      <svg className={`${className}__bookmark-icon`} width={isPropertyBookmarkType ? `31` : `18`} height={isPropertyBookmarkType ? `33` : `19`}>
+      <svg className={`${className}__bookmark-icon`} width={isPropertyBookmarkType ? BookmarkImageSize.property.width : BookmarkImageSize.placeCard.width} height={isPropertyBookmarkType ? BookmarkImageSize.property.height : BookmarkImageSize.placeCard.height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">{`${isFavorite ? `In` : `To`} bookmarks`}</span>
     </button>
-  ) : (
-    <Link
-      to={Path.LOGIN}
-      className={`${className}__bookmark-button ${isFavorite ? `${className}__bookmark-button--active` : ``} button`}
-      type="button"
-      onClick={handleFavoriteBtnClick}
-    >
-      <svg className={`${className}__bookmark-icon`} width={isPropertyBookmarkType ? `31` : `18`} height={isPropertyBookmarkType ? `33` : `19`}>
-        <use xlinkHref="#icon-bookmark"></use>
-      </svg>
-      <span className="visually-hidden">{`${isFavorite ? `In` : `To`} bookmarks`}</span>
-    </Link>
   );
 };
 

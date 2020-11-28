@@ -31,6 +31,13 @@ export const getOffersBySortType = (offers, sortingType) => {
   }
 };
 
+export const getFavoriteOffersByCity = (favoriteOffers) => {
+  return favoriteOffers.reduce((obj, curr) => {
+    obj[curr.city] = obj[curr.city] ? [...(obj[curr.city]), curr] : [curr];
+    return obj;
+  }, {});
+};
+
 export const getTemplateOffer = (data) => {
   return {
     id: String(data.id),

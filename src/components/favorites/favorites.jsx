@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import Header from "../header/header";
 import {OfferPropTуpes} from "../../propTypes";
 import {Path} from "../../const";
-import {activeCitySelector, favoriteOffersSelector, isFavoriteOffersLoadedSelector} from "../../store/selectors";
+import {activeCitySelector, favoriteOffersSelector, isDataLoadedSelector, favoriteOffersByCitySelector} from "../../store/selectors";
 import {fetchFavoriteOffers} from "../../store/api-actions";
 import FavoriteList from "../favorite-list/favorite-list";
 import FavoriteEmpty from "../favorite-empty/favorite-empty";
@@ -17,7 +17,7 @@ class Favorites extends PureComponent {
   }
 
   render() {
-    const {activeCity, favoriteOffers, isFavoriteOffersLoaded} = this.props;
+    const {activeCity, favoriteOffers, isFavoriteOffersLoaded, favoriteOffersByCity} = this.props;
     const isFavoriteOffers = favoriteOffers.length > 0;
 
     return !isFavoriteOffersLoaded ? (
@@ -31,7 +31,7 @@ class Favorites extends PureComponent {
               <section className="favorites">
                 <h1 className="favorites__title">Saved listing</h1>
                 <ul className="favorites__list">
-                  <FavoriteList activeCity={activeCity} favoriteOffers={favoriteOffers} />
+                  <FavoriteList activeCity={activeCity} favoriteOffersByCity={favoriteOffersByCity} />
                 </ul>
               </section>
             </div>
@@ -51,12 +51,14 @@ Favorites.propTypes = {
   loadFavoriteOffersAction: PropTypes.func.isRequired,
   activeCity: PropTypes.string.isRequired,
   isFavoriteOffersLoaded: PropTypes.bool.isRequired,
+  favoriteOffersByCity: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activeCity: activeCitySelector(state),
   favoriteOffers: favoriteOffersSelector(state),
-  isFavoriteOffersLoaded: isFavoriteOffersLoadedSelector(state),
+  isFavoriteOffersLoaded: isDataLoadedSelector(state),
+  favoriteOffersByCity: favoriteOffersByCitySelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

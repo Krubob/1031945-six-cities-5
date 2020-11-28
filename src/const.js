@@ -35,6 +35,17 @@ export const BookmarkType = {
   PLACE_CARD_BOOKMARK: `PLACE_CARD_BOOKMARK`
 };
 
+export const BookmarkImageSize = {
+  property: {
+    width: 31,
+    height: 33,
+  },
+  placeCard: {
+    width: 18,
+    height: 19,
+  },
+};
+
 export const stars = [
   {
     value: `5`,

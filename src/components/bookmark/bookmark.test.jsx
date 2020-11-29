@@ -9,7 +9,7 @@ import {testInitialState} from "../../test-data";
 const mockStore = configureMockStore();
 const store = mockStore(testInitialState);
 
-describe(`Bookmark should render correctly`, () => {
+describe(`Bookmark snapshot`, () => {
   it(`Should Bookmark render correctly when isUserAuthorized={false} and isFavorite={false}`, () => {
     const tree = renderer
       .create(

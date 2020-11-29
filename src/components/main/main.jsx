@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {OfferPropTуpes, cityPropTypes} from "../../propTypes";
+import {OfferPropTуpes} from "../../propTypes";
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import SortingList from "../sorting-list/sorting-list";
@@ -53,8 +53,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
-  cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeCity: PropTypes.string.isRequired,
   changeCityAction: PropTypes.func.isRequired,
   activeSorting: PropTypes.string.isRequired,

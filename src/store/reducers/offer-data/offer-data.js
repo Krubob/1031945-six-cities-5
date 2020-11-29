@@ -1,6 +1,6 @@
 import {extend, getOffersWithNewFavoriteStatus} from "../../../utils";
 import {ActionType} from "../../action";
-import cities from "../../../mocks/cities";
+import {cities, CityType, SortingType} from "../../../const";
 
 const initialState = {
   cities,
@@ -11,8 +11,8 @@ const initialState = {
   nearOffers: [],
   favoriteOffers: [],
   changedFavoriteOffer: {},
-  activeCity: `Paris`,
-  activeSorting: `Popular`,
+  activeCity: CityType.PARIS,
+  activeSorting: SortingType.POPULAR,
   isLoading: false,
   error: null,
 };

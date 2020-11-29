@@ -1,17 +1,13 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {OfferPropTуpes, cityPropTypes} from "../../propTypes";
-import {getCoordByCity} from "../../utils";
+import {OfferPropTуpes} from "../../propTypes";
 import leaflet from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import {citiesSelector, activeCitySelector, activeOfferSelector} from "../../store/selectors";
+import {activeOfferSelector} from "../../store/selectors";
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.defaultCoords = getCoordByCity(this.props.cities, this.props.activeCity);
-    this.zoom = 12;
     this.pinIcon = undefined;
     this.activePinIcon = undefined;
     this.iconSize = [30, 30];
@@ -20,6 +16,8 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const {offers} = this.props;
+    const defaultCoords = offers[0].cityCoordinates;
+    const zoom = offers[0].cityZoom;
 
     this.pinIcon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -32,12 +30,12 @@ class Map extends PureComponent {
     });
 
     this.map = leaflet.map(`map`, {
-      center: this.defaultCoords,
-      zoom: this.zoom,
+      center: defaultCoords,
+      zoom,
       zoomControl: false,
       marker: true
     });
-    this.map.setView(this.defaultCoords, this.zoom);
+    this.map.setView(defaultCoords, zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -48,29 +46,12 @@ class Map extends PureComponent {
     this._addPinsToMap(offers);
   }
 
-  componentDidUpdate(prevProps) {
-    const {offers, cities, activeCity} = this.props;
-    const currentCoords = getCoordByCity(cities, activeCity);
-
-    if (activeCity !== prevProps.activeCity) {
-      this._removePinsMap();
-      this.map.remove();
-
-      this.map = leaflet.map(`map`, {
-        center: currentCoords,
-        zoom: this.zoom,
-        zoomControl: false,
-        marker: true
-      });
-      this.map.setView(currentCoords, this.zoom);
-
-      leaflet
-    .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-    })
-    .addTo(this.map);
-    }
-
+  componentDidUpdate() {
+    const {offers} = this.props;
+    const currentCoords = offers[0].cityCoordinates;
+    const currentZoom = offers[0].cityZoom;
+    this.map.setView(currentCoords, currentZoom);
+    this._removePinsMap();
     this._addPinsToMap(offers);
   }
 
@@ -106,14 +87,10 @@ Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
   className: PropTypes.string.isRequired,
   activeOffer: PropTypes.string.isRequired,
-  cities: PropTypes.arrayOf(cityPropTypes.isRequired),
-  activeCity: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  cities: citiesSelector(state),
   activeOffer: activeOfferSelector(state),
-  activeCity: activeCitySelector(state),
 });
 
 export {Map};

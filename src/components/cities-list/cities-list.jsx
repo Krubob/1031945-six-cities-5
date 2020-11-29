@@ -11,11 +11,11 @@ const CitiesList = (props) => {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {
-            cities.map((city) => (
+            cities.map((city, i) => (
               <CityItem
-                key={`city-${city.id}`}
-                name={city.name}
-                isActive={city.name === activeCity}
+                key={`city-${i}`}
+                name={city}
+                isActive={city === activeCity}
                 onCityClick={onCityClick}
               />
             ))
@@ -27,7 +27,7 @@ const CitiesList = (props) => {
 };
 
 CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeCity: PropTypes.string.isRequired,
   onCityClick: PropTypes.func.isRequired,
 };

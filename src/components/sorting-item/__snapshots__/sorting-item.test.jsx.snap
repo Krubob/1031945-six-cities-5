@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortingItem snapshot SortingItem should render correctly when type is equal activeSorting 1`] = `
+<li
+  className="places__option places__option--active"
+  onClick={[Function]}
+  tabIndex="0"
+>
+  Popular
+</li>
+`;
+
+exports[`SortingItem snapshot SortingItem should render correctly when type not equal activeSorting 1`] = `
+<li
+  className="places__option "
+  onClick={[Function]}
+  tabIndex="0"
+>
+  Top rated first
+</li>
+`;

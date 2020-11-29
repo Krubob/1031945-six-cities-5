@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import CityItem from "../city-item/city-item";
-import {cityPropTypes} from "../../propTypes";
 
 const CitiesList = (props) => {
   const {cities, activeCity, onCityClick} = props;

@@ -7,7 +7,7 @@ import {BookmarkType, BookmarkImageSize, Path} from "../../const";
 import browserHistory from "../../browser-history";
 
 const Bookmark = (props) => {
-  const {offerId, isFavorite, changeFavoriteOfferStatusAction, className, bookmarkType, isUserAuthorized} = props;
+  const {offerId, isFavorite, onChangeFavoriteOfferStatusAction, className, bookmarkType, isUserAuthorized} = props;
 
   const isPropertyBookmarkType = bookmarkType === BookmarkType.PROPERTY_BOOKMARK;
 
@@ -15,7 +15,7 @@ const Bookmark = (props) => {
     evt.preventDefault();
 
     if (isUserAuthorized) {
-      changeFavoriteOfferStatusAction(offerId, !isFavorite);
+      onChangeFavoriteOfferStatusAction(offerId, !isFavorite);
     } else {
       browserHistory.push(Path.LOGIN);
     }
@@ -38,7 +38,7 @@ const Bookmark = (props) => {
 Bookmark.propTypes = {
   offerId: PropTypes.string.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  changeFavoriteOfferStatusAction: PropTypes.func.isRequired,
+  onChangeFavoriteOfferStatusAction: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   bookmarkType: PropTypes.string.isRequired,
   isUserAuthorized: PropTypes.bool.isRequired,
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeFavoriteOfferStatusAction(offerId, favoriteStatus) {
+  onChangeFavoriteOfferStatusAction(offerId, favoriteStatus) {
     dispatch(updateOfferFavoriteStatus(offerId, favoriteStatus));
     dispatch(fetchFavoriteOffers());
   },

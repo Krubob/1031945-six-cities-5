@@ -77,7 +77,7 @@ const offers = [
   },
 ];
 
-it(`OfferCard should render correctly`, () => {
+it(`OffersList should render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>

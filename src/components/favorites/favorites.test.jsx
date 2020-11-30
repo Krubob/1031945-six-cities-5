@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import configureMockStore from "redux-mock-store";
 import {MemoryRouter} from "react-router-dom";
 import {Provider} from "react-redux";
-import Favorites from "./favorites";
+import {Favorites} from "./favorites";
 import {testInitialState} from "../../test-data";
 
 const mockStore = configureMockStore();
@@ -29,7 +29,7 @@ const favoriteOffersByCity = {
       cityZoom: 13,
       avatar: `avatar-url`,
       name: `host-name`,
-      description: [`description`],
+      description: `description`,
       isHostPro: true,
     },
     {
@@ -51,7 +51,7 @@ const favoriteOffersByCity = {
       cityZoom: 13,
       avatar: `avatar-url`,
       name: `host-name`,
-      description: [`description`],
+      description: `description`,
       isHostPro: true,
     },
   ],
@@ -75,12 +75,11 @@ const favoriteOffersByCity = {
       cityZoom: 13,
       avatar: `avatar-url`,
       name: `host-name`,
-      description: [`description`],
+      description: `description`,
       isHostPro: true,
     },
   ],
 };
-
 const emptyFavoriteOffersByCity = {};
 
 describe(`Favorites snapshot`, () => {

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Header from "../header/header";
 import {Path} from "../../const";
-import {activeCitySelector, isDataLoadedSelector, favoriteOffersByCitySelector} from "../../store/selectors";
+import {isDataLoadedSelector, favoriteOffersByCitySelector} from "../../store/selectors";
 import {fetchFavoriteOffers} from "../../store/api-actions";
 import FavoriteList from "../favorite-list/favorite-list";
 import FavoriteEmpty from "../favorite-empty/favorite-empty";
@@ -47,13 +47,11 @@ class Favorites extends PureComponent {
 
 Favorites.propTypes = {
   loadFavoriteOffersAction: PropTypes.func.isRequired,
-  activeCity: PropTypes.string.isRequired,
   isFavoriteOffersLoaded: PropTypes.bool.isRequired,
   favoriteOffersByCity: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: activeCitySelector(state),
   isFavoriteOffersLoaded: isDataLoadedSelector(state),
   favoriteOffersByCity: favoriteOffersByCitySelector(state),
 });

@@ -4,7 +4,7 @@ import configureMockStore from "redux-mock-store";
 import {MemoryRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {testInitialState} from "../../test-data";
-import Offer from "./offer";
+import {Offer} from "./offer";
 
 const mockStore = configureMockStore();
 const store = mockStore(testInitialState);
@@ -27,13 +27,13 @@ const offer = {
   cityZoom: 13,
   avatar: `avatar-url`,
   name: `host-name`,
-  description: [`description`],
+  description: `description`,
   isHostPro: true,
 };
 const reviews = [
   {
     id: 1,
-    date: `date`,
+    date: `2020-10-06`,
     comment: `comment`,
     rating: 4,
     user: {

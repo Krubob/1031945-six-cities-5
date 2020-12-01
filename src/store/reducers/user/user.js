@@ -31,4 +31,4 @@ const user = (state = initialState, action) => {
   }
 };
 
-export {user};
+export {user, initialState};

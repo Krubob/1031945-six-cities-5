@@ -87,16 +87,6 @@ const offerData = (state = initialState, action) => {
         isLoading: null,
         error: action.error
       });
-    case ActionType.CHANGE_FAVORITE_OFFER_STATUS:
-      return extend(state, {
-        offers: getOffersWithNewFavoriteStatus(state.offers, action.payload),
-        changedFavoriteOffer: action.payload,
-      });
-    case ActionType.CHANGE_FAVORITE_NEAR_OFFER_STATUS:
-      return extend(state, {
-        nearOffers: getOffersWithNewFavoriteStatus(state.nearOffers, action.payload),
-        changedFavoriteOffer: action.payload,
-      });
     case ActionType.LOAD_FAVORITE_OFFERS_SUCCESS:
       return extend(state, {
         isLoading: false,
@@ -111,9 +101,19 @@ const offerData = (state = initialState, action) => {
         isLoading: null,
         error: action.error
       });
+    case ActionType.CHANGE_FAVORITE_OFFER_STATUS:
+      return extend(state, {
+        offers: getOffersWithNewFavoriteStatus(state.offers, action.payload),
+        changedFavoriteOffer: action.payload,
+      });
+    case ActionType.CHANGE_FAVORITE_NEAR_OFFER_STATUS:
+      return extend(state, {
+        nearOffers: getOffersWithNewFavoriteStatus(state.nearOffers, action.payload),
+        changedFavoriteOffer: action.payload,
+      });
     default:
       return state;
   }
 };
 
-export {offerData};
+export {offerData, initialState};

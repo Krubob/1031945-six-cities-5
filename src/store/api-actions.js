@@ -104,7 +104,7 @@ export const updateOfferFavoriteStatus = (offerId, favoriteStatus) => (dispatch,
 export const checkAuth = () => (dispatch, getState, api) => {
   dispatch(loadAuthDataRequest());
 
-  api.get(APIPath.LOGIN)
+  api.get(APIPath.LOGI)
     .then((response) => {
       if (response.status !== HttpCode.UNAUTHORIZED) {
         const authData = getTemplateAuthData(response.data);
@@ -115,7 +115,7 @@ export const checkAuth = () => (dispatch, getState, api) => {
       }
     })
     .catch((err) => {
-      loadAuthDataFailure(err);
+      dispatch(loadAuthDataFailure(err));
       swal(`Ошибка аутентификации`, String(err), `error`);
       return err;
     });

@@ -7,7 +7,7 @@ import Favorites from "../favorites/favorites";
 import Offer from "../offer/offer";
 import Login from "../login/login";
 import {Path} from "../../const";
-import {OfferPropTуpes} from "../../propTypes";
+import {OfferPropTypes} from "../../propTypes";
 import {offersSelector, isUserAuthorizedSelector} from "../../store/selectors";
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
@@ -46,7 +46,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropTуpes.isRequired).isRequired,
+  offers: PropTypes.arrayOf(OfferPropTypes.isRequired).isRequired,
   isUserAuthorized: PropTypes.bool.isRequired,
 };
 

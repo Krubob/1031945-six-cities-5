@@ -18,7 +18,7 @@ exports[`App snapshot Should App render correctly 1`] = `
         >
           <a
             className="header__logo-link"
-            href="/login"
+            href="/"
             onClick={[Function]}
           >
             <img

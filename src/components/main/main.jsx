@@ -1,11 +1,11 @@
 import React, {Fragment} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {OfferPropTуpes} from "../../propTypes";
+import {OfferPropTypes} from "../../propTypes";
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import SortingList from "../sorting-list/sorting-list";
-import withSortingList from "../hocs/with-sorting-list/with-sorting-list";
+import withSortingList from "../../hocs/with-sorting-list/with-sorting-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
@@ -58,8 +58,8 @@ Main.propTypes = {
   changeCityAction: PropTypes.func.isRequired,
   activeSorting: PropTypes.string.isRequired,
   changeSortingAction: PropTypes.func.isRequired,
-  sortedOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
-  cityOffers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  sortedOffers: PropTypes.arrayOf(OfferPropTypes.isRequired),
+  cityOffers: PropTypes.arrayOf(OfferPropTypes.isRequired),
   isOffersLoaded: PropTypes.bool.isRequired,
 };
 

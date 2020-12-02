@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {REVIEW_TEXT} from "../../../const";
+import {REVIEW_TEXT} from "../../const";
 
 const withComment = (Component) => {
   class WithComment extends PureComponent {

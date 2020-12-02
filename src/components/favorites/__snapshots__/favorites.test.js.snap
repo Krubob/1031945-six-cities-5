@@ -24,7 +24,7 @@ exports[`Favorites snapshot Should Favorites render correctly when isFavoriteOff
         >
           <a
             className="header__logo-link"
-            href="/login"
+            href="/"
             onClick={[Function]}
           >
             <img

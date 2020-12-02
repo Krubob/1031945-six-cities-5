@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {Path, BookmarkType} from "../../const";
 import {RATING_MULTIPLIER, ClassNameType, OfferCardType} from '../../const';
-import {OfferPropTуpes} from "../../propTypes";
+import {OfferPropTypes} from "../../propTypes";
 import {changeActiveOffer} from "../../store/action";
 import Bookmark from "../bookmark/bookmark";
 
@@ -51,7 +51,7 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  offer: OfferPropTуpes.isRequired,
+  offer: OfferPropTypes.isRequired,
   changeActiveOfferAction: PropTypes.func,
   className: PropTypes.string.isRequired,
   offerCardType: PropTypes.string.isRequired,

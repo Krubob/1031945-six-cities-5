@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import FavoriteItem from "../favorite-item/favorite-item";
 
 const FavoriteList = (props) => {
-  const {favoriteOffers} = props;
-  const favoriteOffersByCity = {};
-  favoriteOffers.forEach((it) => {
-    favoriteOffersByCity[it.city] = favoriteOffersByCity[it.city] ? [...(favoriteOffersByCity[it.city]), it] : [it];
-  });
+  const {favoriteOffersByCity} = props;
 
   return (
     <Fragment>
@@ -19,7 +15,7 @@ const FavoriteList = (props) => {
 };
 
 FavoriteList.propTypes = {
-  favoriteOffers: PropTypes.array.isRequired,
+  favoriteOffersByCity: PropTypes.object.isRequired,
 };
 
 export default FavoriteList;

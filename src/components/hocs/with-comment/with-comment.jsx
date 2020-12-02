@@ -53,10 +53,10 @@ const withComment = (Component) => {
           review={review}
           isValid={isValid}
           isDisabledSubmitBtn={isDisabledSubmitBtn}
-          handleResponseWaitingChange={this.handleResponseWaitingChange}
-          handleFormDataClear={this.handleFormDataClear}
-          handleInputStarClick={this.handleInputStarClick}
-          handleTextAreaChange={this.handleTextAreaChange}
+          onResponseWaitingChange={this.handleResponseWaitingChange}
+          onFormDataClear={this.handleFormDataClear}
+          onInputStarClick={this.handleInputStarClick}
+          onTextAreaChange={this.handleTextAreaChange}
         />
       );
     }

@@ -1,22 +1,21 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import CityItem from "../city-item/city-item";
-import {cityPropTypes} from "../../propTypes";
 
 const CitiesList = (props) => {
-  const {cities, activeCity, handleCityClick} = props;
+  const {cities, activeCity, onCityClick} = props;
 
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {
-            cities.map((city) => (
+            cities.map((city, i) => (
               <CityItem
-                key={`city-${city.id}`}
-                name={city.name}
-                isActive={city.name === activeCity}
-                handleCityClick={handleCityClick}
+                key={`city-${i}`}
+                name={city}
+                isActive={city === activeCity}
+                onCityClick={onCityClick}
               />
             ))
           }
@@ -27,9 +26,9 @@ const CitiesList = (props) => {
 };
 
 CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(cityPropTypes.isRequired).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeCity: PropTypes.string.isRequired,
-  handleCityClick: PropTypes.func.isRequired,
+  onCityClick: PropTypes.func.isRequired,
 };
 
 export default CitiesList;

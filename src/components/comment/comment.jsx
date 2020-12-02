@@ -13,36 +13,30 @@ class Comment extends PureComponent {
   }
 
   handleSubmit(evt) {
-    const {rating, review, offerId, sendReviewAction, handleFormDataClear, handleResponseWaitingChange} = this.props;
+    const {rating, review, offerId, sendReviewAction, onResponseWaitingChange, onFormDataClear} = this.props;
     evt.preventDefault();
 
-    handleResponseWaitingChange(true);
+    onResponseWaitingChange(true);
 
-    sendReviewAction({
-      rating,
-      review,
-      offerId,
-    },
-    handleResponseWaitingChange,
-    );
+    sendReviewAction({rating, review, offerId, onResponseWaitingChange});
 
-    handleFormDataClear();
+    onFormDataClear();
   }
 
   render() {
-    const {review, stars, rating, handleTextAreaChange, handleInputStarClick, isDisabledSubmitBtn} = this.props;
+    const {review, stars, rating, onTextAreaChange, onInputStarClick, isDisabledSubmitBtn} = this.props;
 
     return (
       <form className="reviews__form form" onSubmit={this.handleSubmit} action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {stars.map((star) => (
-            <RatingStar key={star.title} star={star} handleInputStarClick={handleInputStarClick} checked={rating === star.value} />
+            <RatingStar key={star.title} star={star} onInputStarClick={onInputStarClick} checked={rating === star.value} />
           ))}
         </div>
         <textarea
           className="reviews__textarea form__textarea"
-          onChange={handleTextAreaChange}
+          onChange={onTextAreaChange}
           id="review"
           name="review"
           placeholder="Tell how was your stay, what you like and what can be improved"
@@ -63,10 +57,10 @@ class Comment extends PureComponent {
 Comment.propTypes = {
   stars: PropTypes.arrayOf(StarPropTypes.isRequired),
   rating: PropTypes.string.isRequired,
-  handleTextAreaChange: PropTypes.func.isRequired,
-  handleInputStarClick: PropTypes.func.isRequired,
-  handleFormDataClear: PropTypes.func.isRequired,
-  handleResponseWaitingChange: PropTypes.func.isRequired,
+  onTextAreaChange: PropTypes.func.isRequired,
+  onInputStarClick: PropTypes.func.isRequired,
+  onFormDataClear: PropTypes.func.isRequired,
+  onResponseWaitingChange: PropTypes.func.isRequired,
   review: PropTypes.string.isRequired,
   offerId: PropTypes.string.isRequired,
   sendReviewAction: PropTypes.func.isRequired,

@@ -19,12 +19,25 @@ export const createAPI = (onUnauthorized) => {
   const onFail = (err) => {
     const {response} = err;
 
-    if (response.status === HttpCode.UNAUTHORIZED) {
-      onUnauthorized();
-      throw err;
+    if (response) {
+      if (response.status === HttpCode.UNAUTHORIZED) {
+        onUnauthorized();
+        throw err;
+      } else {
+        throw new Error(`${response.status}; text: ${response.statusText};
+      method: ${response.config.method};
+      url: ${response.config.url};
+      data-error: ${response.data.error}
+      `);
+      }
+    } else if (err.request) {
+      throw new Error(`${err.request}`);
+    } else {
+      throw new Error(
+          `Error message: ${err.message}.
+          Error config: ${err.config}`
+      );
     }
-
-    throw err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

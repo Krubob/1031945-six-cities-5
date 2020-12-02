@@ -8,10 +8,10 @@ import Map from "../map/map";
 import OffersList from "../offers-list/offers-list";
 import withComment from "../hocs/with-comment/with-comment";
 import {RATING_MULTIPLIER, ClassNameType, BookmarkType} from '../../const';
-import {OfferPropTуpes, ReviewPropTypes} from "../../propTypes";
+import {ReviewPropTypes} from "../../propTypes";
 import {stars} from "../../const";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
-import {offerSelector, nearOffersSelector, isOfferLoadedSelector, isUserAuthorizedSelector, getSortedReviewsSelector} from "../../store/selectors";
+import {offerSelector, nearOffersSelector, isOfferLoadedSelector, isUserAuthorizedSelector, getSortedReviewsSelector, changedFavoriteOfferSelector, offerFavoriteStatusSelector} from "../../store/selectors";
 import Bookmark from "../bookmark/bookmark";
 
 const CommentWrapped = withComment(Comment);
@@ -38,7 +38,7 @@ class Offer extends PureComponent {
   }
 
   render() {
-    const {offer, offerId, nearOffers, isOfferLoaded, isUserAuthorized, availableReviews} = this.props;
+    const {offer, nearOffers, isOfferLoaded, isUserAuthorized, availableReviews, offerFavoriteStatus, changedFavoriteOffer} = this.props;
 
     return !isOfferLoaded ? (
       <div>LOADING...</div>
@@ -63,7 +63,7 @@ class Offer extends PureComponent {
                   <h1 className="property__name">
                     {offer.title}
                   </h1>
-                  <Bookmark className={ClassNameType.PROPERTY} bookmarkType={BookmarkType.PROPERTY_BOOKMARK} offerId={offer.id} isFavorite={offer.isFavorite} />
+                  <Bookmark className={ClassNameType.PROPERTY} bookmarkType={BookmarkType.PROPERTY_BOOKMARK} offerId={offer.id} isFavorite={offer.id === changedFavoriteOffer.id ? offerFavoriteStatus : offer.isFavorite} />
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -100,7 +100,7 @@ class Offer extends PureComponent {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                    <div className={`property__avatar-wrapper ${offer.isHostPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
                       <img className="property__avatar user__avatar" src={offer.avatar} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
@@ -115,17 +115,17 @@ class Offer extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={availableReviews} />
-                  {isUserAuthorized && <CommentWrapped stars={stars} offerId={offerId} />}
+                  {isUserAuthorized && <CommentWrapped stars={stars} offerId={offer.id} />}
                 </section>
               </div>
             </div>
-            <Map offers={nearOffers} className={ClassNameType.PROPERTY} />
+            <Map offers={[offer, ...nearOffers]} className={ClassNameType.PROPERTY} />
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <OffersList offers={nearOffers} />
+                <OffersList offers={nearOffers}/>
               </div>
             </section>
           </div>
@@ -136,7 +136,7 @@ class Offer extends PureComponent {
 }
 
 Offer.propTypes = {
-  offer: OfferPropTуpes.isRequired,
+  offer: PropTypes.any.isRequired,
   offerId: PropTypes.string.isRequired,
   availableReviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
   nearOffers: PropTypes.array.isRequired,
@@ -145,6 +145,8 @@ Offer.propTypes = {
   loadNearOffersAction: PropTypes.func.isRequired,
   isOfferLoaded: PropTypes.bool.isRequired,
   isUserAuthorized: PropTypes.bool.isRequired,
+  offerFavoriteStatus: PropTypes.bool,
+  changedFavoriteOffer: PropTypes.any.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -153,6 +155,8 @@ const mapStateToProps = (state) => ({
   nearOffers: nearOffersSelector(state),
   isOfferLoaded: isOfferLoadedSelector(state),
   isUserAuthorized: isUserAuthorizedSelector(state),
+  changedFavoriteOffer: changedFavoriteOfferSelector(state),
+  offerFavoriteStatus: offerFavoriteStatusSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

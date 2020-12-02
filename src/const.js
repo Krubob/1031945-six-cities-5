@@ -35,6 +35,28 @@ export const BookmarkType = {
   PLACE_CARD_BOOKMARK: `PLACE_CARD_BOOKMARK`
 };
 
+export const BookmarkImageSize = {
+  property: {
+    width: 31,
+    height: 33,
+  },
+  placeCard: {
+    width: 18,
+    height: 19,
+  },
+};
+
+export const CityType = {
+  PARIS: `Paris`,
+  COLOGNE: `Cologne`,
+  BRUSSELS: `Brussels`,
+  AMSTERDAM: `Amsterdam`,
+  HAMBURG: `Hamburg`,
+  DUSSELDORF: `Dusseldorf`,
+};
+
+export const cities = [CityType.PARIS, CityType.COLOGNE, CityType.BRUSSELS, CityType.AMSTERDAM, CityType.HAMBURG, CityType.DUSSELDORF];
+
 export const stars = [
   {
     value: `5`,
@@ -58,14 +80,14 @@ export const stars = [
   },
 ];
 
-export const sortingTypes = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
-
 export const SortingType = {
   POPULAR: `Popular`,
   PRICE_LOW_TO_HIGH: `Price: low to high`,
   PRICE_HIGH_TO_LOW: `Price: high to low`,
   TOP_RATED: `Top rated first`,
 };
+
+export const sortingTypes = [SortingType.POPULAR, SortingType.PRICE_LOW_TO_HIGH, SortingType.PRICE_HIGH_TO_LOW, SortingType.TOP_RATED];
 
 export const RATING_MULTIPLIER = 20;
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
+import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import configureMockStore from "redux-mock-store";
 import {MemoryRouter} from "react-router-dom";
@@ -14,12 +14,12 @@ const store = mockStore(testInitialState);
 
 test(`should call onClick`, () => {
   const onChangeFavoriteOfferStatusAction = jest.fn();
-  const wrapper = shallow(
+  const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
           <Bookmark
             offerId={`1`}
-            isFavorite={false}
+            isFavorite={true}
             onChangeFavoriteOfferStatusAction={onChangeFavoriteOfferStatusAction}
             className={ClassNameType.PLACE_CARD}
             bookmarkType={BookmarkType.PLACE_CARD_BOOKMARK}

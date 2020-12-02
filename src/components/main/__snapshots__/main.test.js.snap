@@ -18,7 +18,7 @@ exports[`Main snapshot Main should render correctly with empty cityOffers 1`] = 
         >
           <a
             className="header__logo-link"
-            href="/login"
+            href="/"
             onClick={[Function]}
           >
             <img

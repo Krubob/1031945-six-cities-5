@@ -45,7 +45,7 @@ exports[`FavoriteItem should render correctly 1`] = `
         </a>
       </div>
       <div
-        className="undefined place-card__info"
+        className="favorites__card-info place-card__info"
       >
         <div
           className="place-card__price-wrapper"
@@ -152,7 +152,7 @@ exports[`FavoriteItem should render correctly 1`] = `
         </a>
       </div>
       <div
-        className="undefined place-card__info"
+        className="favorites__card-info place-card__info"
       >
         <div
           className="place-card__price-wrapper"
@@ -252,7 +252,7 @@ exports[`FavoriteItem should render correctly 1`] = `
         </a>
       </div>
       <div
-        className="undefined place-card__info"
+        className="favorites__card-info place-card__info"
       >
         <div
           className="place-card__price-wrapper"

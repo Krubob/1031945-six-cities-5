@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {ClassNameType, OfferCardType} from "../../const";
-import {OfferCard} from "../offer-card/offer-card";
+import OfferCard from "../offer-card/offer-card";
+import {OfferPropTypes} from "../../propTypes";
 
 const FavoriteItem = (props) => {
   const {city, offers} = props;
@@ -32,7 +33,7 @@ const FavoriteItem = (props) => {
 
 FavoriteItem.propTypes = {
   city: PropTypes.string.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(OfferPropTypes).isRequired,
 };
 
 export default FavoriteItem;

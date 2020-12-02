@@ -9,10 +9,10 @@ class Comment extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
   }
 
-  handleSubmit(evt) {
+  handleCommentSubmit(evt) {
     const {rating, review, offerId, sendReviewAction, onResponseWaitingChange, onFormDataClear} = this.props;
     evt.preventDefault();
 
@@ -27,7 +27,7 @@ class Comment extends PureComponent {
     const {review, stars, rating, onTextAreaChange, onInputStarClick, isDisabledSubmitBtn} = this.props;
 
     return (
-      <form className="reviews__form form" onSubmit={this.handleSubmit} action="#" method="post">
+      <form className="reviews__form form" onSubmit={this.handleCommentSubmit} action="#" method="post">
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {stars.map((star) => (

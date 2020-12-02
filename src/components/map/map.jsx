@@ -1,9 +1,10 @@
 import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {OfferPropTуpes} from "../../propTypes";
+import {OfferPropTypes} from "../../propTypes";
 import leaflet from 'leaflet';
 import {activeOfferSelector} from "../../store/selectors";
+import "leaflet/dist/leaflet.css";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -84,7 +85,7 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropTуpes.isRequired),
+  offers: PropTypes.arrayOf(OfferPropTypes.isRequired),
   className: PropTypes.string.isRequired,
   activeOffer: PropTypes.string.isRequired,
 };

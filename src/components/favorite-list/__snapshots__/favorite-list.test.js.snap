@@ -46,7 +46,7 @@ Array [
           </a>
         </div>
         <div
-          className="undefined place-card__info"
+          className="favorites__card-info place-card__info"
         >
           <div
             className="place-card__price-wrapper"
@@ -153,7 +153,7 @@ Array [
           </a>
         </div>
         <div
-          className="undefined place-card__info"
+          className="favorites__card-info place-card__info"
         >
           <div
             className="place-card__price-wrapper"
@@ -277,7 +277,7 @@ Array [
           </a>
         </div>
         <div
-          className="undefined place-card__info"
+          className="favorites__card-info place-card__info"
         >
           <div
             className="place-card__price-wrapper"

@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import configureMockStore from "redux-mock-store";
 import {MemoryRouter} from "react-router-dom";
 import {Provider} from "react-redux";
-import Header from "./header";
+import {Header} from "./header";
 import {testInitialState} from "../../test-data";
 
 const mockStore = configureMockStore();

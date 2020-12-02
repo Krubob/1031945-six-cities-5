@@ -6,7 +6,6 @@ import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {createAPI} from "./services/api";
 import App from "./components/app/app";
-import reviews from "./mocks/reviews";
 import rootReducer from "./store/reducers/root-reducer";
 import {loadAuthDataSuccess} from "./store/action";
 import {AuthorizationStatus} from "./const";
@@ -32,9 +31,7 @@ Promise.all([
   .then(() => {
     ReactDOM.render(
         <Provider store={store}>
-          <App
-            reviews={reviews}
-          />
+          <App />
         </Provider>,
         document.querySelector(`#root`)
     );

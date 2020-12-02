@@ -27,7 +27,7 @@ const OfferCard = (props) => {
           <img className="place-card__image" src={offer.image} width={isFavoriteCardType ? `150` : `260`} height={isFavoriteCardType ? `110` : `200`} alt="Place image" />
         </Link>
       </div>
-      <div className={`${isFavoriteCardType ? ClassNameType.FAVORITES__CARD_INFO : ``} place-card__info`}>
+      <div className={`${isFavoriteCardType ? ClassNameType.FAVORITES_CARD_INFO : ``} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.cost}</b>
@@ -52,7 +52,7 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offer: OfferPropTypes.isRequired,
-  changeActiveOfferAction: PropTypes.func,
+  changeActiveOfferAction: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
   offerCardType: PropTypes.string.isRequired,
 };

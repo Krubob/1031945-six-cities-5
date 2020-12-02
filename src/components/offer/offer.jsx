@@ -8,7 +8,7 @@ import Map from "../map/map";
 import OffersList from "../offers-list/offers-list";
 import withComment from "../../hocs/with-comment/with-comment";
 import {RATING_MULTIPLIER, ClassNameType, BookmarkType, stars} from '../../const';
-import {ReviewPropTypes} from "../../propTypes";
+import {ReviewPropTypes, OfferPropTypes} from "../../propTypes";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
 import {offerSelector, nearOffersSelector, isOfferLoadedSelector, isUserAuthorizedSelector, getSortedReviewsSelector, changedFavoriteOfferSelector, offerFavoriteStatusSelector} from "../../store/selectors";
 import Bookmark from "../bookmark/bookmark";
@@ -135,10 +135,10 @@ class Offer extends PureComponent {
 }
 
 Offer.propTypes = {
-  offer: PropTypes.any.isRequired,
+  offer: OfferPropTypes.isRequired,
   offerId: PropTypes.string.isRequired,
   availableReviews: PropTypes.arrayOf(ReviewPropTypes.isRequired).isRequired,
-  nearOffers: PropTypes.array.isRequired,
+  nearOffers: PropTypes.arrayOf(OfferPropTypes).isRequired,
   loadOfferAction: PropTypes.func.isRequired,
   loadReviewsAction: PropTypes.func.isRequired,
   loadNearOffersAction: PropTypes.func.isRequired,

@@ -6,18 +6,21 @@ import {SortingType} from "../../const";
 
 configure({adapter: new Adapter()});
 
-test(`should call onSortingToggle`, () => {
-  const onSortingClick = jest.fn();
-  const onSortingToggle = jest.fn();
-  const wrapper = shallow(
-      <SortingList
-        isOpened={false}
-        activeSorting={SortingType.TOP_RATED}
-        onSortingToggle={onSortingToggle}
-        onSortingClick={onSortingClick}
-      />
-  );
+describe(`e2e test: SortingList component`, () => {
+  it(`should call onSortingToggle with isOpened`, () => {
+    const onSortingClick = jest.fn();
+    const onSortingToggle = jest.fn();
+    const wrapper = shallow(
+        <SortingList
+          isOpened={true}
+          activeSorting={SortingType.TOP_RATED}
+          onSortingToggle={onSortingToggle}
+          onSortingClick={onSortingClick}
+        />
+    );
 
-  wrapper.find(`span.places__sorting-type`).simulate(`click`);
-  expect(onSortingToggle).toHaveBeenCalledTimes(1);
+    wrapper.find(`span.places__sorting-type`).simulate(`click`);
+    expect(onSortingToggle).toHaveBeenCalledTimes(1);
+    expect(onSortingToggle.mock.calls[0][0]).toBe(true);
+  });
 });

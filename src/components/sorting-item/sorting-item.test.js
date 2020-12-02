@@ -1,14 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import SortingItem from "./sorting-item";
+import {SortingType} from "../../const";
 
 describe(`SortingItem snapshot`, () => {
   it(`SortingItem should render correctly when type is equal activeSorting`, () => {
     const tree = renderer
     .create(
         <SortingItem
-          type={`Popular`}
-          activeSorting={`Popular`}
+          type={SortingType.POPULAR}
+          activeSorting={SortingType.POPULAR}
           onSortingClick={()=>{}}
         />
     )
@@ -20,8 +21,8 @@ describe(`SortingItem snapshot`, () => {
     const tree = renderer
     .create(
         <SortingItem
-          type={`Top rated first`}
-          activeSorting={`Popular`}
+          type={SortingType.TOP_RATED}
+          activeSorting={SortingType.POPULAR}
           onSortingClick={()=>{}}
         />
     )

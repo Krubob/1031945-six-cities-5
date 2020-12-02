@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import SortingList from "./sorting-list";
+import {SortingType} from "../../const";
 
 describe(`SortingList snapshot`, () => {
   it(`SortingList should render correctly when the sorting is opened`, () => {
@@ -8,7 +9,7 @@ describe(`SortingList snapshot`, () => {
     .create(
         <SortingList
           isOpened={true}
-          activeSorting={`Popular`}
+          activeSorting={SortingType.POPULAR}
           onSortingToggle={()=>{}}
           onSortingClick={()=>{}}
         />
@@ -22,7 +23,7 @@ describe(`SortingList snapshot`, () => {
     .create(
         <SortingList
           isOpened={false}
-          activeSorting={`Popular`}
+          activeSorting={SortingType.POPULAR}
           onSortingToggle={()=>{}}
           onSortingClick={()=>{}}
         />

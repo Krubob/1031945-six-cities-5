@@ -5,15 +5,12 @@ import {OfferPropTypes} from "../../propTypes";
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import SortingList from "../sorting-list/sorting-list";
-import withSortingList from "../../hocs/with-sorting-list/with-sorting-list";
 import Map from "../map/map";
 import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
 import {ClassNameType} from "../../const";
 import {changeCity, changeSorting} from "../../store/action";
 import {citiesSelector, activeCitySelector, activeSortingSelector, getSortedCityOffersSelector, getCityOffersSelector, isDataLoadedSelector} from "../../store/selectors";
-
-const SortingListWrapped = withSortingList(SortingList);
 
 const Main = (props) => {
 
@@ -35,7 +32,7 @@ const Main = (props) => {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{cityOffers.length} places to stay in {activeCity}</b>
-                  <SortingListWrapped onSortingClick={changeSortingAction} activeSorting={activeSorting} />
+                  <SortingList onSortingClick={changeSortingAction} activeSorting={activeSorting} />
                   <div className="cities__places-list places__list tabs__content">
                     <OffersList offers={sortedOffers} />
                   </div>

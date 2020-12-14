@@ -60,10 +60,8 @@ const SortingList = (props) => {
 };
 
 SortingList.propTypes = {
-  isOpened: PropTypes.bool.isRequired,
   activeSorting: PropTypes.string.isRequired,
   onSortingClick: PropTypes.func.isRequired,
-  onSortingToggle: PropTypes.func.isRequired,
 };
 
 export default SortingList;

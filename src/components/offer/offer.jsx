@@ -6,14 +6,11 @@ import Header from "../header/header";
 import ReviewsList from "../reviews-list/reviews-list";
 import Map from "../map/map";
 import OffersList from "../offers-list/offers-list";
-import withComment from "../../hocs/with-comment/with-comment";
 import {RATING_MULTIPLIER, ClassNameType, BookmarkType, stars} from '../../const';
 import {ReviewPropTypes, OfferPropTypes} from "../../propTypes";
 import {fetchOffer, fetchReviews, fetchNearOffers} from "../../store/api-actions";
 import {offerSelector, nearOffersSelector, isOfferLoadedSelector, isUserAuthorizedSelector, getSortedReviewsSelector, changedFavoriteOfferSelector, offerFavoriteStatusSelector} from "../../store/selectors";
 import Bookmark from "../bookmark/bookmark";
-
-const CommentWrapped = withComment(Comment);
 
 class Offer extends PureComponent {
   constructor(props) {
@@ -114,7 +111,7 @@ class Offer extends PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <ReviewsList reviews={availableReviews} />
-                  {isUserAuthorized && <CommentWrapped stars={stars} offerId={offer.id} />}
+                  {isUserAuthorized && <Comment stars={stars} offerId={offer.id} />}
                 </section>
               </div>
             </div>

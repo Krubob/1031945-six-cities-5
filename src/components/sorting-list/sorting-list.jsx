@@ -1,47 +1,19 @@
-import React, {useReducer} from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import SortingItem from "../sorting-item/sorting-item";
 import {sortingTypes} from "../../const";
-import {extend} from "../../utils";
 
 const SortingList = (props) => {
   const {activeSorting, onSortingClick} = props;
 
-  const initialState = {
-    isOpened: false,
-  };
-
-  const ActionType = {
-    SET_IS_OPENED: `SET_IS_OPENED`,
-  };
-
-  const setIsOpened = (isOpened) => ({
-    type: ActionType.SET_IS_OPENED,
-    payload: !isOpened,
-  });
-
-  const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case ActionType.SET_IS_OPENED:
-        return extend(state, {
-          isOpened: action.payload,
-        });
-      default:
-        return state;
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const {isOpened} = state;
-
-  const onSortingToggle = (status) => dispatch(setIsOpened(status));
+  const [isOpened, setStatus] = useState(false);
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex="0"
         onClick={()=>{
-          onSortingToggle(isOpened);
+          setStatus(!isOpened);
         }}
       >
         {activeSorting}

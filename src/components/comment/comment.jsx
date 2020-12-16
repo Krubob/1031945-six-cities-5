@@ -5,11 +5,66 @@ import RatingStar from "../rating-star/rating-star";
 import {sendReview} from "../../store/api-actions";
 import {connect} from "react-redux";
 import {REVIEW_TEXT} from "../../const";
-import {reducer, initialState} from "./store/reducer";
-import {setFormReviewValue, setFormRatingValue, clearFormData, setIsResponseWaiting} from "./store/action";
+import {extend} from "../../utils";
 
 const Comment = (props) => {
   const {stars, offerId, sendReviewAction} = props;
+
+  const ActionType = {
+    SET_IS_RESPONSE_WAITING: `SET_IS_RESPONSE_WAITING`,
+    CLEAR_FORM_DATA: `CLEAR_FORM_DATA`,
+    SET_FORM_REVIEW_VALUE: `SET_FORM_REVIEW_VALUE`,
+    SET_FORM_RATING_VALUE: `SET_FORM_RATING_VALUE`,
+  };
+
+  const setIsResponseWaiting = (isWaiting) => ({
+    type: ActionType.SET_IS_RESPONSE_WAITING,
+    payload: isWaiting,
+  });
+
+  const clearFormData = () => ({
+    type: ActionType.CLEAR_FORM_DATA,
+  });
+
+  const setFormReviewValue = (evt) => ({
+    type: ActionType.SET_FORM_REVIEW_VALUE,
+    payload: evt.target.value,
+  });
+
+  const setFormRatingValue = (evt) => ({
+    type: ActionType.SET_FORM_RATING_VALUE,
+    payload: evt.target.value,
+  });
+
+  const initialState = {
+    rating: ``,
+    review: ``,
+    isResponseWaiting: false,
+  };
+
+  const reducer = (state = initialState, action) => {
+    switch (action.type) {
+      case ActionType.SET_IS_RESPONSE_WAITING:
+        return extend(state, {
+          isResponseWaiting: action.payload,
+        });
+      case ActionType.CLEAR_FORM_DATA:
+        return extend(state, {
+          rating: ``,
+          review: ``,
+        });
+      case ActionType.SET_FORM_REVIEW_VALUE:
+        return extend(state, {
+          review: action.payload,
+        });
+      case ActionType.SET_FORM_RATING_VALUE:
+        return extend(state, {
+          rating: action.payload,
+        });
+      default:
+        return state;
+    }
+  };
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const {rating, review, isResponseWaiting} = state;

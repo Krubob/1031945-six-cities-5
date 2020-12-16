@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useMemo} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -13,7 +13,7 @@ const Favorites = (props) => {
   const {isFavoriteOffersLoaded, favoriteOffersByCity, loadFavoriteOffersAction} = props;
   const isFavoriteOffersByCity = Object.keys(favoriteOffersByCity).length !== 0;
 
-  useEffect(() => {
+  useMemo(() => {
     if (!isFavoriteOffersByCity) {
       loadFavoriteOffersAction();
     }
